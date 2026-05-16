@@ -122,8 +122,8 @@ public class MarketDataClient {
 
     private String mapPeriod(String period) {
         switch (period) {
-            case "weekly": return "101";
-            case "monthly": return "102";
+            case "weekly": return "102";
+            case "monthly": return "103";
             default: return "101";
         }
     }

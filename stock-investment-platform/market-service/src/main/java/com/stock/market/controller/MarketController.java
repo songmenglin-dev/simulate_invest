@@ -50,6 +50,16 @@ public class MarketController {
         return result;
     }
 
+    @PostMapping("/simulated-quotes")
+    public Map<String, Object> getSimulatedQuotes(@RequestBody List<String> stockCodes) {
+        List<StockQuote> quotes = marketService.getSimulatedQuotes(stockCodes);
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("message", "success");
+        result.put("data", quotes);
+        return result;
+    }
+
     @GetMapping("/indicators/{stockCode}")
     public Map<String, Object> getIndicators(@PathVariable String stockCode,
                                              @RequestParam(defaultValue = "daily") String period) {
