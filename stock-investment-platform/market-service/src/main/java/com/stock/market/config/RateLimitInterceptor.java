@@ -1,6 +1,8 @@
 package com.stock.market.config;
 
 import com.stock.common.exception.BusinessException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,8 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RateLimitInterceptor implements HandlerInterceptor {
 
+    private static final Logger log = LoggerFactory.getLogger(RateLimitInterceptor.class);
+
     @Autowired
     private StringRedisTemplate redisTemplate;
 
@@ -22,19 +26,25 @@ public class RateLimitInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        String clientIp = getClientIp(request);
-        String key = RATE_LIMIT_PREFIX + clientIp;
+        try {
+            String clientIp = getClientIp(request);
+            String key = RATE_LIMIT_PREFIX + clientIp;
 
-        String countStr = redisTemplate.opsForValue().get(key);
-        long count = countStr == null ? 0 : Long.parseLong(countStr);
+            String countStr = redisTemplate.opsForValue().get(key);
+            long count = countStr == null ? 0 : Long.parseLong(countStr);
 
-        if (count >= MAX_REQUESTS) {
-            throw new BusinessException(429, "请求过于频繁，请稍后再试");
-        }
+            if (count >= MAX_REQUESTS) {
+                throw new BusinessException(429, "请求过于频繁，请稍后再试");
+            }
 
-        redisTemplate.opsForValue().increment(key);
-        if (count == 0) {
-            redisTemplate.expire(key, WINDOW_SECONDS, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().increment(key);
+            if (count == 0) {
+                redisTemplate.expire(key, WINDOW_SECONDS, TimeUnit.SECONDS);
+            }
+        } catch (BusinessException e) {
+            throw e;
+        } catch (Exception e) {
+            log.warn("Rate limit check failed, allowing request: {}", e.getMessage());
         }
 
         return true;

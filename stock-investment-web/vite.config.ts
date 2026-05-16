@@ -18,7 +18,7 @@ export default defineConfig({
         rewrite: (p) => p.replace(/^\/api\/user/, '/user'),
       },
       '/api/market': {
-        target: 'http://localhost:8083',
+        target: 'http://127.0.0.1:8083',
         changeOrigin: true,
         rewrite: (p) => p.replace(/^\/api\/market/, '/market'),
       },
@@ -43,12 +43,12 @@ export default defineConfig({
         rewrite: (p) => p.replace(/^\/api\/conditional-order/, '/conditional-order'),
       },
       '/api/watchlist': {
-        target: 'http://localhost:8083',
+        target: 'http://127.0.0.1:8083',
         changeOrigin: true,
         rewrite: (p) => p.replace(/^\/api\/watchlist/, '/watchlist'),
       },
       '/api/alert': {
-        target: 'http://localhost:8083',
+        target: 'http://127.0.0.1:8083',
         changeOrigin: true,
         rewrite: (p) => p.replace(/^\/api\/alert/, '/alert'),
       },
