@@ -35,7 +35,7 @@
 
 - [x] 4.1 Create Order entity with MySQL mapping
 - [x] 4.2 Implement order placement (buy/sell)
-- [ ] 4.3 Create order confirmation flow
+- [x] 4.3 Create order confirmation flow
 - [x] 4.4 Implement order cancellation
 - [x] 4.5 Create order history query
 - [x] 4.6 Add trade execution simulation
@@ -49,7 +49,7 @@
 - [x] 5.3 Create portfolio overview endpoint
 - [x] 5.4 Calculate profit/loss for positions
 - [x] 5.5 Create position details endpoint
-- [ ] 5.6 Manage cash balance with transactions
+- [x] 5.6 Manage cash balance with transactions
 
 ## 6. Analysis Service (analysis-service)
 

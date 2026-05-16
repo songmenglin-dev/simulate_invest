@@ -108,6 +108,27 @@ public class PortfolioService {
         return position != null ? convertToDetail(position) : null;
     }
 
+    public Map<String, Object> getCashBalance(Long userId) {
+        List<FundAccount> accounts = fundAccountMapper.selectList(null).stream()
+                .filter(a -> a.getUserId().equals(userId))
+                .collect(Collectors.toList());
+
+        Map<String, Object> result = new HashMap<>();
+        if (accounts.isEmpty()) {
+            result.put("availableCash", BigDecimal.ZERO);
+            result.put("frozenCash", BigDecimal.ZERO);
+            result.put("totalCash", BigDecimal.ZERO);
+        } else {
+            FundAccount account = accounts.get(0);
+            result.put("availableCash", account.getBalance());
+            result.put("frozenCash", account.getFrozenBalance());
+            result.put("totalCash", account.getBalance().add(account.getFrozenBalance()));
+            result.put("accountNo", account.getAccountNo());
+            result.put("status", account.getStatus());
+        }
+        return result;
+    }
+
     private PositionDetail convertToDetail(Position position) {
         PositionDetail detail = new PositionDetail();
         detail.setPositionId(position.getId());

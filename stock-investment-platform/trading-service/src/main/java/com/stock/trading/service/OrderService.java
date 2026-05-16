@@ -1,12 +1,13 @@
 package com.stock.trading.service;
 
-import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.stock.common.constant.OrderDirection;
 import com.stock.common.constant.OrderStatus;
 import com.stock.common.entity.FundAccount;
 import com.stock.common.entity.Order;
 import com.stock.common.entity.Position;
 import com.stock.common.exception.BusinessException;
+import com.stock.trading.dto.OrderRequest;
 import com.stock.trading.mapper.FundAccountMapper;
 import com.stock.trading.mapper.OrderMapper;
 import com.stock.trading.mapper.PositionMapper;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -81,10 +83,27 @@ public class OrderService {
         order.setOrderType(request.getOrderType());
         orderMapper.insert(order);
 
-        // 模拟撮合：立即成交
+        return order;
+    }
+
+    @Transactional
+    public Order confirmOrder(Long orderId, Long userId) {
+        Order order = orderMapper.selectById(orderId);
+        if (order == null) {
+            throw new BusinessException(400, "订单不存在");
+        }
+        if (!order.getUserId().equals(userId)) {
+            throw new BusinessException(403, "无权确认此订单");
+        }
+        if (order.getStatus() != OrderStatus.PENDING) {
+            throw new BusinessException(400, "订单状态不允许确认");
+        }
+
+        // 执行交易
         executeOrder(order);
 
-        return order;
+        // 重新查询以获取最新状态
+        return orderMapper.selectById(orderId);
     }
 
     @Transactional
@@ -183,7 +202,7 @@ public class OrderService {
     public List<Order> getOrderHistory(Long userId) {
         return orderMapper.selectList(null).stream()
                 .filter(o -> o.getUserId().equals(userId))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private Position findPosition(Long userId, String stockCode) {
@@ -194,6 +213,6 @@ public class OrderService {
     }
 
     private String generateOrderNo() {
-        return "ORD" + System.currentTimeMillis() + IdUtil.randomInt(1000, 9999);
+        return "ORD" + System.currentTimeMillis() + RandomUtil.randomInt(1000, 9999);
     }
 }
