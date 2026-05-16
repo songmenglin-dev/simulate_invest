@@ -21,4 +21,10 @@ public class FinancialData extends BaseEntity {
     private BigDecimal eps;
     private BigDecimal peRatio;
     private BigDecimal pbRatio;
+    private BigDecimal operatingCashFlow;
+    private BigDecimal investingCashFlow;
+    private BigDecimal financingCashFlow;
+    private BigDecimal netCashFlow;
+    private BigDecimal totalShares;
+    private BigDecimal dividendYield;
 }

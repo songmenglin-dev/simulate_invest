@@ -12,6 +12,8 @@ import com.stock.user.dto.LoginResponse;
 import com.stock.user.dto.RegisterRequest;
 import com.stock.user.mapper.FundAccountMapper;
 import com.stock.user.mapper.UserMapper;
+import io.minio.BucketExistsArgs;
+import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.ByteArrayInputStream;
 import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
+import javax.annotation.PostConstruct;
 
 @Service
 public class UserService {
@@ -44,6 +47,18 @@ public class UserService {
 
     private static final String TOKEN_PREFIX = "user:token:";
     private static final long TOKEN_EXPIRE_SECONDS = 86400 * 7; // 7 days
+
+    @PostConstruct
+    public void init() {
+        try {
+            boolean exists = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
+            if (!exists) {
+                minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
+            }
+        } catch (Exception e) {
+            throw new BusinessException(500, "初始化MinIO Bucket失败: " + e.getMessage());
+        }
+    }
 
     @Transactional
     public User register(RegisterRequest request) {
@@ -105,7 +120,7 @@ public class UserService {
     }
 
     public String uploadAvatar(Long userId, byte[] bytes, String fileName) {
-        String objectName = "avatars/" + userId + "/" + fileName;
+        String objectName = userId + "/" + fileName;
         try {
             minioClient.putObject(
                     PutObjectArgs.builder()

@@ -1,5 +1,6 @@
 package com.stock.portfolio.controller;
 
+import com.stock.portfolio.dto.FundTransactionRequest;
 import com.stock.portfolio.dto.PositionDetail;
 import com.stock.portfolio.dto.PortfolioOverview;
 import com.stock.portfolio.service.PortfolioService;
@@ -54,6 +55,26 @@ public class PortfolioController {
         result.put("code", 200);
         result.put("message", "success");
         result.put("data", detail);
+        return result;
+    }
+
+    @PostMapping("/deposit")
+    public Map<String, Object> deposit(@RequestBody FundTransactionRequest request) {
+        Map<String, Object> data = portfolioService.deposit(request.getUserId(), request.getAmount());
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("message", "充值成功");
+        result.put("data", data);
+        return result;
+    }
+
+    @PostMapping("/withdraw")
+    public Map<String, Object> withdraw(@RequestBody FundTransactionRequest request) {
+        Map<String, Object> data = portfolioService.withdraw(request.getUserId(), request.getAmount());
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("message", "提现成功");
+        result.put("data", data);
         return result;
     }
 }

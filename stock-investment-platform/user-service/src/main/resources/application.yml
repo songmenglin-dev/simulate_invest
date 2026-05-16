@@ -14,6 +14,8 @@ spring:
         enabled: true
         server-addr: 127.0.0.1:8848
         file-extension: yaml
+        import-check:
+          enabled: false
   datasource:
     url: jdbc:mysql://172.20.10.6:3306/stock_investment?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root

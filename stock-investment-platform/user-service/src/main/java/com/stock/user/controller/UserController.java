@@ -8,6 +8,7 @@ import com.stock.user.dto.RegisterRequest;
 import com.stock.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -83,7 +84,7 @@ public class UserController {
     }
 
     @PostMapping("/avatar")
-    public Map<String, Object> uploadAvatar(HttpServletRequest request, @RequestParam("file") byte[] bytes, @RequestParam("fileName") String fileName) {
+    public Map<String, Object> uploadAvatar(HttpServletRequest request, @RequestParam("file") MultipartFile file, @RequestParam("fileName") String fileName) {
         String token = request.getHeader("Authorization");
         if (token == null || !token.startsWith("Bearer ")) {
             Map<String, Object> result = new HashMap<>();
@@ -97,6 +98,15 @@ public class UserController {
             Map<String, Object> result = new HashMap<>();
             result.put("code", 401);
             result.put("message", "Token无效");
+            return result;
+        }
+        byte[] bytes;
+        try {
+            bytes = file.getBytes();
+        } catch (Exception e) {
+            Map<String, Object> result = new HashMap<>();
+            result.put("code", 500);
+            result.put("message", "读取文件失败");
             return result;
         }
         String avatarUrl = userService.uploadAvatar(userId, bytes, fileName);

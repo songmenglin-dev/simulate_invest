@@ -1,11 +1,15 @@
 package com.stock.portfolio.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stock.common.entity.FundAccount;
 import com.stock.common.entity.Position;
+import com.stock.common.entity.StockQuoteEntity;
+import com.stock.common.exception.BusinessException;
 import com.stock.portfolio.dto.PositionDetail;
 import com.stock.portfolio.dto.PortfolioOverview;
 import com.stock.portfolio.mapper.FundAccountMapper;
 import com.stock.portfolio.mapper.PositionMapper;
+import com.stock.portfolio.mapper.StockQuoteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,19 +29,8 @@ public class PortfolioService {
     @Autowired
     private FundAccountMapper fundAccountMapper;
 
-    // 模拟股价（实际应从market-service获取）
-    private static final Map<String, BigDecimal> MOCK_PRICES = new HashMap<>();
-
-    static {
-        MOCK_PRICES.put("600036", new BigDecimal("35.50"));
-        MOCK_PRICES.put("600519", new BigDecimal("1680.00"));
-        MOCK_PRICES.put("000858", new BigDecimal("145.30"));
-        MOCK_PRICES.put("601318", new BigDecimal("48.50"));
-        MOCK_PRICES.put("000001", new BigDecimal("12.30"));
-        MOCK_PRICES.put("600887", new BigDecimal("28.90"));
-        MOCK_PRICES.put("000333", new BigDecimal("58.20"));
-        MOCK_PRICES.put("002594", new BigDecimal("268.00"));
-    }
+    @Autowired
+    private StockQuoteMapper stockQuoteMapper;
 
     public PortfolioOverview getOverview(Long userId) {
         PortfolioOverview overview = new PortfolioOverview();
@@ -63,7 +56,7 @@ public class PortfolioService {
         BigDecimal totalCost = BigDecimal.ZERO;
 
         for (Position position : positions) {
-            BigDecimal currentPrice = MOCK_PRICES.getOrDefault(position.getStockCode(), position.getAvgCost());
+            BigDecimal currentPrice = getCurrentPrice(position.getStockCode(), position.getAvgCost());
             BigDecimal marketValue = currentPrice.multiply(new BigDecimal(position.getTotalQuantity()));
             BigDecimal cost = position.getAvgCost().multiply(new BigDecimal(position.getTotalQuantity()));
 
@@ -129,6 +122,58 @@ public class PortfolioService {
         return result;
     }
 
+    public Map<String, Object> deposit(Long userId, BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new BusinessException(400, "充值金额必须大于0");
+        }
+        FundAccount account = fundAccountMapper.selectList(null).stream()
+                .filter(a -> a.getUserId().equals(userId))
+                .findFirst()
+                .orElse(null);
+        if (account == null) {
+            throw new BusinessException(400, "资金账户不存在");
+        }
+        account.setBalance(account.getBalance().add(amount));
+        fundAccountMapper.updateById(account);
+        Map<String, Object> result = new HashMap<>();
+        result.put("balance", account.getBalance());
+        result.put("amount", amount);
+        return result;
+    }
+
+    public Map<String, Object> withdraw(Long userId, BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new BusinessException(400, "提现金额必须大于0");
+        }
+        FundAccount account = fundAccountMapper.selectList(null).stream()
+                .filter(a -> a.getUserId().equals(userId))
+                .findFirst()
+                .orElse(null);
+        if (account == null) {
+            throw new BusinessException(400, "资金账户不存在");
+        }
+        if (account.getBalance().compareTo(amount) < 0) {
+            throw new BusinessException(400, "余额不足");
+        }
+        account.setBalance(account.getBalance().subtract(amount));
+        fundAccountMapper.updateById(account);
+        Map<String, Object> result = new HashMap<>();
+        result.put("balance", account.getBalance());
+        result.put("amount", amount);
+        return result;
+    }
+
+    private BigDecimal getCurrentPrice(String stockCode, BigDecimal fallback) {
+        QueryWrapper<StockQuoteEntity> qw = new QueryWrapper<>();
+        qw.eq("stock_code", stockCode);
+        StockQuoteEntity quote = stockQuoteMapper.selectOne(qw);
+        if (quote != null && quote.getCurrentPrice() != null) {
+            return quote.getCurrentPrice();
+        }
+        BigDecimal fluctuation = BigDecimal.valueOf(0.95 + Math.random() * 0.10);
+        return fallback.multiply(fluctuation).setScale(2, RoundingMode.HALF_UP);
+    }
+
     private PositionDetail convertToDetail(Position position) {
         PositionDetail detail = new PositionDetail();
         detail.setPositionId(position.getId());
@@ -139,7 +184,7 @@ public class PortfolioService {
         detail.setFrozenQuantity(position.getFrozenQuantity());
         detail.setAvgCost(position.getAvgCost());
 
-        BigDecimal currentPrice = MOCK_PRICES.getOrDefault(position.getStockCode(), position.getAvgCost());
+        BigDecimal currentPrice = getCurrentPrice(position.getStockCode(), position.getAvgCost());
         detail.setCurrentPrice(currentPrice);
 
         BigDecimal marketValue = currentPrice.multiply(new BigDecimal(position.getTotalQuantity()));
