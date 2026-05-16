@@ -5,7 +5,7 @@
 - [x] 1.3 Configure Maven multi-module project
 - [x] 1.4 Add Spring Cloud Alibaba dependencies (Nacos, OpenFeign, Sentinel)
 - [x] 1.5 Download and configure Nacos Server (standalone mode)
-- [ ] 1.6 Register all services to Nacos with spring.cloud.nacos.discovery
+- [x] 1.6 Register all services to Nacos with spring.cloud.nacos.discovery
 - [x] 1.7 Configure MySQL 8.0 database connection per service
 - [x] 1.8 Configure Redis for token and captcha storage
 - [x] 1.9 Configure MinIO client for file storage
@@ -77,8 +77,8 @@
 
 ## 8. Infrastructure & Integration
 
-- [ ] 8.1 Configure Nacos for service discovery
-- [ ] 8.2 Configure Sentinel for flow control
+- [x] 8.1 Configure Nacos for service discovery
+- [x] 8.2 Configure Sentinel for flow control
 - [x] 8.3 Set up Spring Cloud Gateway routes
 - [ ] 8.4 Integrate frontend with backend APIs via OpenFeign
 - [ ] 8.5 Test end-to-end stock trading flow

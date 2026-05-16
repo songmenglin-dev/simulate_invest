@@ -7,9 +7,11 @@ spring:
   cloud:
     nacos:
       discovery:
+        enabled: true
         server-addr: 127.0.0.1:8848
         namespace: public
       config:
+        enabled: true
         server-addr: 127.0.0.1:8848
         file-extension: yaml
   datasource:
@@ -17,6 +19,10 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 192.168.100.145
+    port: 6379
+    database: 0
 
 mybatis-plus:
   configuration:
@@ -30,6 +36,11 @@ mybatis-plus:
 feign:
   sentinel:
     enabled: true
+
+sentinel:
+  transport:
+    dashboard: 127.0.0.1:8080
+  eager: true
 
 management:
   endpoints:
