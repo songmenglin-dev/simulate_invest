@@ -19,7 +19,7 @@
 - [x] 2.4 Store token in Redis with TTL
 - [x] 2.7 Implement user profile endpoint
 - [x] 2.8 Implement avatar upload to MinIO
-- [ ] 2.9 Configure Spring Cloud OpenFeign for inter-service calls
+- [x] 2.9 Configure Spring Cloud OpenFeign for inter-service calls
 
 ## 3. Market Data Service (market-service)
 
@@ -40,7 +40,7 @@
 - [x] 4.5 Create order history query
 - [x] 4.6 Add trade execution simulation
 - [x] 4.7 Implement order state machine
-- [ ] 4.8 Integrate with market service for current prices
+- [x] 4.8 Integrate with market service for current prices
 
 ## 5. Portfolio Service (portfolio-service)
 
