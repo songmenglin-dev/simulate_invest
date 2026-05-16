@@ -27,17 +27,6 @@ const navGroups = [
     children: [
       { path: '/market', label: '行情看板', desc: '实时行情与K线' },
       { path: '/watchlist', label: '自选股', desc: '关注股票列表' },
-      { path: '/alerts', label: '价格预警', desc: '价格提醒通知' },
-    ],
-  },
-  {
-    id: 'trading',
-    label: '交易',
-    icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
-    children: [
-      { path: '/trading', label: '下单交易', desc: '买入卖出股票' },
-      { path: '/conditional-orders', label: '条件单', desc: '止盈止损委托' },
-      { path: '/portfolio', label: '我的持仓', desc: '资产与仓位管理' },
     ],
   },
   {
@@ -47,6 +36,17 @@ const navGroups = [
     children: [
       { path: '/analysis', label: '技术分析', desc: '指标与图表分析' },
       { path: '/backtest', label: '策略回测', desc: '历史数据验证' },
+    ],
+  },
+  {
+    id: 'trading',
+    label: '交易',
+    icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+    children: [
+      { path: '/trading', label: '下单交易', desc: '买入卖出股票' },
+      { path: '/conditional-orders', label: '条件单', desc: '止盈止损委托' },
+      { path: '/alerts', label: '价格预警', desc: '价格提醒通知' },
+      { path: '/portfolio', label: '我的持仓', desc: '资产与仓位管理' },
     ],
   },
 ]
@@ -274,6 +274,7 @@ const handleLogout = () => {
 .main-nav {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 2px;
   flex: 1;
 }
