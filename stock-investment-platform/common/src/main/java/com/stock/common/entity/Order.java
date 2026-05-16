@@ -20,4 +20,5 @@ public class Order extends BaseEntity {
     private BigDecimal amount;
     private Integer status; // 1-待成交，2-已成交，3-已取消，4-已拒绝
     private Integer orderType; // 1-市价，2-限价
+    private Long conditionalOrderId; // 关联的条件单ID
 }

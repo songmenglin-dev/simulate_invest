@@ -81,6 +81,9 @@ public class OrderService {
         order.setAmount(amount);
         order.setStatus(OrderStatus.PENDING);
         order.setOrderType(request.getOrderType());
+        if (request.getConditionalOrderId() != null) {
+            order.setConditionalOrderId(request.getConditionalOrderId());
+        }
         orderMapper.insert(order);
 
         return order;
