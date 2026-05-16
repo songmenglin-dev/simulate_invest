@@ -1,7 +1,11 @@
 /mnt/c/sml/project/java_project/inverst/stock-investment-platform/market-service/src/main/java/com/stock/market/service/MarketService.java
+/mnt/c/sml/project/java_project/inverst/stock-investment-platform/market-service/src/main/java/com/stock/market/config/RateLimitInterceptor.java
 /mnt/c/sml/project/java_project/inverst/stock-investment-platform/market-service/src/main/java/com/stock/market/controller/MarketController.java
+/mnt/c/sml/project/java_project/inverst/stock-investment-platform/market-service/src/main/java/com/stock/market/config/RestTemplateConfig.java
 /mnt/c/sml/project/java_project/inverst/stock-investment-platform/market-service/src/main/java/com/stock/market/mapper/StockMapper.java
+/mnt/c/sml/project/java_project/inverst/stock-investment-platform/market-service/src/main/java/com/stock/market/service/MarketDataClient.java
 /mnt/c/sml/project/java_project/inverst/stock-investment-platform/market-service/src/main/java/com/stock/market/dto/TechnicalIndicators.java
 /mnt/c/sml/project/java_project/inverst/stock-investment-platform/market-service/src/main/java/com/stock/market/dto/StockQuote.java
 /mnt/c/sml/project/java_project/inverst/stock-investment-platform/market-service/src/main/java/com/stock/market/MarketServiceApplication.java
 /mnt/c/sml/project/java_project/inverst/stock-investment-platform/market-service/src/main/java/com/stock/market/dto/KLineData.java
+/mnt/c/sml/project/java_project/inverst/stock-investment-platform/market-service/src/main/java/com/stock/market/config/WebConfig.java

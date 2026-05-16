@@ -81,7 +81,7 @@
 - [x] 8.2 Configure Sentinel for flow control
 - [x] 8.3 Set up Spring Cloud Gateway routes
 - [x] 8.4 Integrate frontend with backend APIs via OpenFeign
-- [ ] 8.5 Test end-to-end stock trading flow
-- [ ] 8.6 Test portfolio profit/loss calculation
-- [ ] 8.7 Test financial data display
-- [ ] 8.8 Test technical chart rendering
+- [x] 8.5 Test end-to-end stock trading flow
+- [x] 8.6 Test portfolio profit/loss calculation
+- [x] 8.7 Test financial data display
+- [x] 8.8 Test technical chart rendering
