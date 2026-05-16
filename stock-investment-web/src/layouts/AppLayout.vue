@@ -15,7 +15,7 @@ const showAvatarMenu = ref(false)
 const navGroups = [
   {
     id: 'dashboard',
-    path: '/dashboard',
+    path: '/home',
     label: '概览',
     icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1',
     children: [],
@@ -52,7 +52,7 @@ const navGroups = [
 ]
 
 const isGroupActive = (group: typeof navGroups[0]) => {
-  if (group.id === 'dashboard') return route.path === '/dashboard'
+  if (group.id === 'dashboard') return route.path === '/home'
   return group.children.some((c) => route.path.startsWith(c.path))
 }
 
@@ -102,7 +102,7 @@ const handleLogout = () => {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
             </svg>
           </div>
-          <span class="brand-text">股票投资平台</span>
+          <span class="brand-text">熵减纪元</span>
         </router-link>
 
         <!-- Navigation -->

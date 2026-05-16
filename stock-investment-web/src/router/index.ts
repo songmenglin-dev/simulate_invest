@@ -12,12 +12,15 @@ const router = createRouter({
     {
       path: '/',
       component: AppLayout,
-      redirect: '/dashboard',
+      redirect: '/home',
       children: [
         {
+          path: 'home',
+          component: () => import('../views/LandingView.vue'),
+        },
+        {
           path: 'dashboard',
-          component: () => import('../views/DashboardView.vue'),
-          meta: { requiresAuth: true },
+          redirect: '/home',
         },
         {
           path: 'market',
@@ -79,7 +82,7 @@ router.beforeEach((to, _from, next) => {
   if (to.matched.some(r => r.meta.requiresAuth) && !token) {
     next('/login')
   } else if (to.path === '/login' && token) {
-    next('/dashboard')
+    next('/home')
   } else {
     next()
   }
