@@ -25,6 +25,9 @@ public class MarketService {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
+    @Autowired
+    private MarketDataClient marketDataClient;
+
     // 模拟股票数据（实际应从东方财富/新浪API获取）
     private static final Map<String, StockQuote> MOCK_QUOTES = new HashMap<>();
 
@@ -80,16 +83,20 @@ public class MarketService {
     }
 
     public StockQuote getQuote(String stockCode) {
-        // 先查数据库
+        // Try real API first
+        StockQuote quote = marketDataClient.fetchQuote(stockCode);
+        if (quote != null) {
+            return quote;
+        }
+
+        // Fall back to mock data
         Stock stock = stockMapper.selectList(null).stream()
                 .filter(s -> s.getStockCode().equals(stockCode))
                 .findFirst()
                 .orElse(null);
 
-        // 返回模拟数据（实际应从API获取）
-        StockQuote quote = MOCK_QUOTES.get(stockCode);
+        quote = MOCK_QUOTES.get(stockCode);
         if (quote == null) {
-            // 如果没有模拟数据，生成一个
             quote = new StockQuote();
             quote.setStockCode(stockCode);
             quote.setStockName(stock != null ? stock.getStockName() : "未知");
@@ -101,7 +108,14 @@ public class MarketService {
     }
 
     public KLineData getKLineData(String stockCode, String period) {
-        KLineData kLineData = new KLineData();
+        // Try real API first
+        KLineData kLineData = marketDataClient.fetchKLine(stockCode, period);
+        if (kLineData != null) {
+            return kLineData;
+        }
+
+        // Fall back to mock data
+        kLineData = new KLineData();
         kLineData.setStockCode(stockCode);
 
         List<String> dates = new ArrayList<>();
@@ -117,7 +131,7 @@ public class MarketService {
         Random random = new Random();
         LocalDate today = LocalDate.now();
 
-        int days = "daily".equals(period) ? 30 : ("weekly".equals(period) ? 20 : 60;
+        int days = "daily".equals(period) ? 30 : ("weekly".equals(period) ? 20 : 60);
 
         for (int i = days; i > 0; i--) {
             LocalDate date = today.minusDays(i);
@@ -155,14 +169,16 @@ public class MarketService {
         indicators.setMa20(calculateMA(closes, 20));
 
         // 计算MACD
-        indicators.setMacd(calculateMACD(closes).get("macd"));
-        indicators.setSignal(calculateMACD(closes).get("signal"));
-        indicators.setHistogram(calculateMACD(closes).get("histogram"));
+        Map<String, BigDecimal> macdResult = calculateMACD(closes);
+        indicators.setMacd(macdResult.get("macd"));
+        indicators.setSignal(macdResult.get("signal"));
+        indicators.setHistogram(macdResult.get("histogram"));
 
         // 计算KDJ
-        indicators.setK(calculateKDJ(kLineData).get("k"));
-        indicators.setD(calculateKDJ(kLineData).get("d"));
-        indicators.setJ(calculateKDJ(kLineData).get("j"));
+        Map<String, BigDecimal> kdjResult = calculateKDJ(kLineData);
+        indicators.setK(kdjResult.get("k"));
+        indicators.setD(kdjResult.get("d"));
+        indicators.setJ(kdjResult.get("j"));
 
         return indicators;
     }
@@ -218,14 +234,15 @@ public class MarketService {
 
         BigDecimal k = new BigDecimal("50");
         BigDecimal d = new BigDecimal("50");
+        BigDecimal jValue = new BigDecimal("50");
 
         for (int i = n - 1; i < closes.size(); i++) {
             BigDecimal maxHigh = highs.get(i);
             BigDecimal minLow = lows.get(i);
 
-            for (int j = i - n + 1; j <= i; j++) {
-                if (highs.get(j).compareTo(maxHigh) > 0) maxHigh = highs.get(j);
-                if (lows.get(j).compareTo(minLow) < 0) minLow = lows.get(j);
+            for (int idx = i - n + 1; idx <= i; idx++) {
+                if (highs.get(idx).compareTo(maxHigh) > 0) maxHigh = highs.get(idx);
+                if (lows.get(idx).compareTo(minLow) < 0) minLow = lows.get(idx);
             }
 
             BigDecimal rsv = maxHigh.subtract(minLow).compareTo(BigDecimal.ZERO) == 0
@@ -234,12 +251,12 @@ public class MarketService {
 
             k = rsv.multiply(new BigDecimal("1")).add(k.multiply(new BigDecimal("2"))).divide(new BigDecimal("3"), 2, RoundingMode.HALF_UP);
             d = k.multiply(new BigDecimal("1")).add(d.multiply(new BigDecimal("2"))).divide(new BigDecimal("3"), 2, RoundingMode.HALF_UP);
-            BigDecimal j = k.multiply(new BigDecimal("3")).subtract(d.multiply(new BigDecimal("2")));
+            jValue = k.multiply(new BigDecimal("3")).subtract(d.multiply(new BigDecimal("2")));
         }
 
         result.put("k", k);
         result.put("d", d);
-        result.put("j", j);
+        result.put("j", jValue);
 
         return result;
     }

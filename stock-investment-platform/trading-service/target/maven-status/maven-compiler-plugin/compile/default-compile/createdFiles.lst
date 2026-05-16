@@ -1,3 +1,5 @@
+com/stock/trading/feign/fallback/MarketFeignClientFallback.class
+com/stock/trading/feign/MarketFeignClient.class
 com/stock/trading/mapper/FundAccountMapper.class
 com/stock/trading/TradingServiceApplication.class
 com/stock/trading/controller/TradingController.class

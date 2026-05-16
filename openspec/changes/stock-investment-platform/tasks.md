@@ -23,7 +23,7 @@
 
 ## 3. Market Data Service (market-service)
 
-- [ ] 3.1 Set up market data API integration (East Money/Sina)
+- [x] 3.1 Set up market data API integration (East Money/Sina)
 - [x] 3.2 Implement stock quote fetching with caching
 - [x] 3.3 Create stock search by code and name
 - [x] 3.4 Implement K-line data fetching

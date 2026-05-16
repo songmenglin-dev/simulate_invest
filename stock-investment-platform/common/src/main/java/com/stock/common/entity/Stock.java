@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@TableName("stocks")
 public class Stock extends BaseEntity {
     private String stockCode;
     private String stockName;

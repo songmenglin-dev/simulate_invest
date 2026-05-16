@@ -1,0 +1,10 @@
+com/stock/user/UserServiceApplication.class
+com/stock/user/service/UserService.class
+com/stock/user/dto/LoginRequest.class
+com/stock/user/mapper/FundAccountMapper.class
+com/stock/user/config/MinioConfig.class
+com/stock/user/service/CaptchaService.class
+com/stock/user/dto/RegisterRequest.class
+com/stock/user/mapper/UserMapper.class
+com/stock/user/dto/LoginResponse.class
+com/stock/user/controller/UserController.class

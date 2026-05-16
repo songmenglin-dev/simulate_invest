@@ -2,7 +2,6 @@ package com.stock.user.service;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
-import com.alibaba.fastjson2.JSON;
 import com.stock.common.constant.RedisConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -27,11 +26,12 @@ public class CaptchaService {
         String captchaId = IdUtil.fastSimpleUUID();
         String code = RandomUtil.randomString(4).toUpperCase();
 
-        // 存储验证码到Redis
-        String key = RedisConstant.CAPTCHA_PREFIX + captchaId;
-        redisTemplate.opsForValue().set(key, code, RedisConstant.CAPTCHA_EXPIRE, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(
+                RedisConstant.CAPTCHA_PREFIX + captchaId,
+                code,
+                RedisConstant.CAPTCHA_EXPIRE,
+                TimeUnit.SECONDS);
 
-        // 生成图片
         String imageBase64 = generateImage(code);
 
         Map<String, String> result = new HashMap<>();
@@ -44,12 +44,15 @@ public class CaptchaService {
         if (captchaId == null || code == null) {
             return false;
         }
-        String key = RedisConstant.CAPTCHA_PREFIX + captchaId;
-        String cachedCode = redisTemplate.opsForValue().get(key);
+        String cachedCode = redisTemplate.opsForValue().get(RedisConstant.CAPTCHA_PREFIX + captchaId);
         if (cachedCode == null) {
             return false;
         }
-        return cachedCode.equalsIgnoreCase(code);
+        boolean matches = cachedCode.equalsIgnoreCase(code);
+        if (matches) {
+            redisTemplate.delete(RedisConstant.CAPTCHA_PREFIX + captchaId);
+        }
+        return matches;
     }
 
     private String generateImage(String code) {
@@ -59,11 +62,9 @@ public class CaptchaService {
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = image.createGraphics();
 
-        // 背景
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, width, height);
 
-        // 干扰线
         g.setColor(Color.LIGHT_GRAY);
         for (int i = 0; i < 5; i++) {
             int x1 = RandomUtil.randomInt(width);
@@ -73,7 +74,6 @@ public class CaptchaService {
             g.drawLine(x1, y1, x2, y2);
         }
 
-        // 验证码
         g.setFont(new Font("Arial", Font.BOLD, 24));
         g.setColor(Color.BLUE);
         int x = 20;

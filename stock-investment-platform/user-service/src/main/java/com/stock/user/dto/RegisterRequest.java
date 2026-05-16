@@ -13,8 +13,4 @@ public class RegisterRequest {
 
     private String email;
     private String phone;
-    @NotBlank(message = "验证码不能为空")
-    private String captcha;
-    @NotBlank(message = "验证码ID不能为空")
-    private String captchaId;
 }

@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@TableName("orders")
 public class Order extends BaseEntity {
     private String orderNo;
     private Long userId;

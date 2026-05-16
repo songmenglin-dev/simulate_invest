@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@TableName("fund_accounts")
 public class FundAccount extends BaseEntity {
     private Long userId;
     private String accountNo;

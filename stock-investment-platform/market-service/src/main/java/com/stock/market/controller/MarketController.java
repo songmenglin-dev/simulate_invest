@@ -8,6 +8,7 @@ import com.stock.market.service.MarketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,26 +22,42 @@ public class MarketController {
     @GetMapping("/search")
     public Map<String, Object> searchStocks(@RequestParam(required = false) String keyword) {
         List<Stock> stocks = marketService.searchStocks(keyword);
-        return Map.of("code", 200, "message", "success", "data", stocks);
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("message", "success");
+        result.put("data", stocks);
+        return result;
     }
 
     @GetMapping("/quote/{stockCode}")
     public Map<String, Object> getQuote(@PathVariable String stockCode) {
         StockQuote quote = marketService.getQuote(stockCode);
-        return Map.of("code", 200, "message", "success", "data", quote);
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("message", "success");
+        result.put("data", quote);
+        return result;
     }
 
     @GetMapping("/kline/{stockCode}")
     public Map<String, Object> getKLineData(@PathVariable String stockCode,
                                             @RequestParam(defaultValue = "daily") String period) {
         KLineData kLineData = marketService.getKLineData(stockCode, period);
-        return Map.of("code", 200, "message", "success", "data", kLineData);
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("message", "success");
+        result.put("data", kLineData);
+        return result;
     }
 
     @GetMapping("/indicators/{stockCode}")
     public Map<String, Object> getIndicators(@PathVariable String stockCode,
                                              @RequestParam(defaultValue = "daily") String period) {
         TechnicalIndicators indicators = marketService.calculateIndicators(stockCode, period);
-        return Map.of("code", 200, "message", "success", "data", indicators);
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("message", "success");
+        result.put("data", indicators);
+        return result;
     }
 }

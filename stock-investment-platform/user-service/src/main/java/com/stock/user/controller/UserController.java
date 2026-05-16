@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -20,21 +21,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/captcha")
-    public Map<String, String> getCaptcha() {
-        return userService.generateCaptcha();
-    }
-
     @PostMapping("/register")
     public Map<String, Object> register(@Valid @RequestBody RegisterRequest request) {
         User user = userService.register(request);
-        return Map.of("code", 200, "message", "注册成功", "data", user.getId());
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("message", "注册成功");
+        result.put("data", user.getId());
+        return result;
     }
 
     @PostMapping("/login")
     public Map<String, Object> login(@Valid @RequestBody LoginRequest request) {
         LoginResponse response = userService.login(request);
-        return Map.of("code", 200, "message", "登录成功", "data", response);
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("message", "登录成功");
+        result.put("data", response);
+        return result;
     }
 
     @PostMapping("/logout")
@@ -47,36 +51,61 @@ public class UserController {
                 userService.logout(userId);
             }
         }
-        return Map.of("code", 200, "message", "退出成功");
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("message", "退出成功");
+        return result;
     }
 
     @GetMapping("/profile")
     public Map<String, Object> getProfile(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
         if (token == null || !token.startsWith("Bearer ")) {
-            return Map.of("code", 401, "message", "未登录");
+            Map<String, Object> result = new HashMap<>();
+            result.put("code", 401);
+            result.put("message", "未登录");
+            return result;
         }
         token = token.substring(7);
         Long userId = JwtUtil.getUserId(token);
         if (userId == null) {
-            return Map.of("code", 401, "message", "Token无效");
+            Map<String, Object> result = new HashMap<>();
+            result.put("code", 401);
+            result.put("message", "Token无效");
+            return result;
         }
         User user = userService.getUserById(userId);
-        return Map.of("code", 200, "message", "success", "data", user);
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("message", "success");
+        result.put("data", user);
+        return result;
     }
 
     @PostMapping("/avatar")
     public Map<String, Object> uploadAvatar(HttpServletRequest request, @RequestParam("file") byte[] bytes, @RequestParam("fileName") String fileName) {
         String token = request.getHeader("Authorization");
         if (token == null || !token.startsWith("Bearer ")) {
-            return Map.of("code", 401, "message", "未登录");
+            Map<String, Object> result = new HashMap<>();
+            result.put("code", 401);
+            result.put("message", "未登录");
+            return result;
         }
         token = token.substring(7);
         Long userId = JwtUtil.getUserId(token);
         if (userId == null) {
-            return Map.of("code", 401, "message", "Token无效");
+            Map<String, Object> result = new HashMap<>();
+            result.put("code", 401);
+            result.put("message", "Token无效");
+            return result;
         }
         String avatarUrl = userService.uploadAvatar(userId, bytes, fileName);
-        return Map.of("code", 200, "message", "上传成功", "data", Map.of("avatarUrl", avatarUrl));
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("message", "上传成功");
+        Map<String, Object> data = new HashMap<>();
+        data.put("avatarUrl", avatarUrl);
+        result.put("data", data);
+        return result;
     }
 }
