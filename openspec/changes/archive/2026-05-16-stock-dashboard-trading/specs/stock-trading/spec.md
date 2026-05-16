@@ -1,4 +1,4 @@
-## ADDED Requirements
+## MODIFIED Requirements
 
 ### Requirement: Stock Trading
 The system SHALL provide stock trading functionality with dropdown and button-based stock selection, order placement, and trade confirmation for A-share market, using Chinese market color convention.
@@ -22,25 +22,3 @@ The system SHALL provide stock trading functionality with dropdown and button-ba
 - **WHEN** user navigates to the order history page
 - **THEN** system SHALL display all historical orders with status, time, and details
 - **AND** buy orders SHALL be marked in red, sell orders in green
-
-### Requirement: Order Management
-The system SHALL manage trading orders with states: pending, filled, cancelled, rejected.
-
-#### Scenario: Cancel pending order
-- **WHEN** user views a pending order and clicks "Cancel"
-- **THEN** system SHALL update the order status to "cancelled"
-
-#### Scenario: View order details
-- **WHEN** user clicks on a specific order
-- **THEN** system SHALL display full order details including symbol, price, quantity, status, and timestamp
-
-### Requirement: Trade Confirmation
-The system SHALL require explicit confirmation before executing any trade.
-
-#### Scenario: Confirm trade with insufficient balance
-- **WHEN** user attempts to buy with insufficient funds
-- **THEN** system SHALL display an error message and prevent order submission
-
-#### Scenario: Confirm trade with valid information
-- **WHEN** user confirms a buy order with valid information
-- **THEN** system SHALL record the trade and update the user's positions
