@@ -2,7 +2,6 @@ package com.stock.user.service;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
-import com.stock.common.constant.RedisConstant;
 import com.stock.common.entity.FundAccount;
 import com.stock.common.entity.User;
 import com.stock.common.exception.BusinessException;
@@ -13,11 +12,15 @@ import com.stock.user.dto.LoginResponse;
 import com.stock.user.dto.RegisterRequest;
 import com.stock.user.mapper.FundAccountMapper;
 import com.stock.user.mapper.UserMapper;
+import io.minio.MinioClient;
+import io.minio.PutObjectArgs;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.ByteArrayInputStream;
 import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 
@@ -34,22 +37,21 @@ public class UserService {
     private StringRedisTemplate redisTemplate;
 
     @Autowired
-    private CaptchaService captchaService;
+    private MinioClient minioClient;
+
+    @Value("${minio.bucket:avatars}")
+    private String bucketName;
+
+    private static final String TOKEN_PREFIX = "user:token:";
+    private static final long TOKEN_EXPIRE_SECONDS = 86400 * 7; // 7 days
 
     @Transactional
     public User register(RegisterRequest request) {
-        // 验证验证码
-        if (!captchaService.verifyCaptcha(request.getCaptchaId(), request.getCaptcha())) {
-            throw new BusinessException(400, "验证码错误或已过期");
-        }
-
-        // 检查用户名是否已存在
         if (userMapper.selectCount(null) > 0 &&
             userMapper.selectList(null).stream().anyMatch(u -> u.getUsername().equals(request.getUsername()))) {
             throw new BusinessException(400, "用户名已存在");
         }
 
-        // 创建用户
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(PasswordUtil.encode(request.getPassword()));
@@ -58,11 +60,10 @@ public class UserService {
         user.setStatus(1);
         userMapper.insert(user);
 
-        // 创建资金账户
         FundAccount fundAccount = new FundAccount();
         fundAccount.setUserId(user.getId());
         fundAccount.setAccountNo(generateAccountNo());
-        fundAccount.setBalance(new BigDecimal("100000.00")); // 初始化10万模拟资金
+        fundAccount.setBalance(new BigDecimal("100000.00"));
         fundAccount.setFrozenBalance(BigDecimal.ZERO);
         fundAccount.setStatus(1);
         fundAccountMapper.insert(fundAccount);
@@ -71,33 +72,21 @@ public class UserService {
     }
 
     public LoginResponse login(LoginRequest request) {
-        // 验证验证码
-        if (!captchaService.verifyCaptcha(request.getCaptchaId(), request.getCaptcha())) {
-            throw new BusinessException(400, "验证码错误或已过期");
-        }
-
-        // 查找用户
         User user = userMapper.selectList(null).stream()
                 .filter(u -> u.getUsername().equals(request.getUsername()))
                 .findFirst()
                 .orElseThrow(() -> new BusinessException(401, "用户名或密码错误"));
 
-        // 验证密码
         if (!PasswordUtil.match(request.getPassword(), user.getPassword())) {
             throw new BusinessException(401, "用户名或密码错误");
         }
 
-        // 检查状态
         if (user.getStatus() != 1) {
             throw new BusinessException(403, "账户已被禁用");
         }
 
-        // 生成Token
         String token = JwtUtil.generateToken(user.getId(), user.getUsername());
-
-        // 存储到Redis
-        String key = RedisConstant.TOKEN_PREFIX + user.getId();
-        redisTemplate.opsForValue().set(key, token, RedisConstant.TOKEN_EXPIRE, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(TOKEN_PREFIX + user.getId(), token, TOKEN_EXPIRE_SECONDS, TimeUnit.SECONDS);
 
         LoginResponse response = new LoginResponse();
         response.setToken(token);
@@ -108,8 +97,7 @@ public class UserService {
     }
 
     public void logout(Long userId) {
-        String key = RedisConstant.TOKEN_PREFIX + userId;
-        redisTemplate.delete(key);
+        redisTemplate.delete(TOKEN_PREFIX + userId);
     }
 
     public User getUserById(Long userId) {
@@ -117,9 +105,20 @@ public class UserService {
     }
 
     public String uploadAvatar(Long userId, byte[] bytes, String fileName) {
-        // 这里简化处理，实际应上传到MinIO
-        // 返回一个模拟的URL
-        String avatarUrl = "https://minio.example.com/avatars/" + userId + "/" + fileName;
+        String objectName = "avatars/" + userId + "/" + fileName;
+        try {
+            minioClient.putObject(
+                    PutObjectArgs.builder()
+                            .bucket(bucketName)
+                            .object(objectName)
+                            .stream(new ByteArrayInputStream(bytes), bytes.length, -1)
+                            .contentType("image/" + getExtension(fileName))
+                            .build());
+        } catch (Exception e) {
+            throw new BusinessException(500, "头像上传失败: " + e.getMessage());
+        }
+
+        String avatarUrl = "/" + bucketName + "/" + objectName;
 
         User user = userMapper.selectById(userId);
         if (user != null) {
@@ -127,6 +126,11 @@ public class UserService {
             userMapper.updateById(user);
         }
         return avatarUrl;
+    }
+
+    private String getExtension(String fileName) {
+        int idx = fileName.lastIndexOf('.');
+        return idx > 0 ? fileName.substring(idx + 1) : "png";
     }
 
     private String generateAccountNo() {

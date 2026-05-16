@@ -4,11 +4,11 @@
 The system SHALL provide user account creation, login, and profile management.
 
 #### Scenario: Create new account
-- **WHEN** user provides required information (username, password, captcha) to create an account
-- **THEN** system SHALL validate captcha first, then create a new user account and return success confirmation
+- **WHEN** user provides required information (username, password) to create an account
+- **THEN** system SHALL create a new user account and return success confirmation
 
 #### Scenario: Login to account
-- **WHEN** user enters valid credentials and captcha
+- **WHEN** user enters valid credentials
 - **THEN** system SHALL authenticate the user, generate JWT token, store token in Redis with TTL, and return token to client
 
 #### Scenario: View user profile
@@ -18,17 +18,6 @@ The system SHALL provide user account creation, login, and profile management.
 #### Scenario: Update user profile
 - **WHEN** user updates profile information
 - **THEN** system SHALL update the user record and return success confirmation
-
-### Requirement: Captcha Management
-The system SHALL generate and validate captcha images for login and registration.
-
-#### Scenario: Generate captcha
-- **WHEN** user requests a captcha
-- **THEN** system SHALL generate a captcha image, store the answer in Redis with 5-minute TTL, and return the image
-
-#### Scenario: Validate captcha
-- **WHEN** user submits a captcha answer
-- **THEN** system SHALL verify against Redis stored answer and return validation result
 
 ### Requirement: Avatar Upload
 The system SHALL allow users to upload avatar images stored in MinIO.
