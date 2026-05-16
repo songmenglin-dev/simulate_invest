@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 import { getPortfolioOverview, getPositions, searchStocks, getQuote } from '../services/api'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
 const userId = ref<number>(Number(localStorage.getItem('userId')) || 1)
 const overview = ref<any>(null)
 const positions = ref<any[]>([])
@@ -53,57 +51,25 @@ watch(selectedStock, () => {
 const formatMoney = (v: number) => `¥${v.toFixed(2)}`
 const formatPercent = (v: number) => `${v >= 0 ? '+' : ''}${v.toFixed(2)}%`
 
-const handleLogout = () => {
-  localStorage.clear()
-  router.push('/login')
+const navigateTo = (path: string) => {
+  // handled by router-link in parent
 }
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <!-- Top Navigation - Light Theme -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="flex justify-between items-center h-16">
-          <!-- Logo -->
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-100">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-              </svg>
-            </div>
-            <span class="text-xl font-bold text-gray-900">股票投资平台</span>
-          </div>
-
-          <!-- Nav Items -->
-          <nav class="hidden md:flex items-center gap-1">
-            <a href="#" class="px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition text-sm font-medium">行情</a>
-            <a href="#" class="px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition text-sm font-medium">交易</a>
-            <a href="#" class="px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition text-sm font-medium">持仓</a>
-            <a href="#" class="px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition text-sm font-medium">资讯</a>
-          </nav>
-
-          <!-- User Actions -->
-          <div class="flex items-center gap-4">
-            <div class="flex items-center gap-2 text-sm text-gray-600">
-              <span class="px-3 py-1 bg-gray-100 rounded-full">用户ID: {{ userId }}</span>
-            </div>
-            <button
-              @click="handleLogout"
-              class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition text-sm font-medium"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-              </svg>
-              退出
-            </button>
-          </div>
-        </div>
+  <div>
+    <div class="flex items-center gap-2 mb-6">
+      <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"/>
+        </svg>
       </div>
-    </header>
+      <h1 class="text-2xl font-bold text-gray-900">概览</h1>
+    </div>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-6 py-8">
+    <div v-if="loading" class="text-center py-12 text-gray-400">加载中...</div>
+
+    <template v-else>
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- 账户概览 -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
@@ -121,7 +87,6 @@ const handleLogout = () => {
               <p class="text-sm text-gray-500 mb-1">总资产</p>
               <p class="text-3xl font-bold text-blue-600">{{ formatMoney(overview.totalAssets) }}</p>
             </div>
-
             <div class="grid grid-cols-2 gap-3">
               <div class="p-3 bg-gray-50 rounded-xl">
                 <p class="text-xs text-gray-500 mb-1">可用资金</p>
@@ -132,12 +97,10 @@ const handleLogout = () => {
                 <p class="text-lg font-semibold text-yellow-600">{{ formatMoney(overview.frozenCash) }}</p>
               </div>
             </div>
-
             <div class="p-3 bg-gray-50 rounded-xl">
               <p class="text-xs text-gray-500 mb-1">持仓市值</p>
               <p class="text-lg font-semibold text-gray-900">{{ formatMoney(overview.totalMarketValue) }}</p>
             </div>
-
             <div class="p-4 bg-gray-50 rounded-xl border border-gray-200">
               <div class="flex justify-between items-center">
                 <span class="text-sm text-gray-500">总盈亏</span>
@@ -182,7 +145,6 @@ const handleLogout = () => {
                 {{ quote.change >= 0 ? '+' : '' }}{{ quote.change.toFixed(2) }} ({{ formatPercent(quote.changePercent) }})
               </div>
             </div>
-
             <div class="grid grid-cols-2 gap-3 text-sm">
               <div class="flex justify-between p-3 bg-gray-50 rounded-xl">
                 <span class="text-gray-500">开盘</span>
@@ -216,21 +178,20 @@ const handleLogout = () => {
           </div>
 
           <div class="grid grid-cols-2 gap-4">
-            <button class="bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl transition shadow-lg shadow-blue-200 font-medium">
+            <router-link to="/trading" class="bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl transition shadow-lg shadow-blue-200 font-medium text-center">
               买入
-            </button>
-            <button class="bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-xl transition shadow-lg shadow-orange-200 font-medium">
+            </router-link>
+            <router-link to="/trading" class="bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-xl transition shadow-lg shadow-orange-200 font-medium text-center">
               卖出
-            </button>
-            <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-4 rounded-xl transition font-medium">
+            </router-link>
+            <router-link to="/portfolio" class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-4 rounded-xl transition font-medium text-center">
               持仓
-            </button>
-            <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-4 rounded-xl transition font-medium">
+            </router-link>
+            <router-link to="/trading" class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-4 rounded-xl transition font-medium text-center">
               订单
-            </button>
+            </router-link>
           </div>
 
-          <!-- Market Summary -->
           <div class="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl">
             <p class="text-sm text-gray-500 mb-2">市场动态</p>
             <div class="flex items-center gap-2">
@@ -290,6 +251,6 @@ const handleLogout = () => {
           </table>
         </div>
       </div>
-    </main>
+    </template>
   </div>
 </template>

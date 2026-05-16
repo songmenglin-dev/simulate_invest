@@ -134,26 +134,45 @@ export const getOrderHistory = (userId: number) =>
     orderNo: string
     stockCode: string
     stockName: string
-    direction: string
+    direction: number
     price: number
     quantity: number
     amount: number
-    status: string
+    status: number
     createTime: string
   }>>(`/order/history/${userId}`)
+
+export const confirmOrder = (orderId: number, userId: number) =>
+  request<any>(`/order/confirm/${orderId}?userId=${userId}`, { method: 'POST' })
+
+export const cancelOrder = (orderId: number, userId: number) =>
+  request<any>(`/order/cancel/${orderId}?userId=${userId}`, { method: 'POST' })
 
 // Analysis
 export const getFinancialOverview = (stockCode: string) =>
   request<{
     stockCode: string
     stockName: string
-    pe: number
-    pb: number
-    marketCap: number
     revenue: number
     netProfit: number
     roe: number
+    eps: number
+    peRatio: number
+    pbRatio: number
+    dividendYield: number
+    totalAssets: number
+    totalLiabilities: number
+    shareholdersEquity: number
   }>(`/analysis/overview/${stockCode}`)
+
+export const getIncomeStatement = (stockCode: string) =>
+  request<{ revenue: number; netProfit: number; eps: number; reportDate: string }>(`/analysis/income/${stockCode}`)
+
+export const getBalanceSheet = (stockCode: string) =>
+  request<{ totalAssets: number; totalLiabilities: number; shareholdersEquity: number; reportDate: string }>(`/analysis/balance/${stockCode}`)
+
+export const getCashFlowStatement = (stockCode: string) =>
+  request<{ operatingCashFlow: number; investingCashFlow: number; financingCashFlow: number; netCashFlow: number; reportDate: string }>(`/analysis/cashflow/${stockCode}`)
 
 export const getRevenueTrend = (stockCode: string) =>
   request<{
@@ -162,3 +181,7 @@ export const getRevenueTrend = (stockCode: string) =>
     revenues: number[]
     growthRates: number[]
   }>(`/analysis/revenue-trend/${stockCode}`)
+
+// Portfolio Cash
+export const getCashBalance = (userId: number) =>
+  request<{ availableCash: number; frozenCash: number; totalCash: number; accountNo: string; status: number }>(`/portfolio/cash/${userId}`)
