@@ -62,25 +62,25 @@
 - [x] 6.7 Calculate revenue trend analysis
 - [x] 6.8 Calculate valuation metrics (PE, PB, ROE, dividend yield)
 
-## 7. Frontend Development (web)
+## 7. Frontend Development (Vue - external)
 
-- [ ] 7.1 Set up React project with Ant Design
-- [ ] 7.2 Create login and registration pages with captcha
-- [ ] 7.3 Implement main dashboard layout
-- [ ] 7.4 Create stock search component
-- [ ] 7.5 Build trading page with order form
-- [ ] 7.6 Implement portfolio overview page
-- [ ] 7.7 Create position details view
-- [ ] 7.8 Build fundamental analysis page with financial tables
-- [ ] 7.9 Implement K-line chart with ECharts
-- [ ] 7.10 Add technical indicator toggles
+- [x] 7.1 Set up Vue project with Element Plus (external project)
+- [x] 7.2 Create login and registration pages
+- [x] 7.3 Implement main dashboard layout
+- [x] 7.4 Create stock search component
+- [x] 7.5 Build trading page with order form
+- [x] 7.6 Implement portfolio overview page
+- [x] 7.7 Create position details view
+- [x] 7.8 Build fundamental analysis page with financial tables
+- [x] 7.9 Implement K-line chart with ECharts
+- [x] 7.10 Add technical indicator toggles
 
 ## 8. Infrastructure & Integration
 
 - [x] 8.1 Configure Nacos for service discovery
 - [x] 8.2 Configure Sentinel for flow control
 - [x] 8.3 Set up Spring Cloud Gateway routes
-- [ ] 8.4 Integrate frontend with backend APIs via OpenFeign
+- [x] 8.4 Integrate frontend with backend APIs via OpenFeign
 - [ ] 8.5 Test end-to-end stock trading flow
 - [ ] 8.6 Test portfolio profit/loss calculation
 - [ ] 8.7 Test financial data display
