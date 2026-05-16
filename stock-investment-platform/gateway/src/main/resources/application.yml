@@ -12,6 +12,8 @@ spring:
       config:
         server-addr: 127.0.0.1:8848
         file-extension: yaml
+        import-check:
+          enabled: false
     gateway:
       discovery:
         locator:
@@ -22,32 +24,38 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/user/**
-          filters:
-            - StripPrefix=1
         - id: trading-service
           uri: lb://trading-service
           predicates:
             - Path=/trade/**
-          filters:
-            - StripPrefix=1
         - id: market-service
           uri: lb://market-service
           predicates:
             - Path=/market/**
-          filters:
-            - StripPrefix=1
         - id: portfolio-service
           uri: lb://portfolio-service
           predicates:
             - Path=/portfolio/**
-          filters:
-            - StripPrefix=1
         - id: analysis-service
           uri: lb://analysis-service
           predicates:
             - Path=/analysis/**
-          filters:
-            - StripPrefix=1
+        - id: conditional-order-service
+          uri: lb://trading-service
+          predicates:
+            - Path=/conditional-order/**
+        - id: watchlist-service
+          uri: lb://market-service
+          predicates:
+            - Path=/watchlist/**
+        - id: alert-service
+          uri: lb://market-service
+          predicates:
+            - Path=/alert/**
+        - id: backtest-service
+          uri: lb://analysis-service
+          predicates:
+            - Path=/backtest/**
 
 management:
   endpoints:
