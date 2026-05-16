@@ -28,6 +28,9 @@ public class RateLimitInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         try {
             String clientIp = getClientIp(request);
+            if ("127.0.0.1".equals(clientIp) || "0:0:0:0:0:0:0:1".equals(clientIp) || "::1".equals(clientIp)) {
+                return true;
+            }
             String key = RATE_LIMIT_PREFIX + clientIp;
 
             String countStr = redisTemplate.opsForValue().get(key);
