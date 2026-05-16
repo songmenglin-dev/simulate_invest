@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { getPortfolioOverview, getPositions, getCashBalance } from '../services/api'
+import { getPortfolioOverview, getPositions, getCashBalance, deposit, withdraw } from '../services/api'
 
 const userId = Number(localStorage.getItem('userId')) || 1
 const overview = ref<any>(null)
@@ -8,7 +8,13 @@ const positions = ref<any[]>([])
 const cash = ref<any>(null)
 const loading = ref(true)
 
-onMounted(async () => {
+const showFundDialog = ref(false)
+const fundAction = ref<'deposit' | 'withdraw'>('deposit')
+const fundAmount = ref('')
+const fundMessage = ref('')
+const fundLoading = ref(false)
+
+const loadData = async () => {
   try {
     const [overviewData, positionsData, cashData] = await Promise.all([
       getPortfolioOverview(userId),
@@ -20,10 +26,45 @@ onMounted(async () => {
     cash.value = cashData
   } catch (err) {
     console.error(err)
-  } finally {
-    loading.value = false
   }
+}
+
+onMounted(async () => {
+  await loadData()
+  loading.value = false
 })
+
+const openFundDialog = (action: 'deposit' | 'withdraw') => {
+  fundAction.value = action
+  fundAmount.value = ''
+  fundMessage.value = ''
+  showFundDialog.value = true
+}
+
+const submitFund = async () => {
+  const amount = Number(fundAmount.value)
+  if (!amount || amount <= 0) {
+    fundMessage.value = '请输入有效金额'
+    return
+  }
+  fundLoading.value = true
+  fundMessage.value = ''
+  try {
+    if (fundAction.value === 'deposit') {
+      await deposit(userId, amount)
+      fundMessage.value = `成功充值 ¥${amount.toFixed(2)}`
+    } else {
+      await withdraw(userId, amount)
+      fundMessage.value = `成功提现 ¥${amount.toFixed(2)}`
+    }
+    await loadData()
+    showFundDialog.value = false
+  } catch (err: any) {
+    fundMessage.value = err.message || '操作失败'
+  } finally {
+    fundLoading.value = false
+  }
+}
 
 const formatMoney = (v: number) => `¥${(v ?? 0).toFixed(2)}`
 const formatPercent = (v: number) => `${(v ?? 0) >= 0 ? '+' : ''}${(v ?? 0).toFixed(2)}%`
@@ -83,6 +124,68 @@ const formatPercent = (v: number) => `${(v ?? 0) >= 0 ? '+' : ''}${(v ?? 0).toFi
           <div>
             <span class="text-gray-400">状态</span>
             <p class="font-medium" :class="cash.status === 1 ? 'text-green-600' : 'text-red-600'">{{ cash.status === 1 ? '正常' : '禁用' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fund Actions -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <h2 class="text-lg font-semibold text-gray-900 mb-4">资金管理</h2>
+        <div class="flex gap-4">
+          <button
+            @click="openFundDialog('deposit')"
+            class="px-6 py-3 bg-green-600 text-white rounded-xl font-medium hover:bg-green-700 transition flex items-center gap-2"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+            </svg>
+            充值
+          </button>
+          <button
+            @click="openFundDialog('withdraw')"
+            class="px-6 py-3 bg-orange-600 text-white rounded-xl font-medium hover:bg-orange-700 transition flex items-center gap-2"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+            </svg>
+            提现
+          </button>
+        </div>
+      </div>
+
+      <!-- Fund Dialog -->
+      <div v-if="showFundDialog" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md mx-4">
+          <h3 class="text-xl font-bold text-gray-900 mb-4">{{ fundAction === 'deposit' ? '充值' : '提现' }}</h3>
+          <div class="mb-4">
+            <label class="block text-sm text-gray-500 mb-2">金额 (元)</label>
+            <input
+              v-model="fundAmount"
+              type="number"
+              min="0"
+              step="0.01"
+              placeholder="请输入金额"
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div v-if="fundAction === 'withdraw' && cash" class="mb-4 p-3 bg-gray-50 rounded-xl text-sm text-gray-500">
+            可用余额: {{ formatMoney(cash.availableCash) }}
+          </div>
+          <p v-if="fundMessage" :class="['text-sm mb-4', fundMessage.includes('成功') ? 'text-green-600' : 'text-red-600']">{{ fundMessage }}</p>
+          <div class="flex gap-3">
+            <button
+              @click="showFundDialog = false"
+              class="flex-1 px-4 py-3 border border-gray-200 rounded-xl text-gray-600 font-medium hover:bg-gray-50 transition"
+            >
+              取消
+            </button>
+            <button
+              @click="submitFund"
+              :disabled="fundLoading"
+              :class="['flex-1 px-4 py-3 rounded-xl font-medium text-white transition', fundAction === 'deposit' ? 'bg-green-600 hover:bg-green-700' : 'bg-orange-600 hover:bg-orange-700']"
+            >
+              {{ fundLoading ? '处理中...' : (fundAction === 'deposit' ? '确认充值' : '确认提现') }}
+            </button>
           </div>
         </div>
       </div>

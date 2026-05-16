@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { placeOrder } from '../services/api'
-import StockSearch from './StockSearch.vue'
+import StockSelector from './StockSelector.vue'
 
 const emit = defineEmits(['ordered'])
 
@@ -22,9 +22,10 @@ const lastOrder = ref<any>(null)
 
 const selectedStockName = ref('')
 
-const onStockSelect = (item: { stockCode: string; stockName: string }) => {
+const onStockSelect = (item: { stockCode: string; stockName: string; currentPrice: number }) => {
   form.value.stockCode = item.stockCode
   form.value.stockName = item.stockName
+  form.value.price = item.currentPrice
   selectedStockName.value = item.stockName
 }
 
@@ -42,10 +43,10 @@ const handleSubmit = async () => {
       fundAccountId: form.value.fundAccountId,
       stockCode: form.value.stockCode,
       stockName: form.value.stockName,
-      direction: form.value.direction === 1 ? 'BUY' as any : 'SELL' as any,
+      direction: form.value.direction,
       price: form.value.price!,
       quantity: form.value.quantity!,
-      orderType: '1',
+      orderType: 1,
     }) as any
     lastOrder.value = { ...order, price: form.value.price, quantity: form.value.quantity, stockName: form.value.stockName, direction: form.value.direction }
     showConfirm.value = true
@@ -108,7 +109,7 @@ const cancelOrder = async () => {
     <form @submit.prevent="handleSubmit" class="space-y-4">
       <div>
         <label class="text-sm font-medium text-gray-700 block mb-2">股票</label>
-        <StockSearch :modelValue="form.stockCode" @select="onStockSelect" />
+        <StockSelector @select="onStockSelect" />
       </div>
       <div>
         <label class="text-sm font-medium text-gray-700 block mb-2">买卖方向</label>

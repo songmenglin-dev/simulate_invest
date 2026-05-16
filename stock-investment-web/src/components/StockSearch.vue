@@ -29,6 +29,15 @@ const selectStock = (item: { stockCode: string; stockName: string }) => {
   showDropdown.value = false
 }
 
+let blurTimer: ReturnType<typeof setTimeout> | null = null
+const handleBlur = () => {
+  blurTimer = setTimeout(() => { showDropdown.value = false }, 200)
+}
+const handleFocus = () => {
+  if (blurTimer) clearTimeout(blurTimer)
+  showDropdown.value = results.value.length > 0
+}
+
 watch(keyword, () => {
   doSearch()
 })
@@ -47,8 +56,8 @@ onMounted(() => {
       type="text"
       placeholder="输入股票代码或名称搜索..."
       class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-      @focus="showDropdown = results.length > 0"
-      @blur="setTimeout(() => showDropdown = false, 200)"
+      @focus="handleFocus"
+      @blur="handleBlur"
     />
     <div
       v-if="showDropdown && results.length > 0"

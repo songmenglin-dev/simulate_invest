@@ -44,6 +44,31 @@ const router = createRouter({
           component: () => import('../views/ProfileView.vue'),
           meta: { requiresAuth: true },
         },
+        {
+          path: 'conditional-orders',
+          component: () => import('../views/ConditionalOrderView.vue'),
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'watchlist',
+          component: () => import('../views/WatchlistView.vue'),
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'alerts',
+          component: () => import('../views/PriceAlertView.vue'),
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'backtest',
+          component: () => import('../views/BacktestView.vue'),
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'backtest/history',
+          component: () => import('../views/BacktestHistoryView.vue'),
+          meta: { requiresAuth: true },
+        },
       ],
     },
   ],

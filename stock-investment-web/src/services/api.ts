@@ -49,6 +49,9 @@ export const getProfile = () =>
 export const searchStocks = (keyword?: string) =>
   request<Array<{ id: number; stockCode: string; stockName: string }>>(`/market/search${keyword ? `?keyword=${keyword}` : ''}`)
 
+export const fetchAllStocks = () =>
+  request<Array<{ id: number; stockCode: string; stockName: string }>>('/market/search')
+
 export const getQuote = (stockCode: string) =>
   request<{
     stockCode: string
@@ -86,6 +89,24 @@ export const getIndicators = (stockCode: string, period = 'daily') =>
     j: number
   }>(`/market/indicators/${stockCode}?period=${period}`)
 
+export const getSimulatedQuotes = (stockCodes: string[]) =>
+  request<Array<{
+    stockCode: string
+    stockName: string
+    currentPrice: number
+    change: number
+    changePercent: number
+    open: number
+    high: number
+    low: number
+    close: number
+    volume: number
+    turnover: number
+  }>>('/market/simulated-quotes', {
+    method: 'POST',
+    body: JSON.stringify(stockCodes),
+  })
+
 // Portfolio
 export const getPortfolioOverview = (userId: number) =>
   request<{
@@ -118,10 +139,10 @@ export const placeOrder = (data: {
   fundAccountId: number
   stockCode: string
   stockName: string
-  direction: 'BUY' | 'SELL'
+  direction: number
   price: number
   quantity: number
-  orderType: string
+  orderType: number
 }) =>
   request<{ id: number; orderNo: string }>('/order/place', {
     method: 'POST',
@@ -185,3 +206,225 @@ export const getRevenueTrend = (stockCode: string) =>
 // Portfolio Cash
 export const getCashBalance = (userId: number) =>
   request<{ availableCash: number; frozenCash: number; totalCash: number; accountNo: string; status: number }>(`/portfolio/cash/${userId}`)
+
+export const deposit = (userId: number, amount: number) =>
+  request<{ balance: number; amount: number }>('/portfolio/deposit', {
+    method: 'POST',
+    body: JSON.stringify({ userId, amount }),
+  })
+
+export const withdraw = (userId: number, amount: number) =>
+  request<{ balance: number; amount: number }>('/portfolio/withdraw', {
+    method: 'POST',
+    body: JSON.stringify({ userId, amount }),
+  })
+
+// Conditional Orders (条件单)
+export const createConditionalOrder = (data: {
+  userId: number
+  fundAccountId: number
+  stockCode: string
+  stockName: string
+  conditionType: string
+  triggerPrice: number
+  orderPrice: number
+  quantity: number
+  direction: number
+}) =>
+  request<{ id: number; orderNo: string }>('/conditional-order/create', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+
+export const getConditionalOrders = (userId: number) =>
+  request<Array<{
+    id: number
+    orderNo: string
+    stockCode: string
+    stockName: string
+    conditionType: string
+    triggerPrice: number
+    orderPrice: number
+    quantity: number
+    direction: number
+    status: string
+    triggeredOrderId: number | null
+    failReason: string | null
+    createTime: string
+    updateTime: string
+  }>>(`/conditional-order/list/${userId}`)
+
+export const getConditionalOrderDetail = (id: number) =>
+  request<{
+    id: number
+    orderNo: string
+    stockCode: string
+    stockName: string
+    conditionType: string
+    triggerPrice: number
+    orderPrice: number
+    quantity: number
+    direction: number
+    status: string
+    triggeredOrderId: number | null
+    failReason: string | null
+    createTime: string
+    updateTime: string
+  }>(`/conditional-order/${id}`)
+
+export const cancelConditionalOrder = (id: number, userId: number) =>
+  request<any>(`/conditional-order/cancel/${id}?userId=${userId}`, { method: 'POST' })
+
+// Watchlist (自选股)
+export const addToWatchlist = (data: { userId: number; stockCode: string; stockName: string }) =>
+  request<any>('/watchlist/add', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+
+export const removeFromWatchlist = (userId: number, stockCode: string) =>
+  request<any>(`/watchlist/remove/${userId}/${stockCode}`, { method: 'DELETE' })
+
+export const getWatchlist = (userId: number) =>
+  request<Array<{ id: number; stockCode: string; stockName: string; createTime: string }>>(`/watchlist/${userId}`)
+
+export const getWatchlistQuotes = (userId: number) =>
+  request<Array<{
+    id: number
+    stockCode: string
+    stockName: string
+    currentPrice: number
+    change: number
+    changePercent: number
+    createTime: string
+  }>>(`/watchlist/quotes/${userId}`)
+
+// Price Alerts (价格预警)
+export const createPriceAlert = (data: {
+  userId: number
+  stockCode: string
+  stockName: string
+  alertType: string
+  targetPrice: number
+}) =>
+  request<{ id: number; alertNo: string }>('/alert/create', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+
+export const getPriceAlerts = (userId: number, status?: string) =>
+  request<Array<{
+    id: number
+    alertNo: string
+    stockCode: string
+    stockName: string
+    alertType: string
+    targetPrice: number
+    status: string
+    createTime: string
+    updateTime: string
+  }>>(`/alert/list/${userId}${status ? `?status=${status}` : ''}`)
+
+export const cancelPriceAlert = (id: number, userId: number) =>
+  request<any>(`/alert/cancel/${id}?userId=${userId}`, { method: 'POST' })
+
+export const getAlertNotifications = (userId: number) =>
+  request<Array<{
+    id: number
+    alertId: number
+    stockCode: string
+    stockName: string
+    alertType: string
+    targetPrice: number
+    triggeredPrice: number
+    isRead: number
+    createTime: string
+  }>>(`/alert/notifications/${userId}`)
+
+export const markNotificationRead = (id: number) =>
+  request<any>(`/alert/notifications/read/${id}`, { method: 'POST' })
+
+export const markAllNotificationsRead = (userId: number) =>
+  request<any>(`/alert/notifications/read-all/${userId}`, { method: 'POST' })
+
+export const getUnreadNotificationCount = (userId: number) =>
+  request<number>(`/alert/notifications/unread-count/${userId}`)
+
+// Strategy Backtesting (策略回测)
+export const runBacktest = (data: {
+  userId: number
+  strategyType: string
+  stockCode: string
+  stockName: string
+  startDate: string
+  endDate: string
+  initialCapital: number
+  parameters: Record<string, any>
+}) =>
+  request<{
+    id: number
+    resultNo: string
+    strategyType: string
+    stockCode: string
+    stockName: string
+    startDate: string
+    endDate: string
+    initialCapital: number
+    finalCapital: number
+    totalReturn: number
+    annualReturn: number
+    maxDrawdown: number
+    winRate: number
+    totalTrades: number
+    winningTrades: number
+    sharpeRatio: number
+    equityCurveJson: string
+    tradesJson: string
+  }>('/backtest/run', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+
+export const getBacktestResult = (id: number) =>
+  request<{
+    id: number
+    resultNo: string
+    strategyType: string
+    stockCode: string
+    stockName: string
+    startDate: string
+    endDate: string
+    initialCapital: number
+    finalCapital: number
+    totalReturn: number
+    annualReturn: number
+    maxDrawdown: number
+    winRate: number
+    totalTrades: number
+    winningTrades: number
+    sharpeRatio: number
+    equityCurveJson: string
+    tradesJson: string
+  }>(`/backtest/result/${id}`)
+
+export const getBacktestHistory = (userId: number) =>
+  request<Array<{
+    id: number
+    resultNo: string
+    strategyType: string
+    stockCode: string
+    stockName: string
+    startDate: string
+    endDate: string
+    totalReturn: number
+    totalTrades: number
+    createTime: string
+  }>>(`/backtest/history/${userId}`)
+
+export const getStrategyTemplates = () =>
+  request<Array<{
+    type: string
+    name: string
+    description: string
+    parameters: Array<{ name: string; label: string; type: string; defaultValue: any }>
+  }>>('/backtest/strategies/templates')

@@ -10,6 +10,7 @@ const uploadMessage = ref('')
 onMounted(async () => {
   try {
     user.value = await getProfile()
+    avatarUrl.value = user.value?.avatarUrl || ''
   } catch (err) {
     console.error(err)
   } finally {
@@ -17,34 +18,29 @@ onMounted(async () => {
   }
 })
 
-const onFileSelected = (event: Event) => {
+const onFileSelected = async (event: Event) => {
   const file = (event.target as HTMLInputElement).files?.[0]
   if (!file) return
-  const reader = new FileReader()
-  reader.onload = async (e) => {
-    const bytes = new Uint8Array(e.target?.result as ArrayBuffer)
-    const token = localStorage.getItem('token')
-    try {
-      const formData = new FormData()
-      formData.append('file', new Blob([bytes]), file.name)
-      formData.append('fileName', file.name)
-      const res = await fetch('/api/user/avatar', {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` },
-        body: formData,
-      })
-      const json = await res.json()
-      if (json.code === 200) {
-        avatarUrl.value = json.data.avatarUrl
-        uploadMessage.value = '头像上传成功'
-      } else {
-        uploadMessage.value = json.message || '上传失败'
-      }
-    } catch (err: any) {
-      uploadMessage.value = err.message
+  const token = localStorage.getItem('token')
+  try {
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('fileName', file.name)
+    const res = await fetch('/api/user/avatar', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}` },
+      body: formData,
+    })
+    const json = await res.json()
+    if (json.code === 200) {
+      avatarUrl.value = json.data.avatarUrl
+      uploadMessage.value = '头像上传成功'
+    } else {
+      uploadMessage.value = json.message || '上传失败'
     }
+  } catch (err: any) {
+    uploadMessage.value = err.message
   }
-  reader.readAsArrayBuffer(file)
 }
 </script>
 

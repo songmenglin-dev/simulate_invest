@@ -17,7 +17,7 @@ const showKDJ = ref(false)
 const period = ref('daily')
 let chart: echarts.ECharts | null = null
 
-const buildOption = (kline: any, indicators: any): echarts.EChartsOption => {
+const buildOption = (kline: any, indicators: any): any => {
   const dates = kline.dates || []
   const ohlc = (kline.open || []).map((_: number, i: number) => [
     kline.open[i],

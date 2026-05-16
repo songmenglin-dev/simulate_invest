@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch } from 'vue'
 import * as echarts from 'echarts/core'
 import { LineChart, BarChart } from 'echarts/charts'
 import { TitleComponent, TooltipComponent, LegendComponent, GridComponent } from 'echarts/components'
@@ -19,8 +19,23 @@ const cashflow = ref<any>(null)
 const trendChartRef = ref<HTMLDivElement>()
 let trendChart: echarts.ECharts | null = null
 
+const popularStocks = [
+  { code: '600519', name: '贵州茅台' },
+  { code: '000858', name: '五粮液' },
+  { code: '600036', name: '招商银行' },
+  { code: '601318', name: '中国平安' },
+  { code: '002594', name: '比亚迪' },
+  { code: '000333', name: '美的集团' },
+  { code: '600887', name: '伊利股份' },
+  { code: '000001', name: '平安银行' },
+]
+
 const onStockSelect = (item: { stockCode: string; stockName: string }) => {
   stockCode.value = item.stockCode
+}
+
+const quickSelect = (code: string) => {
+  stockCode.value = code
 }
 
 const loadData = async (code: string) => {
@@ -49,23 +64,22 @@ const renderTrendChart = () => {
   const d = revenueTrend.value
   trendChart.setOption({
     tooltip: { trigger: 'axis' },
-    legend: { data: ['营收', '增长率'], top: 0 },
+    legend: { data: ['营收', '同比增长率'], top: 0 },
     grid: { left: '5%', right: '5%', top: '15%', height: '70%' },
     xAxis: { data: d.dates, axisLabel: { rotate: 30 } },
     yAxis: [
-      { type: 'value', name: '营收(亿)', axisLabel: { formatter: (v: number) => (v / 100000000).toFixed(0) + '亿' } },
+      { type: 'value', name: '营收(亿)', axisLabel: { formatter: (v: number) => v.toFixed(0) + '亿' } },
       { type: 'value', name: '增长率(%)', axisLabel: { formatter: '{value}%' } },
     ],
     series: [
       { name: '营收', type: 'bar', data: d.revenues, itemStyle: { color: '#3b82f6' } },
-      { name: '增长率', type: 'line', yAxisIndex: 1, data: d.growthRates, itemStyle: { color: '#f59e0b' }, symbol: 'circle', symbolSize: 8 },
+      { name: '同比增长率', type: 'line', yAxisIndex: 1, data: d.growthRates, itemStyle: { color: '#f59e0b' }, symbol: 'circle', symbolSize: 8 },
     ],
   })
 }
 
 watch(stockCode, (code) => { if (code) loadData(code) })
 
-const formatMoney = (v: number) => `¥${(v ?? 0).toFixed(2)}`
 </script>
 
 <template>
@@ -83,6 +97,17 @@ const formatMoney = (v: number) => `¥${(v ?? 0).toFixed(2)}`
     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
       <h2 class="text-lg font-semibold text-gray-900 mb-4">选择股票</h2>
       <StockSearch :modelValue="stockCode" @select="onStockSelect" />
+      <div class="mt-4 flex flex-wrap gap-2">
+        <button
+          v-for="s in popularStocks"
+          :key="s.code"
+          @click="quickSelect(s.code)"
+          :class="['px-3 py-1.5 rounded-lg text-sm font-medium transition', stockCode === s.code ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200']"
+        >
+          {{ s.name }}
+          <span class="ml-1 text-xs opacity-70">{{ s.code }}</span>
+        </button>
+      </div>
     </div>
 
     <template v-if="stockCode">
@@ -90,11 +115,11 @@ const formatMoney = (v: number) => `¥${(v ?? 0).toFixed(2)}`
       <div v-if="overview" class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div class="bg-white rounded-xl border border-gray-100 p-4 text-center">
           <p class="text-xs text-gray-400 mb-1">营收</p>
-          <p class="text-xl font-bold text-gray-900">{{ ((overview.revenue || 0) / 100000000).toFixed(2) }}亿</p>
+          <p class="text-xl font-bold text-gray-900">{{ (overview.revenue || 0).toFixed(2) }}亿</p>
         </div>
         <div class="bg-white rounded-xl border border-gray-100 p-4 text-center">
           <p class="text-xs text-gray-400 mb-1">净利润</p>
-          <p class="text-xl font-bold text-gray-900">{{ ((overview.netProfit || 0) / 100000000).toFixed(2) }}亿</p>
+          <p class="text-xl font-bold text-gray-900">{{ (overview.netProfit || 0).toFixed(2) }}亿</p>
         </div>
         <div class="bg-white rounded-xl border border-gray-100 p-4 text-center">
           <p class="text-xs text-gray-400 mb-1">ROE</p>

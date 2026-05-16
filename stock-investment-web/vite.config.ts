@@ -37,6 +37,30 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (p) => p.replace(/^\/api\/analysis/, '/analysis'),
       },
+      '/api/conditional-order': {
+        target: 'http://localhost:8082',
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/api\/conditional-order/, '/conditional-order'),
+      },
+      '/api/watchlist': {
+        target: 'http://localhost:8083',
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/api\/watchlist/, '/watchlist'),
+      },
+      '/api/alert': {
+        target: 'http://localhost:8083',
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/api\/alert/, '/alert'),
+      },
+      '/api/backtest': {
+        target: 'http://localhost:8085',
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/api\/backtest/, '/backtest'),
+      },
+      '/avatars': {
+        target: 'http://192.168.100.145:9000',
+        changeOrigin: true,
+      },
     },
   },
 })

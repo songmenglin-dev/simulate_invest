@@ -21,6 +21,21 @@ watch(stockCode, async (code) => {
   }
 })
 
+const popularStocks = [
+  { code: '600519', name: '贵州茅台' },
+  { code: '000858', name: '五粮液' },
+  { code: '600036', name: '招商银行' },
+  { code: '601318', name: '中国平安' },
+  { code: '002594', name: '比亚迪' },
+  { code: '000333', name: '美的集团' },
+  { code: '600887', name: '伊利股份' },
+  { code: '000001', name: '平安银行' },
+]
+
+const quickSelect = (code: string) => {
+  stockCode.value = code
+}
+
 const formatPercent = (v: number) => `${v >= 0 ? '+' : ''}${v.toFixed(2)}%`
 </script>
 
@@ -39,6 +54,17 @@ const formatPercent = (v: number) => `${v >= 0 ? '+' : ''}${v.toFixed(2)}%`
     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
       <h2 class="text-lg font-semibold text-gray-900 mb-4">股票搜索</h2>
       <StockSearch :modelValue="stockCode" @select="onStockSelect" />
+      <div class="mt-4 flex flex-wrap gap-2">
+        <button
+          v-for="s in popularStocks"
+          :key="s.code"
+          @click="quickSelect(s.code)"
+          :class="['px-3 py-1.5 rounded-lg text-sm font-medium transition', stockCode === s.code ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200']"
+        >
+          {{ s.name }}
+          <span class="ml-1 text-xs opacity-70">{{ s.code }}</span>
+        </button>
+      </div>
     </div>
 
     <!-- Quote -->
@@ -50,7 +76,7 @@ const formatPercent = (v: number) => `${v >= 0 ? '+' : ''}${v.toFixed(2)}%`
         </div>
         <div class="text-right">
           <p class="text-3xl font-bold text-gray-900">{{ quote.currentPrice?.toFixed(2) }}</p>
-          <p :class="['text-lg font-medium', quote.change >= 0 ? 'text-green-600' : 'text-red-600']">
+          <p :class="['text-lg font-medium', quote.change >= 0 ? 'text-red-600' : 'text-green-600']">
             {{ quote.change >= 0 ? '+' : '' }}{{ quote.change?.toFixed(2) }} ({{ formatPercent(quote.changePercent) }})
           </p>
         </div>
