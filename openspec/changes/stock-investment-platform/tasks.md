@@ -58,9 +58,9 @@
 - [x] 6.3 Implement financial overview endpoint
 - [x] 6.4 Query income statement data
 - [x] 6.5 Query balance sheet data
-- [ ] 6.6 Query cash flow statement
+- [x] 6.6 Query cash flow statement
 - [x] 6.7 Calculate revenue trend analysis
-- [ ] 6.8 Calculate valuation metrics (PE, PB, ROE, dividend yield)
+- [x] 6.8 Calculate valuation metrics (PE, PB, ROE, dividend yield)
 
 ## 7. Frontend Development (web)
 
