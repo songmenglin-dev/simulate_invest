@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { getQuote } from '../services/api'
+import { ref, watch, computed, onMounted, onUnmounted } from 'vue'
+import { getQuote, searchStocks, getSimulatedQuotes } from '../services/api'
 import StockSearch from '../components/StockSearch.vue'
 import KLineChart from '../components/KLineChart.vue'
 
@@ -36,7 +36,59 @@ const quickSelect = (code: string) => {
   stockCode.value = code
 }
 
+const stocks = ref<any[]>([])
+const dashboardStocks = ref([
+  { code: '600519', name: '贵州茅台' },
+  { code: '000858', name: '五粮液' },
+  { code: '600036', name: '招商银行' },
+  { code: '601318', name: '中国平安' },
+  { code: '002594', name: '比亚迪' },
+  { code: '000333', name: '美的集团' },
+])
+
+const simulatedQuotes = ref<any[]>([])
+const dashboardCodes = computed(() => dashboardStocks.value.map(s => s.code))
+
+const availableStocksForDashboard = computed(() =>
+  stocks.value.filter(s => !dashboardStocks.value.some(ds => ds.code === s.stockCode))
+)
+
+const selectedDashboardStock = ref('')
+
+const addDashboardStock = () => {
+  if (!selectedDashboardStock.value) return
+  const stock = stocks.value.find(s => s.stockCode === selectedDashboardStock.value)
+  if (stock && !dashboardStocks.value.some(s => s.code === stock.stockCode)) {
+    dashboardStocks.value.push({ code: stock.stockCode, name: stock.stockName })
+    selectedDashboardStock.value = ''
+  }
+}
+
+const removeDashboardStock = (code: string) => {
+  dashboardStocks.value = dashboardStocks.value.filter(s => s.code !== code)
+}
+
+const loadSimulatedQuotes = async () => {
+  if (dashboardCodes.value.length === 0) return
+  try {
+    simulatedQuotes.value = await getSimulatedQuotes(dashboardCodes.value)
+  } catch { /* silently fail */ }
+}
+
+let dashboardTimer: ReturnType<typeof setInterval> | null = null
+
+onMounted(async () => {
+  try { stocks.value = await searchStocks() } catch { /* silently fail */ }
+  loadSimulatedQuotes()
+  dashboardTimer = setInterval(loadSimulatedQuotes, 3000)
+})
+
+onUnmounted(() => {
+  if (dashboardTimer) clearInterval(dashboardTimer)
+})
+
 const formatPercent = (v: number) => `${v >= 0 ? '+' : ''}${v.toFixed(2)}%`
+const formatMoney = (v: number) => `¥${v.toFixed(2)}`
 </script>
 
 <template>
@@ -105,6 +157,65 @@ const formatPercent = (v: number) => `${v >= 0 ? '+' : ''}${v.toFixed(2)}%`
     <div v-if="stockCode" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
       <h2 class="text-lg font-semibold text-gray-900 mb-4">K线图</h2>
       <KLineChart :stockCode="stockCode" />
+    </div>
+
+    <!-- Market Dashboard -->
+    <div class="mt-6 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
+            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <h2 class="text-lg font-semibold text-gray-900">市场看板</h2>
+          <span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs rounded-full font-medium">模拟数据</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+          <span class="text-xs text-gray-400">每3秒自动刷新</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 mb-4">
+        <select
+          v-model="selectedDashboardStock"
+          @change="addDashboardStock"
+          class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+        >
+          <option value="">+ 添加股票</option>
+          <option v-for="s in availableStocksForDashboard" :key="s.stockCode" :value="s.stockCode">
+            {{ s.stockCode }} - {{ s.stockName }}
+          </option>
+        </select>
+        <span v-if="availableStocksForDashboard.length === 0" class="text-xs text-gray-400">所有股票已添加</span>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div
+          v-for="q in simulatedQuotes"
+          :key="q.stockCode"
+          :class="['relative p-4 rounded-xl border transition-all duration-300 hover:shadow-md cursor-default', q.change >= 0 ? 'bg-red-50 border-red-100 hover:bg-red-100' : 'bg-green-50 border-green-100 hover:bg-green-100']"
+        >
+          <button
+            @click="removeDashboardStock(q.stockCode)"
+            class="absolute top-1 right-1 w-5 h-5 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-200 transition text-xs leading-none"
+            title="移除"
+          >x</button>
+          <div class="text-sm font-medium text-gray-900 truncate mb-1 pr-4">{{ q.stockName }}</div>
+          <div class="text-xs text-gray-400 mb-2">{{ q.stockCode }}</div>
+          <div :class="['text-lg font-bold mb-1', q.change >= 0 ? 'text-red-600' : 'text-green-600']">
+            {{ q.currentPrice?.toFixed(2) }}
+          </div>
+          <div :class="['text-xs font-medium', q.change >= 0 ? 'text-red-500' : 'text-green-500']">
+            {{ q.change >= 0 ? '+' : '' }}{{ q.change?.toFixed(2) }} ({{ q.changePercent >= 0 ? '+' : '' }}{{ q.changePercent?.toFixed(2) }}%)
+          </div>
+        </div>
+      </div>
+
+      <div v-if="dashboardStocks.length > 0 && simulatedQuotes.length === 0" class="text-center py-8 text-gray-400 text-sm">
+        正在加载实时数据...
+      </div>
     </div>
 
     <!-- Empty State -->
