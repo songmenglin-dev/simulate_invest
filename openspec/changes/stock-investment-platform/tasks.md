@@ -28,7 +28,7 @@
 - [x] 3.3 Create stock search by code and name
 - [x] 3.4 Implement K-line data fetching
 - [x] 3.5 Calculate technical indicators (MA, MACD, KDJ)
-- [ ] 3.6 Add Redis caching layer for rate limiting
+- [x] 3.6 Add Redis caching layer for rate limiting
 - [x] 3.7 Expose market data via REST API
 
 ## 4. Trading Service (trading-service)
