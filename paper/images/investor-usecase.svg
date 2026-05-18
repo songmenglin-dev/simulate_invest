@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 820" width="1000" height="820">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", "Microsoft JhengHei", "SimHei", sans-serif; }
+  </style>
+  <rect width="1000" height="820" fill="#ffffff"/>
+
+  <!-- 标题 -->
+  <text x="500" y="38" text-anchor="middle" font-size="24" font-weight="700" fill="#111827">个人投资者用例图</text>
+
+  <!-- 主系统边界 -->
+  <rect x="180" y="55" width="800" height="745" rx="12" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="200" y="78" font-size="15" font-weight="600" fill="#2563eb">个人投资者系统</text>
+
+  <!-- UML小人 -->
+  <circle cx="75" cy="400" r="35" fill="none" stroke="#111827" stroke-width="2.5"/>
+  <line x1="75" y1="435" x2="75" y2="540" stroke="#111827" stroke-width="2.5"/>
+  <line x1="75" y1="475" x2="25" y2="530" stroke="#111827" stroke-width="2.5"/>
+  <line x1="75" y1="475" x2="125" y2="530" stroke="#111827" stroke-width="2.5"/>
+  <line x1="75" y1="540" x2="35" y2="620" stroke="#111827" stroke-width="2.5"/>
+  <line x1="75" y1="540" x2="115" y2="620" stroke="#111827" stroke-width="2.5"/>
+  <text x="75" y="655" text-anchor="middle" font-size="15" font-weight="600" fill="#111827">个人投资者</text>
+
+  <!-- 子系统1: 用户认证 -->
+  <rect x="220" y="100" width="730" height="115" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="240" y="122" font-size="14" font-weight="700" fill="#2563eb">«subect»</text>
+  <text x="330" y="122" font-size="14" font-weight="700" fill="#2563eb">用户认证</text>
+
+  <ellipse cx="360" cy="170" rx="85" ry="32" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="360" y="175" text-anchor="middle" font-size="14" fill="#111827">用户注册</text>
+
+  <ellipse cx="550" cy="170" rx="80" ry="32" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="550" y="175" text-anchor="middle" font-size="14" fill="#111827">用户登录</text>
+
+  <ellipse cx="740" cy="170" rx="90" ry="32" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="740" y="175" text-anchor="middle" font-size="14" fill="#111827">查看个人信息</text>
+
+  <ellipse cx="900" cy="170" rx="45" ry="32" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="900" y="175" text-anchor="middle" font-size="14" fill="#111827">登出</text>
+
+  <!-- 子系统2: 行情研究 -->
+  <rect x="220" y="230" width="730" height="155" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="240" y="252" font-size="14" font-weight="700" fill="#16a34a">«subect»</text>
+  <text x="330" y="252" font-size="14" font-weight="700" fill="#16a34a">行情研究</text>
+
+  <ellipse cx="320" cy="305" rx="75" ry="32" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="320" y="310" text-anchor="middle" font-size="14" fill="#111827">股票搜索</text>
+
+  <ellipse cx="500" cy="305" rx="80" ry="32" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="500" y="310" text-anchor="middle" font-size="14" fill="#111827">实时行情</text>
+
+  <ellipse cx="690" cy="305" rx="75" ry="32" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="690" y="310" text-anchor="middle" font-size="14" fill="#111827">K线数据</text>
+
+  <ellipse cx="860" cy="305" rx="80" ry="32" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="860" y="310" text-anchor="middle" font-size="14" fill="#111827">技术指标</text>
+
+  <ellipse cx="360" cy="380" rx="80" ry="32" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="360" y="385" text-anchor="middle" font-size="14" fill="#111827">自选股管理</text>
+
+  <ellipse cx="570" cy="380" rx="80" ry="32" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="570" y="385" text-anchor="middle" font-size="14" fill="#111827">价格预警</text>
+
+  <!-- 子系统3: 交易执行 -->
+  <rect x="220" y="400" width="730" height="130" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="240" y="422" font-size="14" font-weight="700" fill="#dc2626">«subect»</text>
+  <text x="330" y="422" font-size="14" font-weight="700" fill="#dc2626">交易执行</text>
+
+  <ellipse cx="310" cy="480" rx="75" ry="32" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="310" y="485" text-anchor="middle" font-size="14" fill="#111827">市价下单</text>
+
+  <ellipse cx="500" cy="480" rx="75" ry="32" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="500" y="485" text-anchor="middle" font-size="14" fill="#111827">限价下单</text>
+
+  <ellipse cx="690" cy="480" rx="75" ry="32" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="690" y="485" text-anchor="middle" font-size="14" fill="#111827">撤销订单</text>
+
+  <ellipse cx="860" cy="480" rx="85" ry="32" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="860" y="485" text-anchor="middle" font-size="14" fill="#111827">条件单管理</text>
+
+  <!-- 子系统4: 组合管理 -->
+  <rect x="220" y="545" width="730" height="115" rx="8" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+  <text x="240" y="567" font-size="14" font-weight="700" fill="#9333ea">«subect»</text>
+  <text x="330" y="567" font-size="14" font-weight="700" fill="#9333ea">组合管理</text>
+
+  <ellipse cx="340" cy="625" rx="75" ry="32" fill="#ffffff" stroke="#9333ea" stroke-width="1.5"/>
+  <text x="340" y="630" text-anchor="middle" font-size="14" fill="#111827">持仓查询</text>
+
+  <ellipse cx="530" cy="625" rx="80" ry="32" fill="#ffffff" stroke="#9333ea" stroke-width="1.5"/>
+  <text x="530" y="630" text-anchor="middle" font-size="14" fill="#111827">资产总览</text>
+
+  <ellipse cx="720" cy="625" rx="65" ry="32" fill="#ffffff" stroke="#9333ea" stroke-width="1.5"/>
+  <text x="720" y="630" text-anchor="middle" font-size="14" fill="#111827">充值</text>
+
+  <ellipse cx="880" cy="625" rx="65" ry="32" fill="#ffffff" stroke="#9333ea" stroke-width="1.5"/>
+  <text x="880" y="630" text-anchor="middle" font-size="14" fill="#111827">提现</text>
+
+  <!-- 子系统5: 分析功能 -->
+  <rect x="220" y="675" width="730" height="95" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text x="240" y="697" font-size="14" font-weight="700" fill="#ea580c">«subect»</text>
+  <text x="330" y="697" font-size="14" font-weight="700" fill="#ea580c">分析功能</text>
+
+  <ellipse cx="450" cy="745" rx="90" ry="32" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="450" y="750" text-anchor="middle" font-size="14" fill="#111827">财务数据查询</text>
+
+  <ellipse cx="650" cy="745" rx="90" ry="32" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="650" y="750" text-anchor="middle" font-size="14" fill="#111827">量化策略回测</text>
+
+  <!-- 连接线: Actor到子系统 -->
+  <line x1="110" y1="380" x2="220" y2="155" stroke="#111827" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="110" y1="410" x2="220" y2="305" stroke="#111827" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="110" y1="440" x2="220" y2="460" stroke="#111827" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="110" y1="470" x2="220" y2="605" stroke="#111827" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="110" y1="500" x2="220" y2="725" stroke="#111827" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+  <!-- 图例 -->
+  <rect x="50" y="700" width="100" height="60" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="60" y="720" font-size="11" fill="#6b7280">图例:</text>
+  <line x1="60" y1="735" x2="90" y2="735" stroke="#111827" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="100" y="739" font-size="10" fill="#6b7280">Actor-to-Subject</text>
+</svg>

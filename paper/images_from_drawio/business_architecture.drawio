@@ -1,0 +1,141 @@
+<mxfile host="app.diagrams.net" modified="2026-05-17T00:00:00.000Z" agent="Claude" version="24.0.0">
+  <diagram name="Business Architecture" id="business-architecture">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="股票投资平台业务架构图" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=26;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="600" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Presentation Layer Background -->
+        <mxCell id="bg-presentation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=3;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="50" y="80" width="1300" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="layer-presentation" value="前端层" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;strokeColor=none;fillColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry x="60" y="85" width="100" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Frontend Components -->
+        <mxCell id="fe-market" value="行情页面" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;verticalAlign=top;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="130" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="fe-trading" value="交易页面" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;verticalAlign=top;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="130" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="fe-portfolio" value="组合页面" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;verticalAlign=top;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="130" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="fe-analysis" value="分析页面" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;verticalAlign=top;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="810" y="130" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="fe-tech" value="Vue 3 + TypeScript + Vite + Tailwind CSS" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontColor=#1565C0;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="150" width="250" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Business Logic Layer Background -->
+        <mxCell id="bg-business" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=3;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="50" y="240" width="1300" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="layer-business" value="业务逻辑层" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;strokeColor=none;fillColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry x="60" y="245" width="130" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- User Service -->
+        <mxCell id="svc-user" value="User Service&#xa;用户服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;verticalAlign=top;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="300" width="200" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Market Service -->
+        <mxCell id="svc-market" value="Market Service&#xa;行情服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;verticalAlign=top;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="300" width="200" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Trading Service -->
+        <mxCell id="svc-trading" value="Trading Service&#xa;交易服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;verticalAlign=top;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="300" width="200" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Portfolio Service -->
+        <mxCell id="svc-portfolio" value="Portfolio Service&#xa;持仓服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;verticalAlign=top;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="300" width="200" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Analysis Service -->
+        <mxCell id="svc-analysis" value="Analysis Service&#xa;分析服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;verticalAlign=top;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="300" width="200" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Data Access Layer Background -->
+        <mxCell id="bg-data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#F57C00;strokeWidth=3;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="50" y="460" width="1300" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="layer-data" value="数据层" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;strokeColor=none;fillColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry x="60" y="465" width="100" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- MyBatis-Plus -->
+        <mxCell id="db-mybatis" value="MyBatis-Plus" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;verticalAlign=top;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="505" width="250" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Redis Cache -->
+        <mxCell id="db-redis" value="Redis Cache" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;verticalAlign=top;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="505" width="250" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- MySQL -->
+        <mxCell id="db-mysql" value="MySQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;verticalAlign=top;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="505" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Infrastructure Layer Background -->
+        <mxCell id="bg-infra" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=3;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="50" y="600" width="1300" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="layer-infra" value="基础设施" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;strokeColor=none;fillColor=none;spacing=5;" vertex="1" parent="1">
+          <mxGeometry x="60" y="605" width="100" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Nacos -->
+        <mxCell id="infra-nacos" value="Nacos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#6A1B9A;strokeWidth=2;verticalAlign=top;align=center;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="625" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Spring Cloud Gateway -->
+        <mxCell id="infra-gateway" value="Spring Cloud Gateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#6A1B9A;strokeWidth=2;verticalAlign=top;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="625" width="280" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Connections -->
+        <mxCell id="conn1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#455A64;strokeWidth=2;endArrow=classic;endFill=1;dashed=1;dashPattern=8 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint"/>
+            <mxPoint x="200" y="300" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="conn2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#455A64;strokeWidth=2;endArrow=classic;endFill=1;dashed=1;dashPattern=8 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="460" y="200" as="sourcePoint"/>
+            <mxPoint x="440" y="300" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="conn3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#455A64;strokeWidth=2;endArrow=classic;endFill=1;dashed=1;dashPattern=8 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="680" y="200" as="sourcePoint"/>
+            <mxPoint x="680" y="300" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="conn4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#455A64;strokeWidth=2;endArrow=classic;endFill=1;dashed=1;dashPattern=8 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="920" y="200" as="sourcePoint"/>
+            <mxPoint x="920" y="300" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

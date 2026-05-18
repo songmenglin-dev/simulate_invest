@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 800" width="900" height="800">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", "Microsoft JhengHei", "SimHei", sans-serif; }
+  </style>
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <rect width="900" height="800" fill="#ffffff"/>
+
+  <!-- 标题 -->
+  <text x="450" y="40" text-anchor="middle" font-size="24" font-weight="700" fill="#111827">股票投资平台需求分析</text>
+
+  <!-- 左侧：个人投资者 -->
+  <rect x="30" y="70" width="400" height="700" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="230" y="105" text-anchor="middle" font-size="20" font-weight="700" fill="#2563eb">个人投资者</text>
+  <text x="230" y="130" text-anchor="middle" font-size="14" fill="#6b7280">核心用户</text>
+
+  <!-- 用户认证 -->
+  <rect x="50" y="150" width="360" height="100" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <rect x="50" y="150" width="360" height="36" rx="8" fill="#2563eb"/>
+  <text x="230" y="175" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">用户认证</text>
+  <text x="70" y="210" font-size="14" fill="#374151">注册 · 登录 · JWT令牌</text>
+  <text x="70" y="235" font-size="14" fill="#374151">初始资金10万 · 登出失效</text>
+
+  <!-- 行情研究 -->
+  <rect x="50" y="265" width="360" height="130" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <rect x="50" y="265" width="360" height="36" rx="8" fill="#16a34a"/>
+  <text x="230" y="290" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">行情研究</text>
+  <text x="70" y="325" font-size="14" fill="#374151">股票搜索 · 实时行情</text>
+  <text x="70" y="350" font-size="14" fill="#374151">K线数据（日/周/月）· 技术指标</text>
+  <text x="70" y="375" font-size="14" fill="#374151">MA MACD KDJ RSI BOLL</text>
+  <text x="70" y="400" font-size="14" fill="#374151">自选股 · 价格预警</text>
+
+  <!-- 交易执行 -->
+  <rect x="50" y="410" width="360" height="150" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <rect x="50" y="410" width="360" height="36" rx="8" fill="#dc2626"/>
+  <text x="230" y="435" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">交易执行</text>
+  <text x="70" y="470" font-size="14" fill="#374151">市价单 · 限价单</text>
+  <text x="70" y="495" font-size="14" fill="#374151">余额校验 · 持仓校验</text>
+  <text x="70" y="520" font-size="14" fill="#374151">资金冻结 · 股份冻结</text>
+  <text x="70" y="545" font-size="14" fill="#374151">止损单 · 止盈单（定时扫描）</text>
+
+  <!-- 组合管理 -->
+  <rect x="50" y="575" width="360" height="85" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <rect x="50" y="575" width="360" height="36" rx="8" fill="#9333ea"/>
+  <text x="230" y="600" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">组合管理</text>
+  <text x="70" y="635" font-size="14" fill="#374151">持仓明细 · 总资产 · 浮动盈亏</text>
+  <text x="70" y="660" font-size="14" fill="#374151">充值提现</text>
+
+  <!-- 分析功能 -->
+  <rect x="50" y="675" width="360" height="85" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <rect x="50" y="675" width="360" height="36" rx="8" fill="#ea580c"/>
+  <text x="230" y="700" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">分析功能</text>
+  <text x="70" y="735" font-size="14" fill="#374151">财务数据查询（利润表/资产负债表/现金流量表）</text>
+  <text x="70" y="760" font-size="14" fill="#374151">量化回测 · 收益率 · 回撤 · 胜率</text>
+
+  <!-- 右侧：系统管理员 -->
+  <rect x="470" y="70" width="400" height="700" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="670" y="105" text-anchor="middle" font-size="20" font-weight="700" fill="#dc2626">系统管理员</text>
+  <text x="670" y="130" text-anchor="middle" font-size="14" fill="#6b7280">运维管理</text>
+
+  <!-- 用户管理 -->
+  <rect x="490" y="165" width="360" height="120" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <rect x="490" y="165" width="360" height="40" rx="8" fill="#dc2626"/>
+  <text x="670" y="193" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">用户管理</text>
+  <text x="510" y="235" font-size="14" fill="#374151">查看注册用户列表</text>
+  <text x="510" y="260" font-size="14" fill="#374151">违规账户禁用/启用</text>
+  <text x="510" y="285" font-size="14" fill="#374151">用户状态监控</text>
+
+  <!-- 服务监控 -->
+  <rect x="490" y="310" width="360" height="120" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <rect x="490" y="310" width="360" height="40" rx="8" fill="#0891b2"/>
+  <text x="670" y="338" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">服务监控</text>
+  <text x="510" y="380" font-size="14" fill="#374151">Nacos控制台</text>
+  <text x="510" y="405" font-size="14" fill="#374151">微服务注册状态</text>
+  <text x="510" y="430" font-size="14" fill="#374151">健康检查与异常告警</text>
+
+  <!-- 空余区域填充 -->
+  <rect x="490" y="455" width="360" height="300" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="670" y="610" text-anchor="middle" font-size="14" fill="#9ca3af">系统支撑能力</text>
+</svg>

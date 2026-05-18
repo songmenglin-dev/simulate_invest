@@ -1,9 +1,0 @@
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/user-service/src/main/java/com/stock/user/UserServiceApplication.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/user-service/src/main/java/com/stock/user/controller/UserController.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/user-service/src/main/java/com/stock/user/mapper/FundAccountMapper.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/user-service/src/main/java/com/stock/user/dto/LoginResponse.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/user-service/src/main/java/com/stock/user/mapper/UserMapper.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/user-service/src/main/java/com/stock/user/dto/LoginRequest.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/user-service/src/main/java/com/stock/user/service/CaptchaService.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/user-service/src/main/java/com/stock/user/service/UserService.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/user-service/src/main/java/com/stock/user/dto/RegisterRequest.java

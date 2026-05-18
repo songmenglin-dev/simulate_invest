@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600">
+  <defs>
+    <style>
+      .title { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 28px; font-weight: bold; fill: #1f2937; }
+      .layer-title { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 18px; font-weight: bold; fill: #374151; }
+      .item-label { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 14px; fill: #4b5563; }
+      .item { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 14px; fill: #1f2937; }
+      .rect { fill: #ffffff; stroke: #d1d5db; stroke-width: 2; rx: 8; ry: 8; }
+      .rect-dark { fill: #f9fafb; stroke: #d1d5db; stroke-width: 2; rx: 8; ry: 8; }
+      .arrow { stroke: #2563eb; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="600" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="480" y="45" text-anchor="middle" class="title">系统业务架构图</text>
+
+  <!-- Layer 1: 展现层 -->
+  <text x="120" y="100" class="layer-title">展现层</text>
+  <rect x="60" y="115" width="840" height="90" class="rect-dark"/>
+
+  <!-- Dashboard -->
+  <rect x="100" y="135" width="150" height="50" class="rect"/>
+  <text x="175" y="165" text-anchor="middle" class="item">Dashboard</text>
+
+  <!-- 行情中心 -->
+  <rect x="280" y="135" width="150" height="50" class="rect"/>
+  <text x="355" y="165" text-anchor="middle" class="item">行情中心</text>
+
+  <!-- 交易中心 -->
+  <rect x="460" y="135" width="150" height="50" class="rect"/>
+  <text x="535" y="165" text-anchor="middle" class="item">交易中心</text>
+
+  <!-- 个人中心 -->
+  <rect x="640" y="135" width="150" height="50" class="rect"/>
+  <text x="715" y="165" text-anchor="middle" class="item">个人中心</text>
+
+  <!-- Layer 2: 业务逻辑层 -->
+  <text x="120" y="245" class="layer-title">业务逻辑层</text>
+  <rect x="60" y="260" width="840" height="110" class="rect-dark"/>
+
+  <!-- 用户服务 -->
+  <rect x="100" y="285" width="130" height="65" class="rect"/>
+  <text x="165" y="320" text-anchor="middle" class="item">用户服务</text>
+
+  <!-- 交易服务 -->
+  <rect x="250" y="285" width="130" height="65" class="rect"/>
+  <text x="315" y="320" text-anchor="middle" class="item">交易服务</text>
+
+  <!-- 分析服务 -->
+  <rect x="400" y="285" width="130" height="65" class="rect"/>
+  <text x="465" y="320" text-anchor="middle" class="item">分析服务</text>
+
+  <!-- 行情服务 -->
+  <rect x="550" y="285" width="130" height="65" class="rect"/>
+  <text x="615" y="320" text-anchor="middle" class="item">行情服务</text>
+
+  <!-- 通知服务 -->
+  <rect x="700" y="285" width="130" height="65" class="rect"/>
+  <text x="765" y="320" text-anchor="middle" class="item">通知服务</text>
+
+  <!-- Layer 3: 数据访问层 -->
+  <text x="120" y="415" class="layer-title">数据访问层</text>
+  <rect x="60" y="430" width="840" height="90" class="rect-dark"/>
+
+  <!-- 用户Mapper -->
+  <rect x="100" y="450" width="150" height="50" class="rect"/>
+  <text x="175" y="480" text-anchor="middle" class="item">用户Mapper</text>
+
+  <!-- 交易Mapper -->
+  <rect x="280" y="450" width="150" height="50" class="rect"/>
+  <text x="355" y="480" text-anchor="middle" class="item">交易Mapper</text>
+
+  <!-- 股票Mapper -->
+  <rect x="460" y="450" width="150" height="50" class="rect"/>
+  <text x="535" y="480" text-anchor="middle" class="item">股票Mapper</text>
+
+  <!-- 持仓Mapper -->
+  <rect x="640" y="450" width="150" height="50" class="rect"/>
+  <text x="715" y="480" text-anchor="middle" class="item">持仓Mapper</text>
+
+  <!-- Layer 4: 数据源 -->
+  <text x="120" y="565" class="layer-title">数据源</text>
+  <rect x="60" y="535" width="840" height="50" class="rect-dark"/>
+
+  <!-- MySQL -->
+  <rect x="120" y="540" width="150" height="40" class="rect"/>
+  <text x="195" y="565" text-anchor="middle" class="item-label">MySQL</text>
+
+  <!-- Redis -->
+  <rect x="400" y="540" width="150" height="40" class="rect"/>
+  <text x="475" y="565" text-anchor="middle" class="item-label">Redis</text>
+
+  <!-- 外部API -->
+  <rect x="680" y="540" width="150" height="40" class="rect"/>
+  <text x="755" y="565" text-anchor="middle" class="item-label">外部API</text>
+
+  <!-- Arrow: 展现层 -> 业务逻辑层 (单个居中) -->
+  <line x1="480" y1="205" x2="480" y2="260" class="arrow"/>
+
+  <!-- Arrow: 业务逻辑层 -> 数据访问层 (单个居中) -->
+  <line x1="480" y1="370" x2="480" y2="430" class="arrow"/>
+
+  <!-- Arrow: 数据访问层 -> 数据源 (单个居中) -->
+  <line x1="480" y1="500" x2="480" y2="535" class="arrow"/>
+</svg>

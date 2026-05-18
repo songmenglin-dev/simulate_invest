@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", "Microsoft JhengHei", "SimHei", sans-serif; }
+  </style>
+  <defs>
+    <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#ffffff"/>
+
+  <!-- 标题 -->
+  <text x="400" y="35" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">系统管理员用例图</text>
+
+  <!-- 系统边界 -->
+  <rect x="180" y="55" width="580" height="400" rx="10" fill="none" stroke="#dc2626" stroke-width="2"/>
+  <text x="195" y="75" font-size="14" font-weight="600" fill="#dc2626">系统管理员系统</text>
+
+  <!-- UML小人 -->
+  <circle cx="70" cy="250" r="30" fill="none" stroke="#111827" stroke-width="2"/>
+  <line x1="70" y1="280" x2="70" y2="370" stroke="#111827" stroke-width="2"/>
+  <line x1="70" y1="310" x2="25" y2="350" stroke="#111827" stroke-width="2"/>
+  <line x1="70" y1="310" x2="115" y2="350" stroke="#111827" stroke-width="2"/>
+  <line x1="70" y1="370" x2="35" y2="440" stroke="#111827" stroke-width="2"/>
+  <line x1="70" y1="370" x2="105" y2="440" stroke="#111827" stroke-width="2"/>
+  <text x="70" y="470" text-anchor="middle" font-size="14" font-weight="600" fill="#111827">系统管理员</text>
+
+  <!-- 用户管理用例 -->
+  <ellipse cx="350" cy="130" rx="85" ry="32" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="350" y="135" text-anchor="middle" font-size="14" fill="#111827">查看用户列表</text>
+
+  <ellipse cx="550" cy="130" rx="75" ry="32" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="550" y="135" text-anchor="middle" font-size="14" fill="#111827">禁用账户</text>
+
+  <ellipse cx="700" cy="130" rx="75" ry="32" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="700" y="135" text-anchor="middle" font-size="14" fill="#111827">启用账户</text>
+
+  <!-- 服务监控用例 -->
+  <ellipse cx="350" cy="260" rx="85" ry="32" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
+  <text x="350" y="265" text-anchor="middle" font-size="14" fill="#111827">查看服务状态</text>
+
+  <ellipse cx="550" cy="260" rx="80" ry="32" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
+  <text x="550" y="265" text-anchor="middle" font-size="14" fill="#111827">健康检查</text>
+
+  <ellipse cx="700" cy="260" rx="75" ry="32" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
+  <text x="700" y="265" text-anchor="middle" font-size="14" fill="#111827">异常告警</text>
+
+  <!-- 扩展关系 -->
+  <rect x="430" y="320" width="140" height="100" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="500" y="345" text-anchor="middle" font-size="12" fill="#6b7280">«extend»</text>
+  <text x="500" y="370" text-anchor="middle" font-size="12" fill="#374151">Nacos控制台</text>
+  <text x="500" y="390" text-anchor="middle" font-size="11" fill="#9ca3af">服务注册监控</text>
+
+  <!-- 连接线 -->
+  <line x1="100" y1="250" x2="265" y2="130" stroke="#111827" stroke-width="1.5"/>
+  <line x1="100" y1="250" x2="265" y2="260" stroke="#111827" stroke-width="1.5"/>
+  <line x1="100" y1="280" x2="475" y2="130" stroke="#111827" stroke-width="1.5"/>
+  <line x1="100" y1="280" x2="475" y2="260" stroke="#111827" stroke-width="1.5"/>
+  <line x1="100" y1="310" x2="625" y2="130" stroke="#111827" stroke-width="1.5"/>
+  <line x1="100" y1="310" x2="625" y2="260" stroke="#111827" stroke-width="1.5"/>
+</svg>

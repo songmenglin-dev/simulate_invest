@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600">
+  <defs>
+    <!-- Arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="600" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="480" y="32" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="20" font-weight="bold" fill="#1f2937" text-anchor="middle">功能模块设计图</text>
+
+  <!-- Root Node: 股票投资分析系统 -->
+  <rect x="330" y="48" width="300" height="52" rx="10" fill="#2563eb" stroke="#1e40af" stroke-width="2"/>
+  <text x="480" y="81" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">股票投资分析系统</text>
+
+  <!-- Main horizontal connector line -->
+  <line x1="100" y1="120" x2="860" y2="120" stroke="#d1d5db" stroke-width="2"/>
+
+  <!-- Arrows from root to main line -->
+  <line x1="100" y1="100" x2="100" y2="120" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="250" y1="100" x2="250" y2="120" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="400" y1="100" x2="400" y2="120" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="560" y1="100" x2="560" y2="120" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="710" y1="100" x2="710" y2="120" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="860" y1="100" x2="860" y2="120" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Module 1: 用户模块 -->
+  <rect x="35" y="130" width="130" height="44" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="2"/>
+  <text x="100" y="158" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="15" font-weight="bold" fill="#1f2937" text-anchor="middle">用户模块</text>
+  <!-- Sub functions box -->
+  <line x1="100" y1="174" x2="100" y2="200" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4,2"/>
+  <rect x="20" y="200" width="160" height="130" rx="6" fill="#f9fafb" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="100" y="230" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">注册</text>
+  <text x="100" y="258" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">登录</text>
+  <text x="100" y="286" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">认证</text>
+  <text x="100" y="314" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">Profile</text>
+
+  <!-- Module 2: 股票模块 -->
+  <rect x="185" y="130" width="130" height="44" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="2"/>
+  <text x="250" y="158" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="15" font-weight="bold" fill="#1f2937" text-anchor="middle">股票模块</text>
+  <!-- Sub functions box -->
+  <line x1="250" y1="174" x2="250" y2="200" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4,2"/>
+  <rect x="170" y="200" width="160" height="160" rx="6" fill="#f9fafb" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="250" y="230" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">搜索</text>
+  <text x="250" y="258" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">行情</text>
+  <text x="250" y="286" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">K线</text>
+  <text x="250" y="314" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">收藏</text>
+  <text x="250" y="342" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">板块</text>
+
+  <!-- Module 3: 交易模块 -->
+  <rect x="335" y="130" width="130" height="44" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="2"/>
+  <text x="400" y="158" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="15" font-weight="bold" fill="#1f2937" text-anchor="middle">交易模块</text>
+  <!-- Sub functions box -->
+  <line x1="400" y1="174" x2="400" y2="200" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4,2"/>
+  <rect x="320" y="200" width="160" height="190" rx="6" fill="#f9fafb" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="400" y="230" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">买入</text>
+  <text x="400" y="258" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">卖出</text>
+  <text x="400" y="286" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">委托</text>
+  <text x="400" y="314" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">撤单</text>
+  <text x="400" y="342" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">持仓</text>
+  <text x="400" y="370" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">流水</text>
+
+  <!-- Module 4: 分析模块 -->
+  <rect x="495" y="130" width="130" height="44" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="2"/>
+  <text x="560" y="158" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="15" font-weight="bold" fill="#1f2937" text-anchor="middle">分析模块</text>
+  <!-- Sub functions box -->
+  <line x1="560" y1="174" x2="560" y2="200" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4,2"/>
+  <rect x="480" y="200" width="160" height="220" rx="6" fill="#f9fafb" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="560" y="230" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">回测</text>
+  <text x="560" y="258" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">指标</text>
+  <text x="560" y="286" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">策略</text>
+  <text x="560" y="314" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">模拟</text>
+  <text x="560" y="342" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">预测</text>
+  <text x="560" y="370" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">风险</text>
+  <text x="560" y="398" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">收益</text>
+
+  <!-- Module 5: 系统模块 -->
+  <rect x="645" y="130" width="130" height="44" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="2"/>
+  <text x="710" y="158" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="15" font-weight="bold" fill="#1f2937" text-anchor="middle">系统模块</text>
+  <!-- Sub functions box -->
+  <line x1="710" y1="174" x2="710" y2="200" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4,2"/>
+  <rect x="630" y="200" width="160" height="160" rx="6" fill="#f9fafb" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="710" y="230" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">权限</text>
+  <text x="710" y="258" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">日志</text>
+  <text x="710" y="286" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">配置</text>
+  <text x="710" y="314" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">备份</text>
+  <text x="710" y="342" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">监控</text>
+
+  <!-- Module 6: 资讯模块 -->
+  <rect x="795" y="130" width="130" height="44" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="2"/>
+  <text x="860" y="158" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="15" font-weight="bold" fill="#1f2937" text-anchor="middle">资讯模块</text>
+  <!-- Sub functions box -->
+  <line x1="860" y1="174" x2="860" y2="200" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4,2"/>
+  <rect x="780" y="200" width="160" height="130" rx="6" fill="#f9fafb" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="860" y="230" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">新闻</text>
+  <text x="860" y="258" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">公告</text>
+  <text x="860" y="286" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">数据</text>
+  <text x="860" y="314" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="14" fill="#374151" text-anchor="middle">订阅</text>
+
+  <!-- Bottom decorative line -->
+  <line x1="50" y1="460" x2="910" y2="460" stroke="#e5e7eb" stroke-width="1"/>
+</svg>

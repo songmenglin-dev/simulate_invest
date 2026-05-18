@@ -1,0 +1,160 @@
+<mxfile host="app.diagrams.net" modified="2026-05-17T00:00:00.000Z" agent="Claude" version="24.0.0">
+  <diagram name="Functional Modules" id="functional-modules">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="股票投资平台功能模块设计图" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=28;fontStyle=bold;fontColor=#1E3A5F;" vertex="1" parent="1">
+          <mxGeometry x="450" y="20" width="500" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- User Service Module -->
+        <mxCell id="mod1" value="用户服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4A90D9;fontColor=#FFFFFF;fontSize=20;fontStyle=bold;align=center;verticalAlign=middle;spacing=10;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="50" y="100" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub1_1" value="账户管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D6E4F0;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="70" y="180" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub1_2" value="认证授权" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D6E4F0;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="70" y="240" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub1_3" value="头像管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D6E4F0;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="70" y="300" width="200" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- Market Service Module -->
+        <mxCell id="mod2" value="行情服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#67B95C;fontColor=#FFFFFF;fontSize=20;fontStyle=bold;align=center;verticalAlign=middle;spacing=10;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="50" y="380" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub2_1" value="实时行情" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5F5E3;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="70" y="460" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub2_2" value="K线数据" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5F5E3;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="70" y="520" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub2_3" value="技术指标" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5F5E3;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="70" y="580" width="200" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- Trading Service Module -->
+        <mxCell id="mod3" value="交易服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E67E22;fontColor=#FFFFFF;fontSize=20;fontStyle=bold;align=center;verticalAlign=middle;spacing=10;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="330" y="100" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub3_1" value="下单管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FAE5D3;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="350" y="180" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub3_2" value="订单管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FAE5D3;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="350" y="240" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub3_3" value="资金验证" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FAE5D3;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="350" y="300" width="200" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- Portfolio Service Module -->
+        <mxCell id="mod4" value="持仓服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9B59B6;fontColor=#FFFFFF;fontSize=20;fontStyle=bold;align=center;verticalAlign=middle;spacing=10;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="330" y="380" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub4_1" value="持仓查询" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8DAEF;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="350" y="460" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub4_2" value="盈亏计算" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8DAEF;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="350" y="520" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub4_3" value="资金管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8DAEF;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="350" y="580" width="200" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- Analysis Service Module -->
+        <mxCell id="mod5" value="分析服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E74C3C;fontColor=#FFFFFF;fontSize=20;fontStyle=bold;align=center;verticalAlign=middle;spacing=10;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="610" y="100" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub5_1" value="条件单" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FADBD8;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="630" y="180" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub5_2" value="价格预警" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FADBD8;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="630" y="240" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub5_3" value="财务分析" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FADBD8;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="630" y="300" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub5_4" value="策略回测" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FADBD8;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="630" y="360" width="200" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- Watchlist Module -->
+        <mxCell id="mod6" value="自选股" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3498DB;fontColor=#FFFFFF;fontSize=20;fontStyle=bold;align=center;verticalAlign=middle;spacing=10;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="610" y="420" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub6_1" value="自选股管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D6EAF8;fontColor=#2C3E50;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="630" y="500" width="200" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- Edge: User Module to Sub-functions -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4A90D9;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="mod1" target="sub1_1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4A90D9;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="sub1_1" target="sub1_2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4A90D9;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="sub1_2" target="sub1_3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Edge: Market Module to Sub-functions -->
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#67B95C;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="mod2" target="sub2_1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#67B95C;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="sub2_1" target="sub2_2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#67B95C;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="sub2_2" target="sub2_3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Edge: Trading Module to Sub-functions -->
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E67E22;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="mod3" target="sub3_1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E67E22;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="sub3_1" target="sub3_2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E67E22;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="sub3_2" target="sub3_3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Edge: Portfolio Module to Sub-functions -->
+        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9B59B6;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="mod4" target="sub4_1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9B59B6;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="sub4_1" target="sub4_2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9B59B6;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="sub4_2" target="sub4_3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Edge: Analysis Module to Sub-functions -->
+        <mxCell id="e13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E74C3C;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="mod5" target="sub5_1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E74C3C;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="sub5_1" target="sub5_2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E74C3C;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="sub5_2" target="sub5_3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E74C3C;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="sub5_3" target="sub5_4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Edge: Watchlist Module -->
+        <mxCell id="e17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3498DB;strokeWidth=2;endArrow=none;endFill=0;" edge="1" parent="1" source="mod6" target="sub6_1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

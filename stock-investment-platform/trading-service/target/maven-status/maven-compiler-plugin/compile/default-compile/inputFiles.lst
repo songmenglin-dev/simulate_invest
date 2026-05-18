@@ -1,9 +1,0 @@
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/trading-service/src/main/java/com/stock/trading/controller/TradingController.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/trading-service/src/main/java/com/stock/trading/mapper/PositionMapper.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/trading-service/src/main/java/com/stock/trading/service/OrderService.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/trading-service/src/main/java/com/stock/trading/mapper/FundAccountMapper.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/trading-service/src/main/java/com/stock/trading/dto/OrderRequest.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/trading-service/src/main/java/com/stock/trading/mapper/OrderMapper.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/trading-service/src/main/java/com/stock/trading/TradingServiceApplication.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/trading-service/src/main/java/com/stock/trading/feign/fallback/MarketFeignClientFallback.java
-/mnt/c/sml/project/java_project/inverst/stock-investment-platform/trading-service/src/main/java/com/stock/trading/feign/MarketFeignClient.java

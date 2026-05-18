@@ -285,9 +285,9 @@ onMounted(() => {
       <h1 class="text-2xl font-bold text-gray-900">价格预警</h1>
     </div>
 
-    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
-      <!-- Left Column: Create Alert + Alert List -->
-      <div class="xl:col-span-2 space-y-6">
+    <div class="space-y-6">
+      <!-- Create Alert + Alert List -->
+      <div class="space-y-6">
         <!-- Create Alert Form -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
           <h2 class="text-lg font-semibold text-gray-900 mb-5">创建预警</h2>
@@ -547,9 +547,9 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Right Column: Notification History -->
-      <div class="xl:col-span-1">
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sticky top-24">
+      <!-- Notification History -->
+      <div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
           <div class="flex items-center justify-between mb-5">
             <div class="flex items-center gap-2">
               <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -579,7 +579,7 @@ onMounted(() => {
           </div>
 
           <!-- Notification List -->
-          <div v-else class="space-y-2 max-h-[600px] overflow-y-auto">
+          <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-2">
             <button
               v-for="notification in notifications"
               :key="notification.id"

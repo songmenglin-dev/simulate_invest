@@ -1,0 +1,124 @@
+<mxfile host="app.diagrams.net" modified="2026-05-17T00:00:00.000Z" agent="Claude" version="24.7.0">
+  <diagram name="ER Diagram" id="er-diagram">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="股票投资平台数据库ER图" style="text;html=1;align=center;verticalAlign=middle;fontSize=28;fontStyle=bold;fontColor=#1E3A5F;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="600" y="20" width="600" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- users -->
+        <mxCell id="users_cell" value="users&#xa;━━━━━━━━━━━━━&#xa;id (PK)&#xa;username&#xa;password&#xa;avatar_url&#xa;status" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fontFamily=Helvetica;fontSize=14;spacing=10;spacingTop=10;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="100" y="100" width="200" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- fund_accounts -->
+        <mxCell id="fund_accounts_cell" value="fund_accounts&#xa;━━━━━━━━━━━━━&#xa;id (PK)&#xa;user_id (FK)&#xa;account_no&#xa;balance&#xa;frozen_balance" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fontFamily=Helvetica;fontSize=14;spacing=10;spacingTop=10;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="100" width="200" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- stocks -->
+        <mxCell id="stocks_cell" value="stocks&#xa;━━━━━━━━━━━━━&#xa;id (PK)&#xa;stock_code&#xa;stock_name" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fontFamily=Helvetica;fontSize=14;spacing=10;spacingTop=10;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="700" y="100" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- orders -->
+        <mxCell id="orders_cell" value="orders&#xa;━━━━━━━━━━━━━&#xa;id (PK)&#xa;user_id (FK)&#xa;fund_account_id (FK)&#xa;stock_code&#xa;direction&#xa;price&#xa;quantity&#xa;status" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fontFamily=Helvetica;fontSize=14;spacing=10;spacingTop=10;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="100" y="350" width="200" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- positions -->
+        <mxCell id="positions_cell" value="positions&#xa;━━━━━━━━━━━━━&#xa;id (PK)&#xa;user_id (FK)&#xa;fund_account_id (FK)&#xa;stock_code&#xa;quantity&#xa;avg_cost" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fontFamily=Helvetica;fontSize=14;spacing=10;spacingTop=10;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="350" width="200" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- watchlist -->
+        <mxCell id="watchlist_cell" value="watchlist&#xa;━━━━━━━━━━━━━&#xa;id (PK)&#xa;user_id (FK)&#xa;stock_code" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fontFamily=Helvetica;fontSize=14;spacing=10;spacingTop=10;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="700" y="350" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- conditional_orders -->
+        <mxCell id="conditional_orders_cell" value="conditional_orders&#xa;━━━━━━━━━━━━━&#xa;id (PK)&#xa;user_id (FK)&#xa;fund_account_id (FK)&#xa;stock_code&#xa;condition_type&#xa;trigger_price&#xa;status" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fontFamily=Helvetica;fontSize=14;spacing=10;spacingTop=10;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="950" y="350" width="220" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- price_alerts -->
+        <mxCell id="price_alerts_cell" value="price_alerts&#xa;━━━━━━━━━━━━━&#xa;id (PK)&#xa;user_id (FK)&#xa;stock_code&#xa;alert_type&#xa;target_price&#xa;status" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fontFamily=Helvetica;fontSize=14;spacing=10;spacingTop=10;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="100" y="650" width="200" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- price_alert_notifications -->
+        <mxCell id="price_alert_notifications_cell" value="price_alert_notifications&#xa;━━━━━━━━━━━━━&#xa;id (PK)&#xa;user_id (FK)&#xa;alert_id (FK)&#xa;triggered_price&#xa;is_read" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fontFamily=Helvetica;fontSize=14;spacing=10;spacingTop=10;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="650" width="220" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- backtest_strategies -->
+        <mxCell id="backtest_strategies_cell" value="backtest_strategies&#xa;━━━━━━━━━━━━━&#xa;id (PK)&#xa;user_id (FK)&#xa;name&#xa;strategy_type&#xa;stock_code" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fontFamily=Helvetica;fontSize=14;spacing=10;spacingTop=10;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="700" y="650" width="200" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- backtest_results -->
+        <mxCell id="backtest_results_cell" value="backtest_results&#xa;━━━━━━━━━━━━━&#xa;id (PK)&#xa;strategy_id (FK)&#xa;user_id (FK)&#xa;stock_code&#xa;strategy_type&#xa;initial_capital&#xa;final_capital&#xa;total_return" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fontFamily=Helvetica;fontSize=14;spacing=10;spacingTop=10;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="950" y="650" width="250" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- Foreign Key Lines -->
+        <mxCell id="fk1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="fund_accounts_cell" target="users_cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fk2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="orders_cell" target="users_cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fk3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="orders_cell" target="fund_accounts_cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fk4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="positions_cell" target="users_cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fk5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="positions_cell" target="fund_accounts_cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fk6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="watchlist_cell" target="users_cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fk7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="conditional_orders_cell" target="users_cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fk8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="price_alerts_cell" target="users_cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fk9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="price_alert_notifications_cell" target="users_cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fk10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="price_alert_notifications_cell" target="price_alerts_cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fk11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="backtest_strategies_cell" target="users_cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fk12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="backtest_results_cell" target="backtest_strategies_cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fk13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="backtest_results_cell" target="users_cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

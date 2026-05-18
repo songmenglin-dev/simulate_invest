@@ -71,19 +71,11 @@ interface StockInfo {
 }
 
 const stocks = ref<StockInfo[]>([])
-const stockSearchKeyword = ref('')
 const selectedStockCode = ref('')
+
 const selectedStockName = computed(() => {
   const found = stocks.value.find(s => s.stockCode === selectedStockCode.value)
   return found ? found.stockName : ''
-})
-
-const filteredStocks = computed(() => {
-  if (!stockSearchKeyword.value) return stocks.value.slice(0, 20)
-  const kw = stockSearchKeyword.value.toLowerCase()
-  return stocks.value.filter(
-    s => s.stockCode.toLowerCase().includes(kw) || s.stockName.toLowerCase().includes(kw)
-  ).slice(0, 20)
 })
 
 const loadStocks = async () => {
@@ -313,31 +305,15 @@ const getBarHeightPercent = (value: number) => {
         <!-- Stock Selector -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">选择股票</label>
-          <div class="relative">
-            <input
-              v-model="stockSearchKeyword"
-              type="text"
-              placeholder="搜索股票..."
-              class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
-            />
-            <svg class="absolute right-4 top-3.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-            </svg>
-          </div>
-          <div v-if="stockSearchKeyword" class="mt-1 max-h-32 overflow-y-auto border border-gray-100 rounded-xl">
-            <button
-              v-for="s in filteredStocks"
-              :key="s.stockCode"
-              @click="selectedStockCode = s.stockCode; stockSearchKeyword = ''"
-              class="w-full text-left px-4 py-2 hover:bg-blue-50 transition text-sm"
-              :class="{ 'bg-blue-50 text-blue-700': selectedStockCode === s.stockCode }"
-            >
+          <select
+            v-model="selectedStockCode"
+            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-gray-900"
+          >
+            <option value="" disabled>请选择股票</option>
+            <option v-for="s in stocks" :key="s.stockCode" :value="s.stockCode">
               {{ s.stockCode }} - {{ s.stockName }}
-            </button>
-          </div>
-          <p v-if="selectedStockCode" class="text-sm text-blue-600 mt-1">
-            已选择: {{ selectedStockCode }} {{ selectedStockName }}
-          </p>
+            </option>
+          </select>
         </div>
 
         <!-- Date Range -->

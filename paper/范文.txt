@@ -1,0 +1,743 @@
+第1章 绪论
+1.1 研究背景
+当前，新型冠状病毒肺炎疫情对中国高校毕业生的就业产生了深刻的影响。为确保广大毕业生的就业得到切实的保障，学校、企业和学生都开始使用线上招聘。如今，线上应聘、招聘成为多数毕业生和用人单位的首选形式[1]。
+虽然线上招聘已经成为大学生求职的主要途径，但其发展仍存在一些问题。一些不良企业可能会发布虚假的信息，诱骗求职者上当受骗；有些网络招聘平台的用户体验不佳；有些招聘平台对企业审核不严格，导致平台出现大量不良企业[1]。
+1.2 研究意义
+在当前就业形势日益严峻的情况下，校园招聘已成为企业引进人才的重要途径[2]。然而，随着企业对校园招聘的需求和竞争的日益激烈，校园招聘也面临一系列的挑战和问题。由于企业未根据实际需求进行招聘、大学生职业规划不清晰、高校时间安排不合理、企业缺乏高效的招聘系统等原因，校园招聘出现了一些突出问题，如企业集中招聘、高校招聘时间冲突、大学生择业犹豫等[2]。因此，我们需要探索更加科学、高效的校园招聘模式，以满足企业和大学生的诉求，促进校企合作和人才培养。
+据了解，国内招聘系统基本只关注职位信息，而且有些招聘平台出现不实招聘信息。所以本项目将校园招聘回归校园，以学校和毕业生为主体，杜绝不实招聘信息，促进毕业生顺利就业。
+第2章 开发技术
+2.1 Spring Cloud技术栈
+Spring Cloud是一个基于Spring框架构建的云原生应用开发解决方案。它是一个非常流行的开源框架，提供了一系列工具，用于开发和管理微服务应用程序，并实现了许多微服务应用程序需要的基础功能，如服务注册、服务调用、负载均衡等等[3]。此外，Spring Cloud提供了一些常用组件，它们可以集成在Spring Boot应用程序中，为开发者更好地管理和实现微服务架构中需要的功能提供了极大的便利[4]。因此，Spring Cloud是一个非常好用的微服务应用开发框架，可以帮助开发人员更好地构建和管理微服务架构的应用程序。
+2.2 Spring Cache缓存框架
+Spring Cache是Spring提供的一个基于注解的缓存框架，使用方便，可提高系统性能。Spring Cache可以与各种缓存技术集成（如Redis），开发者可以根据需要选择合适的缓存技术。Spring Cache封装了底层缓存框架的细节，提供了一种方便、简单的方式来对缓存进行操作，开发者只需要在代码中添加相应的注解即可轻松地实现缓存功能，简化了缓存的操作。通过缓存机制，可以避免频繁地从数据库或其他存储介质中读取数据，加快系统的访问速度，减轻服务器的压力，提高系统的吞吐量和并发性能。
+2.3 kkFileView在线文件预览
+kkFileView是一个基于Spring Boot框架开发的文件文档在线预览解决方案。通过集成kkFileView，可以方便地在Web应用程序中实现对各种文件格式的在线预览功能，如Word、Excel、PowerPoint、PDF、文本、压缩文件以及图片、视频、音频等多种类型的文件。在使用kkFileView的过程中，不需要任何插件或客户端软件的支持，用户只需在浏览器中打开相应的文件即可。同时，kkFileView使用了高效的异步加载和缓存技术，能够快速地加载和渲染大型文件，保证预览效果流畅自然。kkFileView还支持多种文件上传方式，包括本地上传、FTP上传、OSS上传等，用户可以根据实际需求选择适合自己的方式。在将kkFileView集成到项目中时，开发者只需要引入相关依赖并配置一些参数即可，非常方便。kkFileView的API也非常简单易懂，开发者可以很快地掌握并使用kkFileView的各种功能。
+总之，kkFileView是一个功能丰富、易于集成、高效稳定的文件文档在线预览解决方案，广泛应用于各种Web应用程序中，能够大大提高用户体验和开发效率。
+第3章 需求分析
+3.1 需求分析
+不同用户对校园招聘系统的需求不同，主要为学校端需求、学生端需求和企业端需求。根据微服务架构思想，针对不同用户的需求对系统进行细化，学校端主要包含院系管理、企业资质审核、招聘信息审核、班级管理、学生管理这些与毕业生信息管理相关的需求，学生端包括求职、简历管理、投递记录可视化、面经分享等与求职相关的需求，企业端主要包括发布招聘信息、投递处理、面试\笔试安排这些与招聘相关的需求。校园招聘系统需求如图1所示。
+
+图1 校园招聘系统需求分析
+下文按不同权限级别的用户对本系统的需求进行相关描述。
+3.1.1 学校级别用户
+通过Excel导入学院的院系名称、负责人、联系电话等相关信息，手动添加或修改信息，查看、删除二级学院的信息。学校级别用户用例图如图2所示。
+3.1.2 学院级别用户
+审核欲入驻企业的资质，审核企业发布的招聘信息，管理专业信息等。学院级别用户用例图如图3所示。
+
+图2 学校级别用户用例
+
+图3 学院级别用户用例
+3.1.3 专业级别用户
+对班级和毕业生信息进行管理，包括新增、修改和删除等操作。专业级别用户用例图如图4所示。
+3.1.4 学生用户
+搜索与查看招聘信息，找到心仪岗位后投递简历，创建在线简历，上传附件简历，预览简历，查看投递记录，分享面试经验。学生用例图如图5所示。
+
+图4 专业级别用户用例
+
+图5 学生用例
+3.1.5 企业用户
+未入驻前，可申请入驻。入驻后，可发布招聘信息，对学生投递的简历进行处理，安排面试或笔试。企业用户用例图如图6所示。
+
+图6 企业用户用例
+3.2 可行性分析
+3.2.1 技术可行性
+本系统使用Spring Cloud Alibaba技术栈，将系统细分为多个服务，服务之间相互独立。这种架构使得系统能够应对大量请求，并且可以动态调整系统性能。此外，系统各模块之间的耦合度较低，当某模块业务需求改变时，开发人员可以针对性的修改该服务，而不会影响系统的整体运行，从而实现系统的平滑升级。
+综上所述，采用Spring Cloud Alibaba技术栈实现校园招聘系统具有较高的技术可行性，可以构建一个较好的招聘系统，满足学校、企业和学生的需求，促进校园招聘行业的发展。
+3.2.2 经济可行性
+本系统可以在无需重启整个系统的情况下实现单个服务的升级和更新，这可以大幅提高运维效率，从而节省运维成本；校园招聘系统采用微服务架构，可以更加灵活地响应用户需求，快速定位和解决问题。同时，通过微服务的自治性和独立性，避免了一个问题影响整个系统，提高了用户满意度。
+总之，校园招聘系统在经济可行性方面具有较高的优势，可以帮助企业通过降低开发成本、提高运维效率、增强系统的可扩展性、提高用户满意度等多方面实现成本控制和风险管理。
+第4章 概要设计
+4.1 业务流程设计
+本系统将用户划分为学校、学院、专业、学生、企业等角色，用户通过统一的登录界面登录。
+学校用户进入系统后，可以对本校的二级学院进行管理。用户可以查询学院信息、新增学院、删除学院和修改学院信息，此外还支持Excel文件的导入和导出。
+学院用户进入系统后，能够进对申请入驻的企业进行资质审查、审核企业发布的招聘信息、增删改专业信息、通过Excel文件导入专业等。
+具备专业角色的用户登录系统后，可以对该专业下的班级和学生进行管理，能够进行新增、修改、删除和批量导入等功能，主要是进行毕业生信息的管理。
+学生进入系统后，可以管理简历、求职、查看投递记录、分享面试经验。学生管理简历时，可以选择上传pdf等常用文件格式的简历，也能够创建在线简历，完善简历信息后，可以对简历进行预览操作。学生求职时，可以先浏览多个职位信息的简要信息，点击指定职位后展示其详细信息，学生找到心仪岗位后可以投递简历。此外，学生还可以撰写面试经验并分享。系统会记录每一次投递记录，并将投递记录以时间线的方式可视化展示。
+企业用户首先得提交入驻申请，待申请通过后便会收到包含账号和初始密码的邮件，企业用户通过该账号即可登录系统。用户进入系统后，可在个人中心修改初始密码。企业用户能够使用文档编辑器编辑招聘信息，编辑完成后即可提交审核，待审核通过后便可展示。此外，企业用户可以对收到的简历进行处理、安排面试或笔试计划。
+4.2 业务架构设计
+本系统按照业务流程分为学校端、学生端和企业端三个子系统，学校、学院、专业三个角色的用户属于学校端，学生角色的用户属于学生端，企业角色的用户属于企业端。学校端子系统业务主要有：学院管理、企业入驻管理、招聘信息审核、专业管理、班级管理、学生管理。学生端子系统主要业务有：上传附件简历、创建在线简历、求职、分享面试经验、查看投递记录。企业端子系统业务功能主要有：招聘信息管理、投递处理、笔试安排、面试安排。系统业务架构图如图7所示。
+
+图7 系统业务架构图
+
+图8 功能模块设计
+4.3 功能模块设计
+本系统根据用户角色及业务功能划分为学校端、学生端、企业端。其中，企业入驻管理和招聘信息审核归入企业管理模块，上传附件简历和线简历归入简历模块，笔试安排和面试安排合并为笔试/面试安排。具体功能模块设计见上图8所示。
+4.4 技术架构设计
+本系统采用微服务架构，使用Spring Cloud Alibaba相关技术。平台技术架构设计如图9所示。
+
+图9 技术架构设计
+主要技术如下：
+1．Spring Cloud Gateway通过定义路由规则，将传入的HTTP请求路由到不同的微服务，从而为微服务架构中的请求路由和负载均衡提供了解决方案。
+2．Nacos作为注册中心和配置中心。Nacos提供服务注册与发现功能，让微服务之间实现相互通信；Nacos提供动态配置管理功能，管理项目的各种配置数据。
+3．使用Redis作为缓存，具有快速的读取速度，可以提高系统的响应速度，从而提高用户体验。
+
+图10 校园招聘系统的ER图
+4．kkFileView支持多种文件格式的在线预览，可以轻松集成到校园招聘系统，提供文件预览服务。
+5．MySQL具有高效的数据读写能力，可以满足系统的数据存储需求；Elastic Search具有高性能、实时性等优势，将其作为搜索引擎可以提高查询效率。
+4.5 数据库设计
+校园招聘系统ER图如上图10所示。
+本系统在进行数据库设计时设置了逻辑删除标志、创建者、创建时间、更新者、更新时间等公共字段，如表1所示。
+表1 数据库公共字段
+名称	数据类型	约束	说明
+del_flag	char(1)	默认值：0	是否删除(0-未删, 2-已删)
+create_by	varchar(64)		创建者
+create_time	datetime		创建时间
+update_by	varchar(64)		更新者
+update_time	datetime		更新时间
+下文在进行表介绍时，除特殊说明外，均含有公共字段。限于篇幅原因，下文不再展示公共字段。terprise_application（企业入驻申请表）如表2所示。
+表2 enterprise_application（企业入驻申请表）
+名称	数据类型	约束	说明
+id	bigint	主键自动递增	主键
+school_id	bigint	非空	学校ID
+name	varchar(30)	非空	公司名称
+leader	varchar(20)	非空	负责人
+phone	varchar(11)	非空	联系电话
+email	varchar(50)	非空	邮箱
+file	text	非空	相关材料
+status	char(1)		审核状态(0待审核,1通过,2不通过)
+remark	varchar(256)		备注(审核意见)
+表enterprise_examination（面试/笔试安排）如表3所示。
+表3 enterprise_examination（面试/笔试安排）
+名称	数据类型	约束	说明
+id	bigint	主键 自动递增	面试/笔试ID
+enterprise_id	bigint		企业用户ID
+student_id	bigint		学生ID
+post_id	bigint		岗位ID
+name	varchar(50)		测试名称
+type	char(1)		0 面试 1 笔试
+start_time	datetime		开始时间
+end_time	datetime		结束时间
+address	varchar(255)		线下填写地址；线上填写链接
+notice	blob		通知
+notified_flag	char(1)		是否已通知(0未通知 1已通知)
+表enterprise_recruitment（岗位表）如表4所示。
+表4 enterprise_recruitment（岗位表）
+名称	数据类型	约束	说明
+id	bigint	主键 自动递增	岗位ID
+enterprise_id	bigint	非空	企业ID
+school_id	bigint	非空	学校ID
+name	varchar(30）	非空	岗位名称
+level	varchar(2)	非空	实习 校招 社招
+money	varchar(10)	非空	薪资
+enterprise_name	varchar(50)	非空	公司名称
+address	varchar(255)	非空	地点
+detail	longblob	非空	详细信息
+status	char（1）	非空	状态(0待审核，1展示，2不展示)
+表interview_experience（面经表）只包含公共字段中的del_flag、create_time、update_time。如表5所示。
+表5 interview_experience（面经表）
+名称	数据类型	约束	说明
+id	bigint	主键 自动递增	面经ID
+student_id	bigint		学生ID
+enterprise_id	bigint		企业ID
+enterprise_name	varchar(30)		企业名
+post_id	bigint		岗位ID
+post_name	varchar(50)		岗位名称
+examination_id	bigint		面试/笔试ID
+examination_name	varchar(50)		面试/笔试名称
+content	blob		面经内容
+remark	varchar(500)		备注
+表result（投递记录/处理结果）如表6所示。
+表6 result（投递记录/处理结果）
+名称	数据类型	约束	说明
+id	bigint	主键 自动递增	投递记录ID
+enterprise_id	bigint	非空	企业ID
+recruitment_id	bigint	非空	岗位ID
+student_id	bigint	非空	学生ID
+resume_id	bigint	非空	简历ID
+status	tinyint(4)		处理状态 
+已投递(未查看)、被查看(已查看)、
+通过初筛(简历合格)、不合适(任何环节拒绝都标记为不合适)
+remark	varchar(256)		备注
+表resume_basic（简历基础信息）包含公共字段中的del_flag、create_time、update_time。如表7所示。
+表7 resume_basic（简历基础信息）
+名称	数据类型	约束	说明
+id	bigint	主键 自动递增	简历基础信息ID
+user_id	bigint	非空	用户ID
+name	varchar(30)	非空	姓名
+gender	char(2)	非空	性别
+idnumber	char(18)		身份证号
+phone	char(11)	非空	联系方式
+email	varchar(100)	非空	邮箱
+educational_background	varchar(30)	非空	学历
+political_affiliation	char(2)		政治面貌
+01中共党员 02中共预备党员
+03共青团员 04民革党员
+05民盟盟员 06民建会员
+07民进会员 08农工党党员
+09致公党党员 10三学社社员
+11台盟盟员 12无党派人士 13群众
+avatar	varchar(100)		头像
+height	double		身高
+weight	double		体重
+表resume_edu_experience（教育经历）只包含公共字段中的del_flag、create_time、update_time。如表8所示。
+表8 resume_edu_experience（教育经历）
+名称	数据类型	约束	说明
+id	bigint	主键 自动递增	教育经历ID
+resume_id	bigint	非空	简历ID
+educational_background	char(10)	非空	学历
+school_name	varchar(30)	非空	学校名称
+major	varchar(50)	非空	专业
+score_rank	varchar(20)		成绩排名
+start_time	date	非空	在校时间_开始时间
+end_time	date	非空	在校时间_结束时间
+sort	int		排序
+remark	varchar(255)		备注(在校经历)
+表resume_honor（荣誉）不包含公共字段。如表9所示。
+表9 resume_honor（荣誉）
+名称	数据类型	约束	说明
+id	bigint	主键 自动递增	荣誉ID
+resume_id	bigint	非空	简历ID
+name	varchar(50)	非空	荣誉名称
+time	date	非空	获奖时间
+sort	int		排序
+表resume_info（简历）只包含公共字段中的del_flag、create_time、update_time。如表10所示。
+表10 resume_info（简历）
+名称	数据类型	约束	说明
+id	bigint	主键 自动递增	简历ID
+user_id	bigint	非空	用户ID
+name	varchar(50)	非空	简历名称
+type	char(1)	非空	简历类型(0在线简历 1附件简历)
+file	varchar(255)		附件简历文件地址
+remark	varchar(255)		备注(自我介绍、自我推荐等)
+表resume_project_experience（项目经验）只包含公共字段中的del_flag、create_time、update_time。如表11所示。
+表11 resume_project_experience（项目经验）
+名称	数据类型	约束	说明
+id	bigint	主键 自动递增	项目经验ID
+resume_id	bigint	非空	简历ID
+name	varchar(30)	非空	项目名称
+post	varchar(30)		承担角色
+start_time	date	非空	开始时间
+end_time	date	非空	结束时间
+detail	varchar(255)	非空	详细信息
+sort	int		排序
+表resume_work_experience（工作/实习经历）只包含公共字段中的del_flag、create_time、update_time。如表12所示。
+表12 resume_work_experience（工作/实习经历）
+名称	数据类型	约束	说明
+id	bigint	主键 自动递增	工作/实习ID
+resume_id	bigint		简历ID
+type	char(1)	非空	工作/实习(0实习 1工作)
+company_name	varchar(30)	非空	公司名称
+post	varchar(20)	非空	岗位名称
+start_time	date	非空	开始时间
+end_time	date	非空	结束时间
+detail	blob	非空	详细信息
+sort	int		排序
+表sys_dept（部门表）如表13所示。
+
+表13 sys_dept（部门表）
+名称	数据类型	约束	说明
+dept_id	bigint	主键 自动递增	部门id
+parent_id	bigint	默认值：0	父部门id
+ancestors	varchar(50)		祖级列表
+dept_name	varchar(30)		部门名称
+order_num	int	默认值：0	显示顺序
+leader	varchar(20)		负责人
+phone	varchar(11)		联系电话
+email	varchar(50)		邮箱
+status	char(1)	默认值：0	部门状态（0正常 1停用）
+表sys_menu（菜单权限表）只包含公共字段中的create_by、create_time、update_by、update_time。如表14所示。
+表14 sys_menu（菜单权限表）
+名称	数据类型	约束	说明
+menu_id	bigint	主键 自动递增	菜单ID
+menu_name	varchar(50)	非空	菜单名称
+parent_id	bigint	默认值：0	父菜单ID
+order_num	int	默认值：0	显示顺序
+path	varchar(200)		路由地址
+component	varchar(255)		组件路径
+query	varchar(255)		路由参数
+is_frame	int	默认值：1	是否为外链（0是 1否）
+is_cache	int	默认值：0	是否缓存（0缓存 1不缓存）
+menu_type	char(1)		菜单类型（M目录 C菜单 F按钮）
+visible	char(1)	默认值：0	菜单状态（0显示 1隐藏）
+status	char(1)	默认值：0	菜单状态（0正常 1停用）
+perms	varchar(100)		权限标识
+icon	varchar(100)	默认值：#	菜单图标
+remark	varchar(500)		备注
+表sys_role（角色信息表）如表15所示。
+表15 sys_role（角色信息表）
+名称	数据类型	约束	说明
+role_id	bigint	主键 自动递增	角色ID
+role_name	varchar(30)	非空	角色名称
+role_key	varchar(100)	非空	角色权限字符串
+role_sort	int(10)	非空	显示顺序
+data_scope	char(1)	默认值：1	数据范围(1:全部数据权限
+2:自定数据权限 3:本部门数据权限
+4:本部门及以下数据权限)
+menu_check_strictly	bit(1)	默认值：1	菜单树选择项是否关联显示
+dept_check_strictly	bit(1)	默认值：1	部门树选择项是否关联显示
+status	char(1)	非空	角色状态(0正常 1停用)
+remark	varchar(500)		备注
+表sys_user（用户信息表）如表16所示。
+表16 sys_user（用户信息表）
+名称	数据类型	约束	说明
+user_id	bigint	主键 自动递增	用户ID
+dept_id	bigint	非空	部门ID
+user_name	varchar(30)	非空	用户账号
+nick_name	varchar(30)	非空	用户昵称
+user_type	varchar(2)	默认值：00	用户类型
+email	varchar(50)		用户邮箱
+phonenumber	varchar(11)		手机号码
+sex	char(1)	默认值：0	用户性别(0男 1女 2未知)
+avatar	varchar(100)		头像地址
+password	varchar(100)		密码
+status	char(1)	默认值：0	帐号状态(0正常 1停用)
+login_ip	varchar(128)		最后登录IP
+login_date	datetime		最后登录时间
+remark	varchar(500)		备注
+表sys_role_dept（角色和部门关联表）不包含公共字段。如表17所示。
+表17 sys_role_dept（角色和部门关联表）
+名称	数据类型	约束	说明
+role_id	bigint	主键	角色ID
+dept_id	bigint	主键	部门ID
+表sys_role_menu (角色和菜单关联表)不包含公共字段。如表18所示。
+表18 sys_role_menu（角色和菜单关联表）
+名称	数据类型	约束	说明
+role_id	bigint	主键	角色ID
+menu_id	bigint	主键	菜单ID
+表sys_user_role（用户和角色关联表）不包含公共字段如表19所示。
+表19 sys_user_role（用户和角色关联表）
+名称	数据类型	约束	说明
+user_id	bigint	主键	用户ID
+role_id	bigint	主键	角色ID
+第5章 详细设计与实现
+5.1 环境介绍
+本系统开发环境如表20所示。
+表20 系统开发环境
+操作系统	Windows10
+编程环境	JDK1.8、Node14.20.0
+开发框架	Spring Cloud、Vue
+数据库	MySQL8、Redis3.0.5000
+依赖	Nacos2.1.0、kkFileView4.0.0、elasticsearch7.4.2
+项目管理	Maven3.6.1、Git
+集成开发环境	IDEA 2019.1、Visual Studio Code、Navicat
+5.2 功能模块的实现
+5.2.1 企业入驻申请
+未入驻的企业可通过http://localhost/application进入入驻申请首页。在该页面中，企业可以通过学校、公司、负责人、申请状态等条件进行查询。如图11所示。
+
+图11 企业申请入驻首页
+此外，点击页面中的新增按钮，企业即可填写入驻申请。企业需如实填写公司名称、负责人、联系方式等信息，并上传企业资质证明材料。填写完成后点击确定按钮即可发送入驻申请，待系统管理员审核通过后，企业所填邮箱便会收到系统下发的邮件，该邮件中含有系统为其生成的账号。填写入驻申请如图12所示。
+
+图12 填写入驻申请
+系统对入驻申请表单设置了校验规则，当不符合规则时会显示提示信息，如图13所示。
+
+图13 未填写入驻申请的信息提示
+5.2.2 院系管理
+学校级别用户登录系统后，可以进行院系管理操作。在院系管理页面，系统会将该学校所有二级学院的院系名称、负责人、联系方式等信息以表格的形式展现，如图14所示。
+
+图14 院系管理
+
+图15 院系数据导入
+在表格的操作栏，用户可以点击修改或删除按钮对当前行的院系信息进行修改或删除。此外，系统支持通过Excel表格将学院信息批量导入。用户点击表格上方的导入按钮，即出现导入弹窗。院系数据导入界面如上图15所示。
+系统提供Excel模板，用户可以在下载后填写信息。用户填写好院系信息并将Excel文件上传，系统便会把Excel文件中的院系信息批量导入。如果在执行导入操作前勾选了是否更新已存在的院系数据，系统便会进行更新操作，否则提示该信息已存在。院系数据导入结果如图16所示，左图是导入成功，右图是导入不成功时系统的显示结果。
+
+图16 院系数据导入结果（左侧为勾选，右侧为不勾选）
+
+图17 专业管理
+5.2.3 专业管理
+学院级别用户登录系统后，可对专业进行添加、修改、删除和批量导入等操作，前文以提及相似操作，此处不再赘述。
+点击表格右上方的搜索按钮即可控制页面中搜索条件的显示与隐藏。点击刷新按钮，就会刷新数据，即按照当前搜索条件重新获取数据，如上图17所示。
+5.2.4 企业资质审核
+学院级别用户可以对申请入驻的企业进行资质审核。企业入驻审核页面如图18所示。
+
+图18 企业入驻
+点击相关材料的链接，即可预览企业填写入驻申请时提交的资质材料。若企业资质符合学校要求，用户可以点击通过，系统将为该企业创建一个企业账号并将账号和初始密码发送至申请人邮箱。若点击不通过，则拒绝企业的入驻申请。
+5.2.5 招聘信息审核
+对企业发布的招聘信息进行审核，可以通过或拒绝。通过审核的招聘信息即可展示在学生端，未通过的便不会展示在学生端。招聘信息审核页面如图19所示。
+
+图19 招聘信息审核
+点击表格中的查看详情按钮即可预览该招聘信息，如图20所示。
+
+图20 预览招聘信息
+5.2.6 班级管理
+班级管理包含班级信息的添加、删除、修改等操作，此处不再赘述。班级管理页面隐藏搜索条件页面如图21所示。
+
+图21 班级管理-已隐藏搜索条件
+5.2.7 学生管理
+该页面左侧展示班级，右侧上方是搜索条件，右侧下方是学生信息。点击左侧的班级后，右侧的学生信息便只展示该班级的学生。学生管理页面如图22所示。
+5.2.8 简历信息管理
+本页面展示当前用户的所有简历，如图23所示。
+
+图22 学生管理
+
+图23 简历信息
+点击新增按钮时，系统将检测该用户是否已填写个人信息，若已填写则可以新增简历；否则提示完善个人信息。只有填写好个人信息，才能添加简历。
+本系统添加简历使用分步表单实现，步骤一填写简历信息、步骤二填写教育经历、步骤三填写工作经历或实习经历、步骤四填写项目经验、步骤五填写所获荣誉。分步表单各步骤页面如图24、图25、图26、图27、图28所示。
+
+图24 添加简历步骤一
+
+图25 添加简历步骤二
+
+图26 添加简历步骤三
+
+图27 添加简历步骤四
+
+图28 添加简历步骤五
+添加简历步骤一的关键代码如下：
+<div v-if="active == 0">
+  <el-row :gutter="10">
+    <el-col :span="18">
+      <el-form-item label="简历名称" prop="name">
+      <el-input v-model="dynamicValidateForm.name" placeholder="请输入简历名称"/>
+      </el-form-item>
+    </el-col>
+    <el-col :span="6">
+      <el-form-item label="简历类型" prop="type">
+       <el-select v-model="dynamicValidateForm.type" placeholder="请选择简历类型">
+          <el-option label="在线简历" value="0"></el-option>
+          <el-option label="附件简历" value="1"></el-option>
+        </el-select>
+      </el-form-item>
+    </el-col>
+  </el-row>
+  <el-form-item v-show="dynamicValidateForm.type == 1"
+    label="附件简历文件地址" prop="file">
+    <file-upload :limit="1" v-model="dynamicValidateForm.file"
+      :fileType="['doc', 'docx', 'pdf', 'png', 'jpg', 'jpeg']"/>
+  </el-form-item>
+  <el-form-item label="备注" prop="remark">
+    <el-input v-model="dynamicValidateForm.remark" placeholder="自我介绍"/>
+  </el-form-item>
+</div>
+添加简历步骤二的关键代码如下：
+<div v-if="active == 1">
+  <div v-for="(edu, index) in dynamicValidateForm.eduList" :key="index">
+    <el-divider content-position="center"></el-divider>
+    <el-row :gutter="10">
+      <el-col :span="8">
+        <el-form-item label="学历" :prop="'eduList.' + index + '.educationalBackground'"
+          :rules="[{required: true, message: '学历不能为空', trigger: 'blur'},
+            {max: 10, message: '最大长度为10', trigger: 'blur'}]">
+          <el-input v-model="edu.educationalBackground" placeholder="请输入学历"/>
+        </el-form-item>
+      </el-col>
+      <el-col :span="8">
+        <el-form-item label="学校" :prop="'eduList.' + index + '.schoolName'"
+          :rules="[{required: true, message: '学校名称不能为空', trigger: 'blur'},
+            {max: 30, message: '最大长度为30', trigger: 'blur'}
+          ]">
+          <el-input v-model="edu.schoolName" placeholder="请输入学校名称"/>
+        </el-form-item>
+      </el-col>
+      <el-col :span="8">
+        <el-form-item label="专业" :prop="'eduList.' + index + '.major'"
+          :rules="[{required: true, message: '专业名称不能为空', trigger: 'blur'},
+            {max: 50, message: '最大长度为50', trigger: 'blur'}
+          ]">
+          <el-input v-model="edu.major" placeholder="请输入专业名称"/>
+        </el-form-item>
+      </el-col>
+    </el-row>
+    <el-row :gutter="10" style="display: flex">
+      <el-col :sapn="12">
+        <el-form-item label="开始时间" :prop="'eduList.' + index + '.startTime'"
+          :rules="[
+            {required: true, message: '开始时间不能为空', trigger: 'blur', },
+          ]">
+          <el-date-picker style="width: 100%" v-model="edu.startTime"
+           type="date" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd"
+            placeholder="选择开始日期" ></el-date-picker>
+        </el-form-item>
+      </el-col>
+      <el-col :sapn="12">
+        <el-form-item label="结束时间" :prop="'eduList.' + index + '.endTime'"
+          :rules="[{required: true, message: '结束时间不能为空', trigger: 'blur'}]">
+          <el-date-picker style="width: 100%" v-model="edu.endTime"
+           type="date" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd"
+            placeholder="选择结束日期"></el-date-picker>
+        </el-form-item>
+      </el-col>
+    </el-row>
+    <el-form-item label="成绩排名" :prop="'eduList.' + index + '.scoreRank'">
+      <el-input v-model="edu.scoreRank" placeholder="请输入成绩排名"></el-input>
+    </el-form-item>
+    <el-form-item>
+      <el-button icon="el-icon-plus" circle @click="createEdu"></el-button>
+      <el-button v-show="dynamicValidateForm.eduList.length > 1"
+        icon="el-icon-remove" circle @click="deleteEdu(edu)"></el-button>
+    </el-form-item>
+  </div>
+</div>
+添加简历的步骤三、四、五关键代码与步骤二相似，不再赘述。上文已将各步骤代码说明，此处仅展示分步表单的整体框架。分步表单关键代码如下：
+<el-dialog :title="title" :visible.sync="open" width="90%" append-to-body>
+  <el-steps :active="active" finish-status="success" align-center>
+<!-- 利用当前步骤和总步骤的关系决定是否显示,step默认值为1，active默认值为0
+使用watch监听表单dynamicValidateForm.type
+当简历类型为在线简历时，将step设为5,当简历类型为附件简历时，将step设为1-->
+    <el-step v-if="0 < step" title="简历信息"></el-step>
+    <el-step v-if="1 < step" title="教育经历"></el-step>
+    <el-step v-if="2 < step" title="工作/实习经历"></el-step>
+    <el-step v-if="3 < step" title="项目经验"></el-step>
+    <el-step v-if="4 < step" title="所获荣誉"></el-step>
+  </el-steps>
+  <el-form ref="dynamicValidateForm" :model="dynamicValidateForm"
+    :rules="rules" label-width="80px">
+    <div v-if="active == 0"></div>
+    <div v-if="active == 1"></div>
+    <div v-if="active == 2"></div>
+    <div v-if="active == 3"></div>
+    <div v-if="active == 4"></div>
+  </el-form>
+  <div slot="footer" class="dialog-footer">
+    <el-button v-show="active > 0" type="info" icon="el-icon-arrow-left"
+     @click="prev">上一步</el-button>
+    <el-button v-show="active < step - 1" type="primary"
+      icon="el-icon-arrow-right" @click="next">下一步</el-button>
+    <el-button v-show="active == step - 1"
+     type="primary" @click="submitForm" >确定</el-button>
+    <el-button @click="cancel">取 消</el-button>
+  </div>
+</el-dialog>
+点击简历的名称即可对简历进行预览。如图29和图30所示。
+  
+图29 预览在线简历                     图30 预览PDF简历
+预览简历的关键代码如下：
+#controller
+@GetMapping(value = "/{id}")
+public AjaxResult getInfo(@PathVariable("id") Long id) {
+  return AjaxResult.success(resumeService.selectResumeById(id));
+}
+#service
+@Cacheable(key = "'id_' + #id", unless = "#result == null")
+@Override
+public Resume selectResumeById(Long id) {
+  Resume resume = resumeMapper.selectResumeById(id);  // 查询简历信息
+  resume.setBasic(basicMapper.selectBasicByUserId(resume.getUserId()));//查询个人信息
+  resume.setEduList(eduMapper.selectEduListByResumeId(id));  // 查看教育经历
+  resume.setWorkList(workMapper.selectWorkListByResumeId(id));//查询工作/实习经历
+  resume.setProjectList(projectMapper.selectProjectListByResumeId(id));//查询项目经验
+  resume.setHonorList(honorMapper.selectHonorListByResumeId(id));//查询所获荣誉
+  return resume;
+}
+5.2.9 求职广场
+在求职广场页面，将展示岗位的摘要信息，如图31所示。
+
+图31 求职广场
+点击摘要信息即可跳转至岗位的详情页面，如图32所示。
+
+图32 岗位详情
+在详情页面，用户可进行投递，如图33所示。
+
+图33 选择简历投递
+5.2.10 投递记录
+页面左上方将已投递、被查看、通过初筛、不合适四种投递状态的数量以徽章的形式展现，当点击指定状态后页面只展示该状态的数据。投递记录页面如图34所示。
+
+图34 投递记录
+点击页面右上方的投递记录可视化按钮，则将投递记录按照时间顺序进行展示。如图35所示。
+
+图35 投递记录可视化
+5.2.11 面试经验
+当鼠标悬浮在查看详情按钮时即可预览面试经验，如图36所示。
+
+图36 预览面试经验
+5.2.12 招聘信息
+企业用户登录系统后，可以发布招聘信息，如图37所示。
+
+图37 编辑招聘信息
+5.2.13 投递处理
+该页面将处理状态以不同的颜色展现在表格上，如图38所示。
+
+图38 投递处理
+5.2.14 通知面试或笔试
+点击通知按钮，系统将通知通过初筛的学生并提示通知的应聘者数量。如果已经通知过，系统会提示已通知，不会重复通知。通知面试或笔试页面如图39所示。
+
+图39 通知面试或笔试
+其核心代码如下：
+# controller
+@PostMapping("/sendNotice")
+public AjaxResult sendNotice(@RequestBody Examination examination) {
+    examinationService.notified(examination);  // 更新为已通知状态
+    //获取需要通知的邮箱列表
+    List<String> tos = examinationService.getEmail(examination); 
+    if (tos.size() != 0) {  // 邮箱列表不为空
+        examinationService.send(tos, examination);  // 发送邮件
+    }
+    return AjaxResult.success("已通知" + tos.size() + "位应聘者");  // 返回响应信息
+}
+# service
+@Override
+public void notified(Examination examination) {
+    examination.setNotifiedFlag("1"); // 设置状态为已通知
+    examinationMapper.notified(examination); // 更新为已通知状态
+}
+@Override
+public List<String> getEmail(Examination examination) {
+    List<String> tos = new ArrayList<>(); // 发送列表，保存需要通知的邮箱
+    // 查询当前岗位已通过简历初筛的学生
+List<Long> studentList = examinationMapper.agreedStudentId(examination.getPostId());
+    // 获取学生的邮箱
+    if (!studentList.isEmpty()) {
+        List<Map<String, String>> maps = examinationMapper.studentEmail(studentList);
+        for (Map map : maps) {
+            if (!tos.contains((String) map.get("email"))) { // 判断发送列表中是否已存在该邮箱，防止重复发送
+      tos.add((String) map.get("email")); // 将当前学生的邮箱添加到计划返回的列表中
+            }
+        }
+    }
+    return tos; // 返回需要通知的邮箱列表
+}
+@Async("taskExecutor")
+@Override
+public void send(List<String> tos, Examination examination) {
+    MailUtil.send(tos, examination.getName(), examination.getNotice(), true);  // 使用HuTool工具类发送邮件
+}
+#config
+@Configuration
+@EnableAsync
+public class AsyncConfig {
+    @Bean
+    public TaskExecutor taskExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(10);  //设置核心线程数
+        executor.setMaxPoolSize(20);  //设置最大线程数
+        executor.setQueueCapacity(200);  //缓冲队列200 
+        executor.setKeepAliveSeconds(60);  //线程活路时间 60 秒
+        executor.setThreadNamePrefix("taskExecutor-");  //线程池名的前缀
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());  //设置拒绝策略
+        executor.setWaitForTasksToCompleteOnShutdown(true);
+        return executor;
+    }
+}
+第6章 系统测试
+6.1 测试环境
+校园招聘系统可在PC上访问，本系统的测试环境如表21所示。
+表21 测试环境
+类型	操作系统	软件名称	软件版本
+个人电脑	Windows 10	Google Chrome	111.0.5563.147（正式版本）
+		Microsoft Edge	111.0.1661.62 (正式版本)
+服务器	CentOS 7	JDK	1.8
+		Nginx	1.22.0
+		Nacos	v2.1.0
+		MySQL	8.0.26
+		Redis	3.0.500
+6.2 功能测试
+黑盒测试是一种软件测试方法，它主要通过模拟真实的用户操作场景，对软件的功能进行全面的测试[5]。测试人员按照需求规则说明书，直接检查软件的功能是否符合用户和客户的要求和期望。黑盒测试能够发现潜在的缺陷和错误，使软件更加稳定可靠，并确保软件符合用户和客户的需求[5]。下文展示该系统的几个黑盒测试示例。
+学校级别用户导入院系数据的测试用例如表22所示。
+表22 院系数据导入测试用例
+测试用例编号	College_Testcase_Import_01
+测试用例名称	院系数据导入
+测试目的	测试能否导入院系数据
+前置条件	学校级别用户已登录系统
+测试流程	1.进入院系管理菜单
+2.点击表格上方的导入按钮
+3.将需要导入的Excel文件拖入上传框
+4.勾选是否更新已存在的院系数据选项
+5.点击确定
+预期结果	院系数据导入成功，已存在的院系更新成功，不存在的院系导入成功
+实际结果	院系数据导入成功，已存在的11条院系数据更新成功，不存在的1条院系导入成功
+结论	通过
+学生搜索岗位的测试用例如表23所示。
+表23 搜索岗位测试用例
+测试用例编号	Work_Testcase_Search_01
+测试用例名称	搜索岗位信息
+测试目的	测试能否通过关键字搜索岗位信息
+前置条件	学生已登录系统
+测试流程	1.进入求职广场菜单
+2.在页面上方的搜索框中输入关键字
+3.按下回车键Enter
+预期结果	页面显示与关键字相关的岗位信息
+实际结果	页面显示与关键字相关的岗位信息
+结论	通过
+白盒测试是一种软件测试技术，白盒测试关注被测软件内部的运行逻辑和代码实现细节[5]。在白盒测试中，测试人员能够查看和分析软件源代码，设计有针对性的测试用例来验证软件是否存在潜在的缺陷和错误[5]。单元测试是白盒测试方法之一，下文列举系统开发中所使用的几个单元测试代码。
+学生添加在线简历的单元测试代码如下所示。
+@Test
+public void testAdd() {
+    Resume resume = new Resume();  // 新建简历实体
+    resume.setName("在线简历校验");  // 设置简历名称
+    resume.setType("0");  // 设置简历类型为在线简历
+    resume.setRemark("备注：在线简历测试");  // 设置简历备注
+    List<Edu> eduList = new ArrayList<>(); // 创建教育经历列表
+    Edu edu1 = new Edu(); // 新建教育经历实体
+    edu1.setEducationalBackground("本科");  // 学历
+    edu1.setSchoolName("萍乡学院");  // 学校名称
+    edu1.setMajor("软件工程");  // 专业
+    edu1.setScoreRank("保密");  // 成绩排名
+    edu1.setStartTime(new Date(2019 - 1900, Calendar.SEPTEMBER, 10));  // 入学时间
+    edu1.setEndTime(new Date(2023 - 1900, Calendar.JUNE, 15));  // 毕业时间
+    Edu edu2 = new Edu();  // 新建教育经历实体
+    edu2.setEducationalBackground("重点高中");  // 学历
+    edu2.setSchoolName("宁都中学");  // 学校名称
+    edu2.setMajor("无");  // 专业
+    edu2.setScoreRank("(*^_^*)");  // 成绩排名
+    edu2.setStartTime(new Date(2016 - 1900, Calendar.SEPTEMBER, 1));  // 入学时间
+    edu2.setEndTime(new Date(2019 - 1900, Calendar.JUNE, 9));  // 毕业时间
+    eduList.add(edu1);  // 将教育经历1加入教育经历列表
+    eduList.add(edu2);  // 将教育经历2加入教育经历列表
+    resume.setEduList(eduList);  // 设置简历的教育经历
+    List<Work> workList = new ArrayList<>();  // 创建工作/实习经历列表
+    Work work1 = new Work();  // 新建工作/实习经历
+    work1.setType("0");  //实习
+    work1.setCompanyName("湘旺");  // 公司名称
+    work1.setPost("后端开发工程师");  // 岗位
+    work1.setStartTime(new Date(2022 - 1900, Calendar.JUNE, 27));  // 开始时间
+    work1.setEndTime(new Date(2023 - 1900, Calendar.JANUARY, 1));  // 结束时间
+    work1.setDetail("参与项目开发");  // 描述
+    Work work2 = new Work();  // 新建工作/实习经历
+    work2.setType("0");  //实习
+    work2.setCompanyName("湘东区大数据中心");  // 公司名称
+    work2.setPost("后端开发");  // 岗位
+    work2.setStartTime(new Date(2022 - 1900, Calendar.JUNE, 27));  // 开始时间
+    work2.setEndTime(new Date(2023 - 1900, Calendar.JANUARY, 1));  // 结束时间
+    work2.setDetail("参与项目开发");  // 描述
+    workList.add(work1);  // 将工作/实习经历1加入列表
+    workList.add(work2);  // 将工作/实习经历2加入列表
+    resume.setWorkList(workList);  // 设置简历的工作/实习经理
+    List<Project> projectList = new ArrayList<>();  // 创建项目经验列表
+    Project project1 = new Project();  // 新建项目经验实体
+    project1.setName("饿美了");  // 设置项目名称
+    project1.setPost("全栈开发");  // 担任岗位
+    project1.setStartTime(new Date(2022 - 1900, Calendar.APRIL, 12));  // 开始时间
+    project1.setEndTime(new Date(2022 - 1900, Calendar.MAY, 12));  // 结束时间
+    project1.setDetail("外卖点餐系统");  // 项目详情
+    Project project2 = new Project();  // 新建项目经验实体
+    project2.setName("流浪猫狗救助网站");  // 设置项目名称
+    project2.setPost("后端开发");  // 担任岗位
+    project2.setStartTime(new Date(2021 - 1900, Calendar.JANUARY, 1));  // 开始时间
+    project2.setEndTime(new Date(2022 - 1900, Calendar.JANUARY, 4));  // 结束时间
+    project2.setDetail("流浪猫狗救助");  // 项目详情
+    projectList.add(project1);  // 将项目经验1加入项目经验列表
+    projectList.add(project2);  // 将项目经验2加入项目经验列表
+    resume.setProjectList(projectList);  // 设置简历的项目经验
+    List<Honor> honorList = new ArrayList<>();  // 创建荣誉列表
+    Honor honor1 = new Honor();  // 新建荣誉实体
+    honor1.setName("三好学生");  // 荣誉名称
+    honor1.setTime(new Date(2021 - 1900, Calendar.NOVEMBER, 1));  // 获得时间
+    Honor honor2 = new Honor();  // 新建荣誉实体
+    honor2.setName("第十二届“挑战杯”江西省大学生创业大赛铜奖 共青团江西省委、江西省教育厅、江西省人力资源和社会保障厅");  // 荣誉名称
+    honor2.setTime(new Date(2020 - 1900, Calendar.SEPTEMBER, 15));  // 获得时间
+    honorList.add(honor1);  //将所获荣誉1加入荣誉列表
+    honorList.add(honor2);  //将所获荣誉2加入荣誉列表
+    resume.setHonorList(honorList);  // 设置简历的荣誉列表
+    int except = 1;  // 添加简历数量的期待值为1
+    int actual = resumeService.insertResume(resume);  // 添加简历并获取添加的数量
+    this.resumeId = resume.getId();  // 设置简历ID，供查看简历的单元测试使用
+    Assert.assertEquals(except, actual);  // 断言添加简历的数量
+}
+学生查看在线简历的单元测试如下：
+@Test
+public void testGetInfo() {
+    Resume actual = resumeService.selectResumeById(resumeId);//通过简历ID获取简历
+    System.out.println("actual = " + actual);  // 输出简历信息
+    Assert.assertEquals("在线简历校验", actual.getName());//断言"在线简历校验"
+    Assert.assertEquals("0", actual.getType());  // 断言简历类型为在线简历
+    Assert.assertEquals("备注：在线简历测试", actual.getRemark());  // 断言简历备注
+    Assert.assertEquals(2, actual.getEduList().size());  // 断言教育经历数量
+    Assert.assertEquals(2, actual.getWorkList().size());  // 断言工作/实习经历数量
+    Assert.assertEquals(2, actual.getProjectList().size());  // 断言项目经验数量
+    Assert.assertEquals(2, actual.getHonorList().size());  // 断言所获荣誉数量
+}
+6.3 性能测试
+JMeter是一个压力测试软件，它使用线程组对程序进行采样，计算服务器的负载及响应时间等重要指标，从而帮助开发人员确定系统的稳定性和可靠性。JMeter具有简单易用、功能强大、样例丰富和支持多种协议等特点，在网络测试和应用开发中广泛应用。
+因此，使用JMeter对校园招聘系统进行性能测试是一个不错的选择。以下是对查看简历功能的压测，模拟一秒内1000个用户查看简历。压测试汇总报告如图40所示。
+
+图40 汇总报告
+聚合报告显示：请求时间的中位数为1158，90%的请求在2116毫秒内响应、95%的请求在2270毫秒内响应、99%的请求在2322毫秒内响应。聚合报告如图41所示。
+
+图41 聚合报告
+此次压力测试的汇总图如图42所示。
+
+图42 汇总图
+第7章 总结与展望
+7.1 总结
+本文通过分析校园招聘系统的需求，提出了基于微服务架构的设计方案，并详细介绍了系统的实现过程。实践表明，校园招聘系统具有良好的性能表现和扩展性，能够帮助企业或学校更加高效地进行招聘管理。同时，本系统应用了主流的微服务相关技术，对于推进微服务架构的应用和发展具有一定的借鉴意义。
+7.2 展望
+随着互联网和信息技术的不断发展，微服务架构将成为未来系统开发和部署的主流方案。在未来，校园招聘系统还可以进一步扩展和完善，例如实现推荐算法等，以提高用户的使用体验和系统的价值。同时，在应用微服务架构的过程中，本人会持续关注新兴技术和趋势，不断进行技术创新和优化，以适应多样化的业务需求和不断变化的市场环境。相信通过不断努力和创新，校园招聘系统将发挥更加重要的作用，为企业和学校带来更高效、更智能的招聘管理解决方案。

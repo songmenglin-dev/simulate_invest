@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'Microsoft YaHei';
+        src: local('Microsoft YaHei'), local('PingFang SC'), local('SimHei');
+      }
+      text { font-family: Microsoft YaHei, PingFang SC, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="crowfoot" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto">
+      <path d="M0,0 L12,4 L0,8 M6,1 L12,4 L6,7" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="600" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="480" y="35" font-size="20" font-weight="bold" text-anchor="middle" fill="#1f2937">ER图</text>
+  <!-- Entity: 用户 -->
+  <g transform="translate(60, 80)">
+    <rect x="0" y="0" width="160" height="130" fill="#ffffff" stroke="#d1d5db" stroke-width="2" rx="4"/>
+    <rect x="0" y="0" width="160" height="32" fill="#2563eb" stroke="#d1d5db" stroke-width="2" rx="4"/>
+    <rect x="0" y="24" width="160" height="12" fill="#2563eb"/>
+    <text x="80.0" y="22" font-size="16" font-weight="bold" text-anchor="middle" fill="#ffffff">用户</text>
+    <line x1="20" y1="70" x2="140" y2="70" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="66" font-size="12" fill="#374151">user_id(PK)</text>
+    <line x1="20" y1="90" x2="140" y2="90" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="86" font-size="12" fill="#374151">username</text>
+    <line x1="20" y1="110" x2="140" y2="110" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="106" font-size="12" fill="#374151">password</text>
+    <line x1="20" y1="130" x2="140" y2="130" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="126" font-size="12" fill="#374151">email</text>
+    <text x="25" y="146" font-size="12" fill="#374151">role, balance</text>
+  </g>
+
+  <!-- Entity: 股票 -->
+  <g transform="translate(680, 80)">
+    <rect x="0" y="0" width="160" height="110" fill="#ffffff" stroke="#d1d5db" stroke-width="2" rx="4"/>
+    <rect x="0" y="0" width="160" height="32" fill="#2563eb" stroke="#d1d5db" stroke-width="2" rx="4"/>
+    <rect x="0" y="24" width="160" height="12" fill="#2563eb"/>
+    <text x="80.0" y="22" font-size="16" font-weight="bold" text-anchor="middle" fill="#ffffff">股票</text>
+    <line x1="20" y1="70" x2="140" y2="70" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="66" font-size="12" fill="#374151">stock_id(PK)</text>
+    <line x1="20" y1="90" x2="140" y2="90" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="86" font-size="12" fill="#374151">symbol</text>
+    <line x1="20" y1="110" x2="140" y2="110" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="106" font-size="12" fill="#374151">name</text>
+    <text x="25" y="126" font-size="12" fill="#374151">price, change_pct</text>
+  </g>
+
+  <!-- Entity: 持仓 -->
+  <g transform="translate(130, 280)">
+    <rect x="0" y="0" width="160" height="120" fill="#ffffff" stroke="#d1d5db" stroke-width="2" rx="4"/>
+    <rect x="0" y="0" width="160" height="32" fill="#2563eb" stroke="#d1d5db" stroke-width="2" rx="4"/>
+    <rect x="0" y="24" width="160" height="12" fill="#2563eb"/>
+    <text x="80.0" y="22" font-size="16" font-weight="bold" text-anchor="middle" fill="#ffffff">持仓</text>
+    <line x1="20" y1="70" x2="140" y2="70" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="66" font-size="12" fill="#374151">position_id(PK)</text>
+    <line x1="20" y1="90" x2="140" y2="90" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="86" font-size="12" fill="#374151">user_id(FK)</text>
+    <line x1="20" y1="110" x2="140" y2="110" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="106" font-size="12" fill="#374151">stock_id(FK)</text>
+    <text x="25" y="126" font-size="12" fill="#374151">quantity, avg_price, updated</text>
+  </g>
+
+  <!-- Entity: 委托 -->
+  <g transform="translate(530, 280)">
+    <rect x="0" y="0" width="160" height="140" fill="#ffffff" stroke="#d1d5db" stroke-width="2" rx="4"/>
+    <rect x="0" y="0" width="160" height="32" fill="#2563eb" stroke="#d1d5db" stroke-width="2" rx="4"/>
+    <rect x="0" y="24" width="160" height="12" fill="#2563eb"/>
+    <text x="80.0" y="22" font-size="16" font-weight="bold" text-anchor="middle" fill="#ffffff">委托</text>
+    <line x1="20" y1="70" x2="140" y2="70" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="66" font-size="12" fill="#374151">order_id(PK)</text>
+    <line x1="20" y1="90" x2="140" y2="90" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="86" font-size="12" fill="#374151">user_id(FK)</text>
+    <line x1="20" y1="110" x2="140" y2="110" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="106" font-size="12" fill="#374151">stock_id(FK)</text>
+    <line x1="20" y1="130" x2="140" y2="130" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="126" font-size="12" fill="#374151">type, price, quantity</text>
+    <text x="25" y="146" font-size="12" fill="#374151">status, created</text>
+  </g>
+
+  <!-- Entity: 资金流水 -->
+  <g transform="translate(350, 480)">
+    <rect x="0" y="0" width="160" height="120" fill="#ffffff" stroke="#d1d5db" stroke-width="2" rx="4"/>
+    <rect x="0" y="0" width="160" height="32" fill="#2563eb" stroke="#d1d5db" stroke-width="2" rx="4"/>
+    <rect x="0" y="24" width="160" height="12" fill="#2563eb"/>
+    <text x="80.0" y="22" font-size="16" font-weight="bold" text-anchor="middle" fill="#ffffff">资金流水</text>
+    <line x1="20" y1="70" x2="140" y2="70" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="66" font-size="12" fill="#374151">flow_id(PK)</text>
+    <line x1="20" y1="90" x2="140" y2="90" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="86" font-size="12" fill="#374151">user_id(FK)</text>
+    <line x1="20" y1="110" x2="140" y2="110" stroke="#d1d5db" stroke-width="1"/>
+    <text x="25" y="106" font-size="12" fill="#374151">type, amount, balance</text>
+    <text x="25" y="126" font-size="12" fill="#374151">created</text>
+  </g>
+
+  <!-- Relationship: 用户-持仓 (1:N) -->
+  <path d="M 220 145 L 220 200 L 190 200 L 190 280" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <text x="205" y="175" font-size="11" fill="#2563eb">1</text>
+  <text x="175" y="245" font-size="11" fill="#2563eb">N</text>
+  <!-- Relationship: 股票-持仓 (1:N) -->
+  <path d="M 680 145 L 680 200 L 290 200 L 290 280" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <text x="685" y="175" font-size="11" fill="#2563eb">1</text>
+  <text x="295" y="245" font-size="11" fill="#2563eb">N</text>
+  <!-- Relationship: 用户-委托 (1:N) -->
+  <path d="M 220 175 L 350 175 L 350 280" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <text x="205" y="170" font-size="11" fill="#2563eb">1</text>
+  <text x="355" y="235" font-size="11" fill="#2563eb">N</text>
+  <!-- Relationship: 股票-委托 (1:N) -->
+  <path d="M 680 175 L 530 175 L 530 280" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <text x="685" y="170" font-size="11" fill="#2563eb">1</text>
+  <text x="535" y="235" font-size="11" fill="#2563eb">N</text>
+  <!-- Relationship: 用户-资金流水 (1:N) -->
+  <path d="M 140 210 L 140 350 L 350 350 L 350 480" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <text x="125" y="290" font-size="11" fill="#2563eb">1</text>
+  <text x="280" y="365" font-size="11" fill="#2563eb">N</text>
+
+  <!-- Legend -->
+  <g transform="translate(30, 550)">
+    <rect x="0" y="0" width="16" height="16" fill="#2563eb"/>
+    <text x="24" y="13" font-size="12" fill="#374151">主键/外键</text>
+    <line x1="100" y1="8" x2="130" y2="8" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="140" y="13" font-size="12" fill="#374151">关系连接</text>
+  </g>
+</svg>

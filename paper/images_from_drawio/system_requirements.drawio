@@ -1,0 +1,122 @@
+<mxfile host="app.diagrams.net" modified="2026-05-17T00:00:00.000Z" agent="Claude" version="24.0.0">
+  <diagram name="system_requirements">
+    <mxGraphModel dx="1600" dy="1000" grid="1" guides="1" tooltips="1" connect="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="股票投资平台系统需求分析图" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;fontStyle=1;fontColor=#1A1A2E;" vertex="1" parent="1">
+          <mxGeometry x="450" y="30" width="700" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Actors -->
+        <mxCell id="investor" value="投资者" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#4A90D9;strokeColor=#2E5A8C;fontColor=#FFFFFF;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="50" y="200" width="60" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="admin" value="管理员" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#D94A4A;strokeColor=#8C2E2E;fontColor=#FFFFFF;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="50" y="700" width="60" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Module boxes - simplified -->
+        <mxCell id="m1" value="用户服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#4A90D9;strokeWidth=3;fontSize=20;fontStyle=1;fontColor=#1A1A2E;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="200" y="150" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="m2" value="行情服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#4A90D9;strokeWidth=3;fontSize=20;fontStyle=1;fontColor=#1A1A2E;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="200" y="280" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="m3" value="交易服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#4A90D9;strokeWidth=3;fontSize=20;fontStyle=1;fontColor=#1A1A2E;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="200" y="410" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="m4" value="持仓服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#4CAF50;strokeWidth=3;fontSize=20;fontStyle=1;fontColor=#1A1A2E;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="200" y="540" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="m5" value="条件单" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;strokeWidth=3;fontSize=20;fontStyle=1;fontColor=#1A1A2E;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="560" y="150" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="m6" value="价格预警" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;strokeWidth=3;fontSize=20;fontStyle=1;fontColor=#1A1A2E;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="560" y="280" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="m7" value="自选股" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;strokeWidth=3;fontSize=20;fontStyle=1;fontColor=#1A1A2E;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="560" y="410" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="m8" value="财务分析" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9C27B0;strokeWidth=3;fontSize=20;fontStyle=1;fontColor=#1A1A2E;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="560" y="540" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="m9" value="策略回测" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9C27B0;strokeWidth=3;fontSize=20;fontStyle=1;fontColor=#1A1A2E;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="920" y="150" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Connections: Investor -->
+        <mxCell id="c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#1A1A2E;endArrow=classic;endFill=1;" edge="1" parent="1" source="investor" target="m1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#1A1A2E;endArrow=classic;endFill=1;" edge="1" parent="1" source="investor" target="m2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#1A1A2E;endArrow=classic;endFill=1;" edge="1" parent="1" source="investor" target="m3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#1A1A2E;endArrow=classic;endFill=1;" edge="1" parent="1" source="investor" target="m4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#1A1A2E;endArrow=classic;endFill=1;" edge="1" parent="1" source="investor" target="m5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#1A1A2E;endArrow=classic;endFill=1;" edge="1" parent="1" source="investor" target="m6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#1A1A2E;endArrow=classic;endFill=1;" edge="1" parent="1" source="investor" target="m7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#1A1A2E;endArrow=classic;endFill=1;" edge="1" parent="1" source="investor" target="m8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#1A1A2E;endArrow=classic;endFill=1;" edge="1" parent="1" source="investor" target="m9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Connections: Admin -->
+        <mxCell id="c10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#D94A4A;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="admin" target="m1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#D94A4A;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="admin" target="m2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#D94A4A;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="admin" target="m3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="leg1" value="投资者" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4A90D9;strokeColor=#2E5A8C;fontColor=#FFFFFF;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="920" y="400" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2" value="管理员" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D94A4A;strokeColor=#8C2E2E;fontColor=#FFFFFF;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="920" y="460" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3" value="核心服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#4A90D9;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="920" y="520" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4" value="监控预警" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="400" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="leg5" value="分析回测" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9C27B0;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="460" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="leg6" value="持仓服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#4CAF50;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="520" width="100" height="40" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

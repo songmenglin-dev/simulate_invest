@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
-import { searchStocks } from '../services/api'
+import { searchStocks, addToWatchlist } from '../services/api'
 
 const props = defineProps<{ modelValue: string }>()
 const emit = defineEmits(['update:modelValue', 'select'])
@@ -8,6 +8,9 @@ const emit = defineEmits(['update:modelValue', 'select'])
 const keyword = ref('')
 const results = ref<Array<{ stockCode: string; stockName: string }>>([])
 const showDropdown = ref(false)
+const userId = Number(localStorage.getItem('userId')) || 1
+const addingCode = ref<string | null>(null)
+const addedCodes = ref<Set<string>>(new Set())
 
 const doSearch = async () => {
   if (!keyword.value.trim()) {
@@ -27,6 +30,17 @@ const selectStock = (item: { stockCode: string; stockName: string }) => {
   emit('select', item)
   keyword.value = `${item.stockCode} - ${item.stockName}`
   showDropdown.value = false
+}
+
+const handleAddWatchlist = async (item: { stockCode: string; stockName: string }, event: Event) => {
+  event.stopPropagation()
+  if (addedCodes.value.has(item.stockCode)) return
+  addingCode.value = item.stockCode
+  try {
+    await addToWatchlist({ userId, stockCode: item.stockCode, stockName: item.stockName })
+    addedCodes.value = new Set([...addedCodes.value, item.stockCode])
+  } catch { /* silently fail */ }
+  finally { addingCode.value = null }
 }
 
 let blurTimer: ReturnType<typeof setTimeout> | null = null
@@ -70,7 +84,18 @@ onMounted(() => {
         @click="selectStock(item)"
       >
         <span class="font-medium text-gray-900">{{ item.stockCode }}</span>
-        <span class="text-gray-500 text-sm">{{ item.stockName }}</span>
+        <div class="flex items-center gap-3">
+          <span class="text-gray-500 text-sm">{{ item.stockName }}</span>
+          <button
+            v-if="!addedCodes.has(item.stockCode)"
+            @click="(e: Event) => handleAddWatchlist(item, e)"
+            :disabled="addingCode === item.stockCode"
+            class="px-2 py-1 rounded-lg text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 transition"
+          >
+            {{ addingCode === item.stockCode ? '...' : '+自选' }}
+          </button>
+          <span v-else class="text-xs text-yellow-500 font-medium">已自选</span>
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,136 @@
+<mxfile host="app.diagrams.net" modified="2026-05-17T00:00:00.000Z" agent="Claude" version="24.0.0">
+  <diagram name="投资者用例图" id="investor-usecase">
+    <mxGraphModel dx="1800" dy="1400" grid="1" gridSize="20" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="股票投资平台 - 投资者用例图" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=bold;fontColor=#1E3A5F;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="600" y="30" width="600" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Actor: 投资者 -->
+        <mxCell id="actor-investor" value="投资者" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#4A90D9;strokeColor=#2E5A8C;fontColor=#FFFFFF;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="600" width="80" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- Account Management -->
+        <mxCell id="uc-register" value="注册" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="150" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-login" value="登录" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="240" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-edit-profile" value="个人信息" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="330" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Market Data -->
+        <mxCell id="uc-view-quote" value="行情查看" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="150" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-search-stock" value="股票搜索" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="240" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Watchlist -->
+        <mxCell id="uc-add-watchlist" value="自选股管理" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="330" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Trading -->
+        <mxCell id="uc-buy-stock" value="买入" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="150" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-sell-stock" value="卖出" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="240" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-view-orders" value="订单查询" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="330" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Portfolio -->
+        <mxCell id="uc-view-assets" value="资产管理" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="500" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-deposit" value="充值/提现" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="590" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Conditional Orders -->
+        <mxCell id="uc-create-conditional" value="条件单" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="500" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Price Alerts -->
+        <mxCell id="uc-set-alert" value="价格预警" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="590" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Fundamental Analysis -->
+        <mxCell id="uc-view-financial" value="财务分析" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="500" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Backtesting -->
+        <mxCell id="uc-create-strategy" value="策略回测" style="shape=useCase;strokeWidth=3;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="590" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- System Boundary -->
+        <mxCell id="system-boundary" value="股票投资平台" style="shape=umlFrame;whiteSpace=wrap;html=1;boundedText=1;verticalAlign=top;spacing=8;padding=15;shadow=0;strokeWidth=3;fontStyle=1;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="220" y="100" width="800" height="620" as="geometry" />
+        </mxCell>
+
+        <!-- Actor to Use Case Connections -->
+        <mxCell id="assoc-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-register">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-edit-profile">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-view-quote">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-search-stock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-add-watchlist">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-buy-stock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-sell-stock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-view-orders">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-view-assets">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-deposit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-create-conditional">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-set-alert">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-view-financial">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=none;endFill=0;" edge="1" parent="1" source="actor-investor" target="uc-create-strategy">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

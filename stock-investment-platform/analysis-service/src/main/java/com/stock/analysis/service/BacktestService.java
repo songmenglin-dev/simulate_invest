@@ -55,8 +55,8 @@ public class BacktestService {
                 .orderByAsc("trade_date");
         List<StockKLine> klineData = stockKLineMapper.selectList(qw);
 
-        if (klineData.size() < 60) {
-            throw new IllegalArgumentException("Need at least 60 trading days of data, got " + klineData.size());
+        if (klineData.size() < 30) {
+            throw new IllegalArgumentException("Need at least 30 trading days of data, got " + klineData.size());
         }
 
         // Save strategy

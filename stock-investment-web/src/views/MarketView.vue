@@ -1,11 +1,41 @@
 <script setup lang="ts">
 import { ref, watch, computed, onMounted, onUnmounted } from 'vue'
-import { getQuote, searchStocks, getSimulatedQuotes } from '../services/api'
+import { getQuote, searchStocks, getSimulatedQuotes, addToWatchlist, removeFromWatchlist, getWatchlist } from '../services/api'
 import StockSearch from '../components/StockSearch.vue'
 import KLineChart from '../components/KLineChart.vue'
 
 const stockCode = ref('')
 const quote = ref<any>(null)
+const userId = Number(localStorage.getItem('userId')) || 1
+
+// Watchlist
+const watchlistCodes = ref<Set<string>>(new Set())
+const addingToWatchlist = ref(false)
+
+const loadWatchlist = async () => {
+  try {
+    const items = await getWatchlist(userId)
+    watchlistCodes.value = new Set(items.map((i: any) => i.stockCode))
+  } catch { /* silently fail */ }
+}
+
+const isInWatchlist = computed(() => watchlistCodes.value.has(stockCode.value))
+
+const toggleWatchlist = async () => {
+  if (!stockCode.value) return
+  addingToWatchlist.value = true
+  try {
+    if (isInWatchlist.value) {
+      await removeFromWatchlist(userId, stockCode.value)
+      watchlistCodes.value.delete(stockCode.value)
+    } else {
+      await addToWatchlist({ userId, stockCode: stockCode.value, stockName: quote.value?.stockName || stockCode.value })
+      watchlistCodes.value.add(stockCode.value)
+    }
+    watchlistCodes.value = new Set(watchlistCodes.value)
+  } catch { /* silently fail */ }
+  finally { addingToWatchlist.value = false }
+}
 
 const onStockSelect = (item: { stockCode: string; stockName: string }) => {
   stockCode.value = item.stockCode
@@ -79,6 +109,7 @@ let dashboardTimer: ReturnType<typeof setInterval> | null = null
 
 onMounted(async () => {
   try { stocks.value = await searchStocks() } catch { /* silently fail */ }
+  loadWatchlist()
   loadSimulatedQuotes()
   dashboardTimer = setInterval(loadSimulatedQuotes, 3000)
 })
@@ -122,9 +153,21 @@ const formatMoney = (v: number) => `¥${v.toFixed(2)}`
     <!-- Quote -->
     <div v-if="quote" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
       <div class="flex justify-between items-start mb-4">
-        <div>
-          <h2 class="text-xl font-bold text-gray-900">{{ quote.stockName }}</h2>
-          <p class="text-sm text-gray-400">{{ quote.stockCode }}</p>
+        <div class="flex items-start gap-3">
+          <div>
+            <h2 class="text-xl font-bold text-gray-900">{{ quote.stockName }}</h2>
+            <p class="text-sm text-gray-400">{{ quote.stockCode }}</p>
+          </div>
+          <button
+            @click="toggleWatchlist"
+            :disabled="addingToWatchlist"
+            :class="['px-3 py-1.5 rounded-lg text-sm font-medium transition-all inline-flex items-center gap-1', isInWatchlist ? 'bg-yellow-50 text-yellow-600 border border-yellow-200 hover:bg-yellow-100' : 'bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100']"
+          >
+            <svg class="w-4 h-4" :fill="isInWatchlist ? 'currentColor' : 'none'" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+            </svg>
+            {{ isInWatchlist ? '已自选' : '加自选' }}
+          </button>
         </div>
         <div class="text-right">
           <p class="text-3xl font-bold text-gray-900">{{ quote.currentPrice?.toFixed(2) }}</p>
