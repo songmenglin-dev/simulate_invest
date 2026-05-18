@@ -39,3 +39,6 @@ dist/
 
 # Screenshots and test reports
 screenshot-report/
+
+# Claude skills (local to user)
+.claude/skills/
