@@ -1,0 +1,3 @@
+# Exclude .claude from language statistics
+.claude/** linguist-documentation
+*.py linguist-documentation
